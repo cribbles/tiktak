@@ -2,9 +2,7 @@
   <div class="site_title">
     <a href="index" class="site_title">wes<font color="#cc0000">acb</font></a>
   </div>
-</p>
-<% unless yield(:no_title) %>
-<p>
+<% unless yield(:no_title) == true %>
   <font size="4"><center><b><%= yield(:title) %></b></center></font>
-</p>
 <% end %>
+</p>
