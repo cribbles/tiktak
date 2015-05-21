@@ -1,4 +1,8 @@
-<% require 'benchmark'; doc_start_time = Time.now %>
+<%
+require 'benchmark'
+doc_start_time = Time.now
+width_override = yield(:width) ? "width: #{yield(:width)}px !important;" : nil
+%>
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -14,16 +18,15 @@
 </head>
 <body>
   <center>
-    <%= render 'layouts/header' %>
-    <table width="100%" class="content">
+    <%= render 'layouts/title' %>
+    <table width="100%" class="content" style="<%= width_override %>">
       <%= yield %>
     </table>
     <p>
       <%= link_to "Terms of Use", terms_path %> |
       <%= link_to "FAQ",          faq_path %> |
       <%= link_to "Statistics",   stats_path %>
-    </p>
-    <p>
+      <br />
       Page generated in <%= (Time.now-doc_start_time).round(2) %> seconds
     </p>
   </center>
