@@ -61,7 +61,7 @@ body a:hover {
 	font-weight: bold;
 	text-decoration: none
 }
-.cell1 a: active, .cell2 a: active {
+.cell1 a:active, .cell2 a:active {
 	color: #EE0000;
 	font-weight: bold;
 	text-decoration: none
