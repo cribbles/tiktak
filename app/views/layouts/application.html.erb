@@ -1,14 +1,33 @@
-<!DOCTYPE html>
-<html>
+<% require 'benchmark'; DOC_START_TIME = Time.now %>
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Epsilon</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>WesACB - <%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all',
+                                            'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <p align="center">
+    <p>
+      <div class="site_title"><a href="board.php?board=1" class="site_title">wes<font color="#cc0000">acb</font></a></div>
+    </p>
+    <table width="100%" class="content">
+      <%= yield %>
+    </table>
+    <p>
+      <%= link_to "Terms of Use", terms_path %> |
+      <%= link_to "FAQ",          faq_path %> |
+      <%= link_to "Statistics",   stats_path %>
+    </p>
+    <p>
+      Page generated in <%= Time.now-DOC_START_TIME %> seconds
+    </p>
+  </p>
 </body>
 </html>
