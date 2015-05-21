@@ -1,12 +1,5 @@
-<% provide(:title, "Terms of Use") %>
-<tr class="cell1">
-  <td class="header">
-    <%= link_to "Home", root %>
-  </td>
-</tr>
-<tr class="cell4">
-<td>
-<p class="post">
+<%  provide(:title, "Terms of Use") %>
+<%= render 'static/header' %>
 <p>
 WesACB is provided as a free service for Wesleyan students, by Wesleyan 
 students. Unlike many Internet forums, WesACB is completely anonymous and 
@@ -60,11 +53,4 @@ sent to a queue for moderation. You don't have to be logged in to report posts.
 We are neither sponsored by nor in any way affiliated with the administration
 of Wesleyan University.
 </p>
-</p>
-</td>
-</tr>
-<tr class="cell1">
-  <td class="footer">
-    &nbsp;
-  </td>
-</tr>
+<%= render 'static/footer' %>
