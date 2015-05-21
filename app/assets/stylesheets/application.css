@@ -1,15 +1,219 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+body {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	color: #000000;
+	background-color: #FFFFFF;
+	font-family: Arial, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Lucida Grande", sans-serif;
+	text-align: justify;
+	font-size: 13px
+}
+table {
+	empty-cells: show;
+	border-spacing: 0px;
+	width: 695px;
+	border-collapse: none;
+	border: #F8F8F8 5px solid
+}
+.content {
+	-moz-border-radius: 17px;
+	-webkit-border-radius: 17px;
+	border-radius: 17px;
+	-moz-box-shadow: 0 0 16px #B4B4B4;
+	-webkit-box-shadow: 0 0 16px #B4B4B4;
+	box-shadow: 0 0 16px #B4B4B4
+}
+.site_title a, a:hover, a:visited, a:active {
+	text-decoration: none
+}
+.site_title {
+	font-size: 56px;
+	font-weight: bold;
+	font-family: "Palatino", "Book Antiqua", "Georgia", serif;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 0 30px #FFFFFF
+}
+.poster {
+	color: #888888;
+	font-size: 28px;
+	padding: 15px 25px;
+	font-family: "Georgia", serif;
+	text-align: center
+}
+body a, a:hover, a:visited, a:active {
+	text-decoration: underline;
+	color: #000000
+}
+body a:hover {
+	text-decoration: underline
+}
+.cell4 a, a:visited, a:active, a:hover {
+	color: #000000
+}
+.cell1 a, .cell2 a, .cell1 a:visited, .cell2 a:visited {
+	color: #FDFDFD;
+	font-weight: bold;
+	text-decoration: none
+}
+.cell1 a:hover, .cell2 a:hover {
+	color: #EE0000;
+	font-weight: bold;
+	text-decoration: none
+}
+.cell1 a: active, .cell2 a: active {
+	color: #EE0000;
+	font-weight: bold;
+	text-decoration: none
+}
+.quote {
+	margin-left: 0px;
+	padding-top: 3px;
+	padding-left: 6px;
+	padding-right: 110px;
+	border-left: 2px solid #999999 !important;
+	font-size: 12px;
+	font-style: italic;
+	font-family: georgia;
+	color: #333333 !important;
+	text-align: left !important
+}
+.quote a {
+	font-family: verdana !important;
+	font-size: 11px !important;
+}
+div.title {
+	font-size: 300%;
+	font-weight: bold;
+	text-align: center
+}
+.header {
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px
+}
+.footer {
+	-webkit-border-bottom-left-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px
+}
+.footer-left {
+	-webkit-border-bottom-left-radius: 7px
+}
+.footer-right {
+	-webkit-border-bottom-right-radius: 7px
+}
+.cell1 {
+	color: #FDFDFD;
+	background-color: #313131;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center
+}
+.cell2 {
+	color: #FDFDFD;
+	background-color: #646464;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center
+}
+.cell3 {
+	background-color: #F8F8F8;
+	font-size: 13px
+}
+.cell3 td {
+	color: #222222 !important;
+	border-top: 2px solid #888888 !important;
+	border-bottom: 1px solid #DDDDDD !important
+}
+.cell4 {
+	background-color: #FFFFFF;
+	font-size: 13px
+}
+.cell3 a, a:active, a:visited {
+	text-decoration: underline
+}
+.cell3 a:hover {
+	text-decoration: none
+}
+.cell5 {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #DBDBDB;
+	font-size: 13px
+}
+tr.info {
+	background-color: #F8F8F8;
+	font-size: 13px;
+}
+.info td {
+	border-top: 1px solid #E5E5E5 !important;
+	border-bottom: 1px solid #E5E5E5 !important
+}
+.search {
+	display: inline;
+	padding-left: 30px;	
+	height: 32px;
+	line-height: 32px
+}
+.uline a, a:hover, a:active, a:visited {
+	text-decoration: underline
+}
+.topic_title {
+	padding-left: 3px;
+	padding-top: 6px;
+	font-size: 15px;
+	font-family: Helvetica, serif;
+	line-height: 15px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none !important
+}
+.topic_title a:link, a:visited, a:active, a:hover {
+	color: #000000;
+	text-decoration: none !important
+}
+p.post {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-right: 20px;
+	padding-left: 20px;
+	line-height: 1.4;
+	font-family: helvetica, arial, sans-serif !important;
+	font-size: 13px;
+	text-align: left !important
+}
+p.post2 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 30px;
+	line-height: 1.4;
+	font-family: helvetica, arial, sans-serif !important;
+	font-size: 13px;
+	text-align: left !important
+}
+p.post3 {
+	padding-bottom: 18px;
+	padding-right: 18px;
+	padding-left: 18px;
+	line-height: 1.4;
+	font-family: helvetica, arial, sans-serif !important;
+	font-size: 13px;
+	text-align: left !important
+}
+p.post4 {
+	font-family: helvetica !important;
+	font-size: 13px;
+	text-align: left !important
+}
+p.info {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-right: 20px;
+	padding-left: 20px
+}
+.sysnote {
+	background-color: red;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: helvetica, arial, sans-serif;
+	text-align: center
+}
