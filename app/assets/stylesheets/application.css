@@ -34,6 +34,9 @@ table {
 	text-decoration: none;
 	text-shadow: 0 0 30px #FFFFFF
 }
+a.crimson, a.crimson:hover, a.crimson:visited, a.crimson:active {
+	color: #cc0000;
+}
 .poster {
 	color: #888888;
 	font-size: 28px;

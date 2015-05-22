@@ -1,8 +1,8 @@
 <p>
   <div class="site_title">
-    <a href="index" class="site_title">wes<font color="#cc0000">acb</font></a>
+    <%= link_to "wes", root_path %><%= link_to "acb", root_path, class: "crimson" %>
   </div>
-<% unless yield(:no_title) == true %>
+<% unless yield(:title).empty? %>
   <font size="4"><center><b><%= yield(:title) %></b></center></font>
 <% end %>
 </p>
