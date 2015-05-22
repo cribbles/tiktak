@@ -7,8 +7,4 @@ class StaticController < ApplicationController
 
   def stats
   end
-
-  def topics
-    @topics = Topic.paginate(page: params[:page])
-  end
 end

@@ -13,18 +13,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <center>
-    <%= render 'layouts/title' %>
-    <table width="100%" class="content" style="<%= width_override yield(:width) %>">
-      <%= yield %>
-    </table>
-    <p>
-      <%= link_to "Terms of Use", terms_path %> |
-      <%= link_to "FAQ",          faq_path %> |
-      <%= link_to "Statistics",   stats_path %>
-      <br />
-      Page generated in <%= (Time.now-benchmark).round(3) %> seconds
-    </p>
-  </center>
+<center>
+<%= render 'layouts/title' %>
+<table width="100%" class="content" style="<%= width_override yield(:width) %>">
+<%= yield %>
+</table>
+<p>
+  <%= link_to "Terms of Use", terms_path %> |
+  <%= link_to "FAQ",          faq_path %> |
+  <%= link_to "Statistics",   stats_path %>
+  <br />
+  Page generated in <%= (Time.now-benchmark).round(3) %> seconds
+</p>
+</center>
 </body>
 </html>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root            'static#topics'
-  get 'topics' => 'static#topics'
+  root            'topics#index'
+  get 'topics' => 'topics#index'
   get 'terms'  => 'static#terms'
   get 'faq'    => 'static#faq'
   get 'stats'  => 'static#stats'

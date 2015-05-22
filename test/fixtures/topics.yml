@@ -1,7 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  title: MyText
-
-two:
-  title: MyText
+<% 100.times do |n| %>
+topic_<%= n %>:
+  title: <%= Faker::Lorem(3) %>
+<% end %>

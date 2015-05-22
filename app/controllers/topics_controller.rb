@@ -8,4 +8,8 @@ class TopicsController < ApplicationController
 
   def show
   end
+
+  def index
+    @topics = Topic.paginate(page: params[:page])
+  end
 end
