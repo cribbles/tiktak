@@ -1,4 +1,4 @@
 <% 100.times do |n| %>
 topic_<%= n %>:
-  title: <%= Faker::Lorem(3) %>
+  title: "topic test number <%= n %>"
 <% end %>

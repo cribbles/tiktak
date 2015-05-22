@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class StaticControllerTest < ActionController::TestCase
+
   test "should get terms" do
     get :terms
     assert_response :success
@@ -15,5 +16,4 @@ class StaticControllerTest < ActionController::TestCase
     get :stats
     assert_response :success
   end
-
 end
