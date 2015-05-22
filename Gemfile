@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',		'4.2.1'
-gem 'will_paginate',    '3.0.7'
+gem 'will_paginate',    path: 'vendor/gems/will_paginate'
 gem 'faker',		'1.4.3'
 gem 'sass-rails',	'5.0.3'
 gem 'uglifier',		'2.7.1'
