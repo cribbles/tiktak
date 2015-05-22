@@ -1,8 +1,4 @@
-<%
-require 'benchmark'
-doc_start_time = Time.now
-width_override = yield(:width) ? "width: #{yield(:width)}px !important;" : nil
-%>
+<% benchmark %>
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,7 +6,7 @@ width_override = yield(:width) ? "width: #{yield(:width)}px !important;" : nil
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>WesACB - <%= yield(:title) %></title>
+  <title><%= full_title yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all',
                                             'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -19,7 +15,7 @@ width_override = yield(:width) ? "width: #{yield(:width)}px !important;" : nil
 <body>
   <center>
     <%= render 'layouts/title' %>
-    <table width="100%" class="content" style="<%= width_override %>">
+    <table width="100%" class="content" style="<%= width_override yield(:width) %>">
       <%= yield %>
     </table>
     <p>
@@ -27,7 +23,7 @@ width_override = yield(:width) ? "width: #{yield(:width)}px !important;" : nil
       <%= link_to "FAQ",          faq_path %> |
       <%= link_to "Statistics",   stats_path %>
       <br />
-      Page generated in <%= (Time.now-doc_start_time).round(3) %> seconds
+      Page generated in <%= (Time.now-benchmark).round(3) %> seconds
     </p>
   </center>
 </body>

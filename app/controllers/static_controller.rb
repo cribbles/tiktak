@@ -8,6 +8,6 @@ class StaticController < ApplicationController
   def stats
   end
 
-  def index
+  def topics
   end
 end
