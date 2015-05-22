@@ -1,1 +1,43 @@
-Hello!
+<tr class="cell1">
+  <td colspan="100%" class="header">
+    <%= link_to "Log In",    '#' %> &nbsp;|&nbsp;
+    <%= link_to "New Topic", '#' %> &nbsp;|&nbsp;
+    <%= link_to "Search",    '#' %>
+  </td>
+</tr>
+
+<tr class="cell2">
+  <td colspan="100%">
+    <%= link_to "Next Page", '#' %> &nbsp;|&nbsp;
+    <%= link_to "Last Page", '#' %>
+  </td>
+</tr>
+
+<tr class="cell3">
+  <td colspan="2">
+    <p style="padding-left: 3px;"><b>Topic</b></p>
+  </td>
+  <td width="125px">
+    <b>Replies</b>
+  </td>
+</tr>
+
+<%= render @topics %>
+
+<tr class="cell1">
+  <td align="left" width="125px" class="footer-left">
+    &nbsp;&#171; Prev. Page
+  </td>
+  <td align="center">
+    [1]
+    <%= link_to "2",    '#' %></a>
+    <%= link_to "3",    '#' %></a>
+    <%= link_to "4",    '#' %></a>
+    .....
+    <%= link_to "1008", '#' %></a>
+    <%= link_to "1009", '#' %></a>
+  </td>
+  <td align="right" width="125px" class="footer-right">
+    <%= link_to "Next Page »", '#' %>
+  </td>
+</tr>

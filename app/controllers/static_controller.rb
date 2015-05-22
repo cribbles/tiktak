@@ -9,5 +9,6 @@ class StaticController < ApplicationController
   end
 
   def topics
+    @topics = Topic.paginate(page: params[:page])
   end
 end
