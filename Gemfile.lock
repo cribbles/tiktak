@@ -241,4 +241,4 @@ DEPENDENCIES
   turbolinks (= 2.5.3)
   uglifier (= 2.7.1)
   web-console (= 2.1.2)
-  will_paginate (= 3.0.4)!
+  will_paginate!
