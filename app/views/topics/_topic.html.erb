@@ -1,19 +1,15 @@
-<%
-fake_datetime = Faker::Time.between(2.days.ago, Date.today).to_s[0..15]
-fake_ampm     = ["AM","PM"][Random.new.rand(0..1)]
-%>
 <tr class="cell4">
   <td colspan="2" style="<%= top_partial %>">
-    <%= link_to topic.title, '#', class: "topic_title" %>
+    <%= link_to topic.title, topic, class: "topic_title" %>
     <p class="post3">
-      <%= Faker::Lorem.sentence(16) %>
+      <%= topic.posts.first.content %>
     </p>
   </td>
   <td style="<%= top_partial %>">
     <p class="post4">
       <%= link_to "reply", '#' %>
       <br />
-      <%= fake_datetime + " " + fake_ampm %>
+      <%= topic.posts.first.created_at %>
     </p>
   </td>
 </tr>

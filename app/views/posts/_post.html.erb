@@ -1,0 +1,21 @@
+<tr class="cell3">
+  <td width="80px">
+  </td>
+  <td>
+    <b>Posted:</b> <%= post.created_at %> &nbsp;|&nbsp;
+    <%= link_to "Report", '#' %> &nbsp;|&nbsp;
+    <%= link_to "Quote",  '#' %>
+  </td>
+</tr>
+<tr class="cell4">
+  <td width="80px">
+    <div class="poster">
+      <%= poster_for post, params[:page] %>
+    </div>
+  </td>
+  <td>
+    <p class="post2">
+      <%= post.content %>
+    </p>
+  </td>
+</tr>

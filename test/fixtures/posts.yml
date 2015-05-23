@@ -1,9 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  content: MyText
-  topic_id: 
-
-two:
-  content: MyText
-  topic_id: 
+<% 99.times do |n| %>
+post_<%= n %>:
+  content: "topic test number <%= n %>"
+  topic_id: 1
+<% end %>
