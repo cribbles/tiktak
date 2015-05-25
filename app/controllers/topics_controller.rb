@@ -1,9 +1,7 @@
 class TopicsController < ApplicationController
 
-  def create
-  end
-
-  def destroy
+  def index
+    @topics = Topic.paginate(page: params[:page], per_page: 20)
   end
 
   def show
@@ -11,7 +9,29 @@ class TopicsController < ApplicationController
     @posts = @topic.posts.paginate(page: params[:page], per_page: 20)
   end
 
-  def index
-    @topics = Topic.paginate(page: params[:page], per_page: 20)
+  def new
+    @topic = Topic.new
+    @topic.posts.build
   end
+
+  def create
+    @topic = Topic.new(topic_params)
+    if @topic.save
+      redirect_to @topic
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def destroy
+  end
+
+  private
+
+    def topic_params
+      params.require(:topic).permit(:title, posts_attributes: [:content])
+    end
 end
