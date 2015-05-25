@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'faq'    => 'static#faq'
   get 'stats'  => 'static#stats'
 
-  resources :topics
   resources :posts
+  resources :topics do
+    resources :posts
+  end
 end
