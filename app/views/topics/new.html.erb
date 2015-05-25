@@ -1,6 +1,6 @@
 <% provide(:title, 'New Topic')
    provide(:width, '580') %>
-<%= form_for(@topic) do |f| %>
+<%= form_for @topic do |f| %>
 <tr class="cell1">
   <td colspan="100%" class="header">
     <%= link_to "Home",   root_path %> &nbsp;|&nbsp;
@@ -9,7 +9,7 @@
 </tr>
 <tr class="cell2">
   <td colspan="3">
-    <%= f.label "Title" %>
+    <%= f.label :title, "Title" %>
   </td>
 </tr>
 <tr class="info">
@@ -19,16 +19,16 @@
     </p>
   </td>
 </tr>
-<%= f.fields_for :post do |field| %>
+<%= f.fields_for :posts do |builder| %>
 <tr class="cell2">
   <td colspan="3">
-    <%= f.label "Message" %>
+    <%= builder.label :content, "Message" %>
   </td>
 </tr>
 <tr class="info">
   <td colspan="3">
     <p align="center">
-      <%= field.text_area :content, cols: 60, rows: 20 %>
+      <%= builder.text_area :content, cols: 60, rows: 20 %>
     </p>
   </td>
 </tr>

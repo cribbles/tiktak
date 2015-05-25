@@ -11,12 +11,12 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @topic.posts.build
   end
 
   def create
-    @topic = Topic.new(title: topic_params[:title])
-    @post = Post.new(topic_id: @topic.id, content: topic_params[:context])
-    if @topic.save && @post.save
+    @topic = Topic.new(topic_params)
+    if @topic.save
       redirect_to @topic
     else
       render 'new'
@@ -32,10 +32,6 @@ class TopicsController < ApplicationController
   private
 
     def topic_params
-      params.require(:topic).permit(:title)
-    end
-
-    def post_params
-      params.require(:topic).require(:post).permit(:content)
+      params.require(:topic).permit(:title, posts_attributes: [:content])
     end
 end
