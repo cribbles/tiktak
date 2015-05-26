@@ -7,9 +7,9 @@
   </td>
   <td style="<%= top_partial %>">
     <p class="post4">
-      <%= link_to "reply", '#' %>
+      <%= link_to pluralize(topic.posts.count, 'reply'), topic %>
       <br />
-      <%= topic.posts.first.created_at %>
+      <%= sanitize_date(topic.posts.first.created_at) %>
     </p>
   </td>
 </tr>

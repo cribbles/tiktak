@@ -13,4 +13,8 @@ module ApplicationHelper
     base_title = "WesACB"
     page_title.empty? ? base_title : base_title + " - " + page_title
   end
+
+  def sanitize_date(datetime)
+    datetime.strftime("%-m/%-d/%y %I\:%M %p")
+  end
 end

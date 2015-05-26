@@ -2,7 +2,7 @@
   <td width="80px">
   </td>
   <td>
-    <b>Posted:</b> <%= post.created_at %> &nbsp;|&nbsp;
+    <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
     <%= link_to "Quote",  '#' %>
   </td>
