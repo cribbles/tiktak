@@ -15,9 +15,13 @@
 <body>
 <center>
 <%= render 'layouts/title' %>
+<% unless yield(:form_first) == 'true' %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
+<% end %>
 <%= yield %>
+<% unless yield(:form_first) == 'true' %>
 </table>
+<% end %>
 <p>
   <%= link_to "Terms of Use", terms_path %> |
   <%= link_to "FAQ",          faq_path %> |
