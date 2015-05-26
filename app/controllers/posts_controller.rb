@@ -1,18 +1,19 @@
 class PostsController < ApplicationController
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post  = Post.find_by(id: params[:id])
     @topic = Topic.find_by(id: @post.topic_id)
   end
 
   def new
     @topic = Topic.find_by(id: params[:topic_id])
-    @post = @topic.posts.build
+    @quote = @topic.posts.find_by(id: params[:id])
+    @post  = @topic.posts.build
   end
 
   def create
     @topic = Topic.find_by(id: post_params[:topic_id])
-    @post = @topic.posts.build(post_params)
+    @post  = @topic.posts.build(post_params)
     if @post.save
       redirect_to @topic
     else

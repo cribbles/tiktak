@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :topics do
     resources :posts
   end
+
+  get 'topics/:topic_id/posts/:id/new', to: 'post#new', as: 'quote'
 end

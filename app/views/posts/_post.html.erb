@@ -4,7 +4,7 @@
   <td>
     <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
-    <%= link_to "Quote",  '#' %>
+    <%= link_to "Quote",  quote_path(@topic, post) %>
   </td>
 </tr>
 <tr class="cell4">
