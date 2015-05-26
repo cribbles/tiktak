@@ -11,6 +11,14 @@
     <%= link_to "Topic",  @topic    %>
   </td>
 </tr>
+<% if !@quote.nil? %>
+<tr class="cell2">
+  <td colspan="3">
+    <%= f.label :content, "Quote" %>
+  </td>
+</tr>
+<%= render @quote %>
+<% end %>
 <tr class="cell2">
   <td colspan="3">
     <%= f.label :content, "Message" %>
