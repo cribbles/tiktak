@@ -1,7 +1,7 @@
 <tr class="cell3">
   <td width="80px">
   </td>
-  <td>
+  <td colspan="100%">
     <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
     <%= link_to "Quote",  quote_path(@topic, post) %>
@@ -13,7 +13,14 @@
       <%= poster_for post, params[:page] %>
     </div>
   </td>
-  <td>
+  <td colspan="100%">
+<% if !post.quote.nil? %>
+    <div class="quote">
+      <%= link_to "Quote:", '#' %>
+      <br />
+      <%= Post.find_by(id: post.quote).content %>
+    </div>
+<% end %>
     <p class="post2">
       <%= post.content %>
     </p>

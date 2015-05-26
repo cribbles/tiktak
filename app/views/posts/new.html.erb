@@ -14,7 +14,7 @@
 <% if !@quote.nil? %>
 <tr class="cell2">
   <td colspan="3">
-    <%= f.label :content, "Quote" %>
+    <%= f.label :quote, "Quote" %>
   </td>
 </tr>
 <%= render @quote %>
@@ -31,6 +31,26 @@
     </p>
   </td>
 </tr>
+<% if !@quote.nil? %>
+<tr class="cell2">
+  <td colspan="3">
+    Options
+  </td>
+</tr>
+<tr class="info">
+  <td style="width: 145px;">
+    &nbsp;
+  </td>
+  <td>
+    <p align="center">
+      <%= f.check_box :quote, { checked: true }, @quote.id, nil %> <b>Include quote?</b>
+    </p>
+  </td>
+  <td style="width: 145px;">
+    &nbsp;
+  </td>
+</tr>
+<% end %>
 <tr class="cell1">
   <td colspan="3" class="footer">
     <p align="center">
