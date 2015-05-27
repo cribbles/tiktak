@@ -3,45 +3,46 @@
    provide(:form_first, 'true') %>
 <%= form_for @topic do |f| %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
-<tr class="cell1">
-  <td colspan="100%" class="header">
-    <%= link_to "Home",   root_path %> &nbsp;|&nbsp;
-    <%= link_to "Log In", '#' %>
-  </td>
-</tr>
-<tr class="cell2">
-  <td colspan="3">
-    <%= f.label :title, "Title" %>
-  </td>
-</tr>
-<tr class="info">
-  <td colspan="3">
-    <p align="center">
-      <%= f.text_field :title, size: 60 %>
-    </p>
-  </td>
-</tr>
-<%= f.fields_for :posts do |builder| %>
-<tr class="cell2">
-  <td colspan="3">
-    <%= builder.label :content, "Message" %>
-  </td>
-</tr>
-<tr class="info">
-  <td colspan="3">
-    <p align="center">
-      <%= builder.text_area :content, cols: 60, rows: 20 %>
-    </p>
-  </td>
-</tr>
-<% end %>
-<tr class="cell1">
-  <td colspan="3" class="footer">
-    <p align="center">
-      <%= f.submit "Post",    name: 'submit' %>
-      <%= f.submit "Preview", name: 'preview', disabled: true %>
-    </p>
-  </td>
-</tr>
+  <tr class="cell1">
+    <td colspan="100%" class="header">
+      <%= link_to "Home",   root_path %> &nbsp;|&nbsp;
+      <%= link_to "Log In", '#' %>
+    </td>
+  </tr>
+  <%= render 'shared/error_messages', object: f.object %>
+  <tr class="cell2">
+    <td colspan="3">
+      <%= f.label :title, "Title" %>
+    </td>
+  </tr>
+  <tr class="info">
+    <td colspan="3">
+      <p align="center">
+        <%= f.text_field :title, size: 60 %>
+      </p>
+    </td>
+  </tr>
+  <%= f.fields_for :posts do |builder| %>
+  <tr class="cell2">
+    <td colspan="3">
+      <%= builder.label :content, "Message" %>
+    </td>
+  </tr>
+  <tr class="info">
+    <td colspan="3">
+      <p align="center">
+        <%= builder.text_area :content, cols: 60, rows: 20 %>
+      </p>
+    </td>
+  </tr>
+  <% end %>
+  <tr class="cell1">
+    <td colspan="3" class="footer">
+      <p align="center">
+        <%= f.submit "Post",    name: 'submit' %>
+        <%= f.submit "Preview", name: 'preview', disabled: true %>
+      </p>
+    </td>
+  </tr>
 </table>
 <% end %>

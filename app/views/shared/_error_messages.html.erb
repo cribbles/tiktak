@@ -1,0 +1,21 @@
+<% if object.errors.any? %>
+  <tr class="cell2">
+    <td colspan="100%">
+      Errors
+    </td>
+  </tr>
+  <tr class="info">
+    <td colspan="100%">
+      <p>
+        &nbsp;
+        <ul>
+        <% object.errors.full_messages.each do |msg| %>
+          <li>
+            <b><%= msg %>.</b>
+          </li>
+        <% end %>
+        </ul>
+      </p>
+    </td>
+  </tr>
+<% end %>
