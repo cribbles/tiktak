@@ -1,4 +1,4 @@
-<% 100.times do |n| %>
+<% 25.times do |n| %>
 topic_<%= n %>:
   title: "topic test number <%= n %>"
 <% end %>

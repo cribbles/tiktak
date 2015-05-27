@@ -1,5 +1,21 @@
-<% 99.times do |n| %>
+<% 21.times do |n| %>
 post_<%= n %>:
   content: "topic test number <%= n %>"
+  created_at: <%= 10.minutes.ago %>
   topic_id: 1
+  quote: nil
 <% end %>
+
+post_22:
+  content: "Well that's just not true!"
+  created_at: <%= 5.minutes.ago %>
+  topic_id: 1
+  quote: 21
+end
+
+post_23:
+  content: "Yes it is. You're wrong - dead wrong."
+  created_at: <%= 3.minutes.ago %>
+  topic_id: 1
+  quote: 22
+end

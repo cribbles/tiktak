@@ -9,7 +9,7 @@
     <p class="post4">
       <%= link_to pluralize(topic.posts.count, 'reply'), topic %>
       <br />
-      <%= sanitize_date(topic.posts.first.created_at) %>
+      <%= sanitize_date(topic.last_posted) %>
     </p>
   </td>
 </tr>
