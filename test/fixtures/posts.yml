@@ -6,13 +6,13 @@ post_<%= n %>:
   quote: nil
 <% end %>
 
-post_22:
+callout:
   content: "Well that's just not true!"
   created_at: <%= 5.minutes.ago %>
   topic_id: 1
   quote: 21
 
-post_23:
+response:
   content: "Yes it is. You're wrong - dead wrong."
   created_at: <%= 3.minutes.ago %>
   topic_id: 1
