@@ -11,11 +11,9 @@ post_22:
   created_at: <%= 5.minutes.ago %>
   topic_id: 1
   quote: 21
-end
 
 post_23:
   content: "Yes it is. You're wrong - dead wrong."
   created_at: <%= 3.minutes.ago %>
   topic_id: 1
   quote: 22
-end
