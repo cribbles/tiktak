@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
   root            'topics#index'
   get 'terms'  => 'static#terms'
   get 'faq'    => 'static#faq'
