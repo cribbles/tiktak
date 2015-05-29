@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'terms'  => 'static#terms'
   get 'faq'    => 'static#faq'
   get 'stats'  => 'static#stats'
+  get 'signup' => 'users#new'
 
   resources :users
   resources :posts
