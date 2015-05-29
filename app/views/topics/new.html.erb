@@ -5,8 +5,8 @@
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
   <tr class="cell1">
     <td colspan="100%" class="header">
-      <%= link_to "Home",   root_path %> &nbsp;|&nbsp;
-      <%= link_to "Log In", '#' %>
+      <%= link_to "Home",   root_path  %> &nbsp;|&nbsp;
+      <%= link_to "Log In", login_path %>
     </td>
   </tr>
   <%= render 'shared/error_messages', object: f.object %>
