@@ -1,0 +1,53 @@
+<% provide(:title,      'Sign Up')
+   provide(:width,      '460')
+   provide(:form_first, 'true') %>
+<%= form_for(@user) do |f| %>
+<table width="100%" class="content" style="<%= width_override yield(:width) %>">
+  <tr class="cell1">
+    <td colspan="100%" class="header">
+      <%= link_to 'Home', root_path %>
+    </td>
+  </tr>
+  <tr class="info">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :email, "E-mail" %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.email_field :email %>
+      </p>
+    </td>
+  </tr>
+  <tr class="cell4">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :password %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.password_field :password %>
+      </p>
+    </td>
+  </tr>
+  <tr class="info">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :password_confirmation, "Confirm Password" %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.password_field :password_confirmation %>
+      </p>
+    </td>
+  </tr>
+  <tr class="cell1">
+    <td colspan="2" class="footer">
+      <%= f.submit "Sign up!" %>
+    </td>
+  </tr>
+</table>
+<% end %>

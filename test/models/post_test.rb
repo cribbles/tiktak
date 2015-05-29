@@ -3,8 +3,8 @@ require 'test_helper'
 class PostTest < ActiveSupport::TestCase
 
   def setup
-    @topic = topics(:topic_1)
-    @post  = @topic.posts.build(content: "Lorem ipsum")
+    @topic = Topic.new(title: "Lorem Ipsum")
+    @post  = Post.new(topic_id: 1, content: "Lorem Ipsum")
   end
 
   test "should be valid" do
