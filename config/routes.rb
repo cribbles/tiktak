@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'faq'    => 'static#faq'
   get 'stats'  => 'static#stats'
 
+  resources :users
   resources :posts
   resources :topics do
     resources :posts

@@ -1,0 +1,50 @@
+<% provide(:title, 'My Account')
+   provide(:width, '580') %>
+<tr class="cell1">
+  <td colspan="100%" class="header">
+    <%= link_to 'Home',    root_path %> &nbsp;|&nbsp;
+    <%= link_to 'Log Out', '#'       %>
+  </td>
+</tr>
+<tr class="cell2">
+  <td colspan="2" align="center">
+    Info
+  </td>
+</tr>
+<tr class="cell4">
+  <td>
+    <p class="info">
+      <b>E-mail</b>
+    </p>
+  </td>
+  <td>
+    <p class="info">
+      @user.email
+    </p>
+  </td>
+</tr>
+<tr class="cell2">
+  <td colspan="2" align="center">
+    Settings
+  </td>
+</tr>
+<tr class="cell4">
+  <td colspan="2" align="center">
+    <p class="info">
+      <b><%= link_to 'View my private messages', '#' %></b>
+    </p>
+  </td>
+</tr>
+<tr class="info">
+  <td colspan="2" align="center">
+    <p class="info">
+      <b><%= link_to 'Reset my password' %></b>
+    </p>
+  </td>
+</tr>
+<tr class="cell1">
+  <td colspan="2" class="footer">
+    &nbsp;
+  </td>
+</tr>
+
