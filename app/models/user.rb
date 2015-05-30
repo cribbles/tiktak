@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_many :posts, dependent: :destroy
   before_save :downcase_email
 
@@ -7,8 +10,6 @@ class User < ActiveRecord::Base
                     length:     { maximum: 255 },
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
 
   private
 
