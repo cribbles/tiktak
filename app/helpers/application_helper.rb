@@ -6,7 +6,8 @@ module ApplicationHelper
   end
 
   def width_override(width)
-    width.nil? ? nil : "width: #{width}px !important;"
+    width = 695 if width.empty?
+    "width: #{width}px !important;"
   end
 
   def full_title(page_title = '')
