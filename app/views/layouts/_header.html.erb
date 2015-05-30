@@ -1,5 +1,35 @@
   <tr class="cell1">
     <td colspan="100%" class="header">
-      <%= render_header_links %>
+    <% if logged_in? %>
+      <span class="header_link">
+        <%= link_to(current_user.email, current_user) %>
+      </span>
+    <% end %>
+    <% unless current_page?(root_path) %>
+      <span class="header_link">
+        <%= link_to('Home', root_path) %>
+      </span>
+    <% end %>
+    <% unless logged_in? || current_page?(login_path) %>
+      <span class="header_link">
+        <%= link_to('Log In', login_path) %>
+      </span>
+    <% end %>
+    <% unless @topic.nil? || (@topic && @topic.id.nil?)\
+                          || current_page?(action: 'show') %>
+      <span class="header_link">
+        <%= link_to('Topic', @topic) %>
+      </span>
+    <% end %>
+    <% if current_page?(root_path) %>
+      <span class="header_link">
+        <%= link_to('New Topic', new_topic_path) %>
+      </span>
+    <% end %>
+    <% if logged_in? %>
+      <span class="header_link">
+        <%= link_to('Log Out', logout_path, method: :delete) %>
+      </span>
+    <% end %>
     </td>
   </tr>

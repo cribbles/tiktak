@@ -3,11 +3,7 @@
    provide(:form_first, 'true') %>
 <%= form_for(@user) do |f| %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
-  <tr class="cell1">
-    <td colspan="100%" class="header">
-      <%= link_to 'Home', root_path %>
-    </td>
-  </tr>
+  <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
   <tr class="info">
     <td align="left">

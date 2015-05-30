@@ -21,6 +21,7 @@
 <%= render 'layouts/title' %>
 <% unless yield(:form_first) == 'true' %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
+<%= render 'layouts/header' %>
 <% end %>
 <%= yield %>
 <% unless yield(:form_first) == 'true' %>

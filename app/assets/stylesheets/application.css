@@ -104,6 +104,9 @@ div.title {
 .footer-right {
 	-webkit-border-bottom-right-radius: 7px
 }
+.header_link:not(:last-child):after {
+	content: ' | ';
+}
 .cell1 {
 	color: #FDFDFD;
 	background-color: #313131;

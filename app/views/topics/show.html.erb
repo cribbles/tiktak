@@ -1,13 +1,4 @@
 <% provide(:title, @topic.title) %>
-<tr class="cell1">
-  <td colspan="100%" class="header">
-    <%= link_to "Home",   root_path  %> &nbsp;|&nbsp;
-    <%= link_to "Log In", login_path %> &nbsp;|&nbsp;
-    <%= link_to "Reply",  new_topic_post_path(@topic) %> &nbsp;|&nbsp;
-    <%= link_to "Search", '#' %>
-  </td>
-</tr>
-
 <tr class="cell2">
   <td colspan="100%">
     <%= will_paginate @posts, page_links: false, link_separator: ' | ',

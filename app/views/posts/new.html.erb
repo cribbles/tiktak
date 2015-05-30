@@ -4,13 +4,7 @@
 <%= form_for @post do |f| %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
   <%= f.hidden_field :topic_id, value: @topic.id %>
-  <tr class="cell1">
-    <td colspan="100%" class="header">
-      <%= link_to "Home",   root_path  %> &nbsp;|&nbsp;
-      <%= link_to "Log In", login_path %> &nbsp;|&nbsp;
-      <%= link_to "Topic",  @topic     %>
-    </td>
-  </tr>
+  <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
   <% if !@quote.nil? %>
   <tr class="cell2">
