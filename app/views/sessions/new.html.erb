@@ -31,6 +31,16 @@
       </p>
     </td>
   </tr>
+  <tr class="info">
+    <td align="left" colspan="2">
+      <p class="info" align="center">
+        <%= f.label :remember_me do %>
+          <%= f.check_box :remember_me %>
+          <b>Keep me logged in</b>
+        <% end %>
+      </p>
+    </td>
+  </tr>
   <tr class="cell1">
     <td align="center" colspan="2" class="footer">
       <%= f.submit 'Log In' %>
