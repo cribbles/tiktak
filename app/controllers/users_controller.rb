@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Thanks for signing up!"
-      redirect_to @user
+      redirect_to profile_path
     else
       render 'new'
     end
