@@ -1,0 +1,16 @@
+<tr class="cell2">
+  <td colspan="100%">
+    <%= will_paginate collection, page_links: false, link_separator: ' | ',
+        previous_label: "Prev Page", next_label: "Next Page" %>
+    <% if collection.total_pages == 1 %>
+      <div class="pagination">
+        <span class="previous_page disabled">
+          Prev Page
+        </span>
+         |
+        <span class="next_page disabled">
+          Next Page
+        </span>
+    <% end %>
+  </td>
+</tr>
