@@ -20,6 +20,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
+      @topic.update_attributes(last_posted: @topic.posts.first.created_at)
       redirect_to @topic
     else
       render 'new'
