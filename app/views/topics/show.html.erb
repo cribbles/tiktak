@@ -3,6 +3,16 @@
   <td colspan="100%">
     <%= will_paginate @posts, page_links: false, link_separator: ' | ',
         previous_label: "Prev Page", next_label: "Next Page" %>
+    <% if @posts.total_pages == 1 %>
+      <div class="pagination">
+        <span class="previous_page disabled">
+          Prev Page
+        </span>
+         | 
+        <span class="next_page disabled">
+          Next Page
+        </span>
+    <% end %>
   </td>
 </tr>
 
@@ -11,5 +21,18 @@
 <tr class="cell1">
   <td colspan="100%" class="footer">
     <%= will_paginate @posts %>
+    <% if @posts.total_pages == 1 %>
+      <div class="pagination">
+        <span class="previous_page disabled">
+          &#8592; Previous
+        </span>
+        <em class="current">
+          1
+        </em>
+        <span class="next_page disabled">
+          Next &#8594;
+        </span>
+      </div>
+    <% end %>
   </td>
 </tr>
