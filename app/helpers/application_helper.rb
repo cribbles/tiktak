@@ -18,5 +18,4 @@ module ApplicationHelper
   def sanitize_date(datetime)
     datetime.strftime("%-m/%-d/%y %I\:%M %p")
   end
-
 end

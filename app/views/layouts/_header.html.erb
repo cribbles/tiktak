@@ -10,9 +10,9 @@
         <%= link_to('Home', root_path) %>
       </span>
     <% end %>
-    <% if defined?(@topic) && current_page?(topic_posts_path(1)) %>
+    <% if topics_show? %>
       <span class="header_link">
-        <%= link_to('Reply', @topic) %>
+        <%= link_to('Reply', new_topic_post_path(@topic)) %>
       </span>
     <% end %>
     <% unless logged_in? || current_page?(login_path) %>
@@ -20,8 +20,7 @@
         <%= link_to('Log In', login_path) %>
       </span>
     <% end %>
-    <% if defined?(@topic) && !@topic.id.nil? && current_page?(new_topic_post_path(@topic))\
-      || (defined?(@topic) && defined?(params[:id]) && !@topic.id.nil? && !params[:id].nil? && current_page?(quote_path(@topic, params[:id]))) %>
+    <% if posts_new? %>
       <span class="header_link">
         <%= link_to('Topic', @topic) %>
       </span>
