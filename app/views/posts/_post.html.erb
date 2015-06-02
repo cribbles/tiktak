@@ -2,6 +2,7 @@
   <td width="80px">
   </td>
   <td colspan="100%">
+    <a name="p<%= post.id %>"></a>
     <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
     <%= link_to "Quote",  quote_path(@topic, post) %>

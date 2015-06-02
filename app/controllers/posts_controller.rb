@@ -16,7 +16,8 @@ class PostsController < ApplicationController
     @post  = @topic.posts.build(post_params)
     if @post.save
       @topic.update_attributes(last_posted: @post.created_at)
-      redirect_to @topic
+      redirect_to topic_path(@topic, page: last_page_of(@topic),
+                                     anchor: "p" + @post.id.to_s)
     else
       render 'new'
     end
