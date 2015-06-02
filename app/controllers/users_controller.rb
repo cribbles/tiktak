@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :logged_in, only: :show
 
   def show
-    redirect_to root_url if current_user.nil?
   end
 
   def new
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
 
     def logged_in
       unless logged_in?
-        flash[:danger] = "You must be logged in to view this page."
+        flash[:danger] = "Please log in."
         redirect_to login_url
       end
     end
