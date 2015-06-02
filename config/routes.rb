@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :topics do
     resources :posts
   end
+  resources :account_activations, only: :edit
 
   get 'posts/:topic_id/:id/new', to: 'posts#new', as: 'quote'
 end

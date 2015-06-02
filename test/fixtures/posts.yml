@@ -1,4 +1,4 @@
-<% (1..21).each do |n| %>
+<% (0..20).each do |n| %>
 post_<%= n %>:
   id: <%= n %>
   content: "post test number <%= n %>"
@@ -9,17 +9,17 @@ post_<%= n %>:
 <% end %>
 
 callout:
-  id: 22
+  id: 21
   content: "Well that's just not true!"
   created_at: <%= 5.minutes.ago %>
   updated_at: <%= 5.minutes.ago %>
   topic: topic_1
-  quote: 21
+  quote: 20
 
 response:
-  id: 23
+  id: 22
   content: "Yes it is. You're wrong - dead wrong."
   created_at: <%= 3.minutes.ago %>
   updated_at: <%= 3.minutes.ago %>
   topic: topic_1
-  quote: 22
+  quote: 21

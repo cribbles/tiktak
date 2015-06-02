@@ -3,7 +3,11 @@
 fred:
   email: fred@flintstone.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 wilma:
   email: wilma@flintstone.com
-  password_digest: <%= User.digest('foobar') %>
+  password_digest: <%= User.digest('foobarbat') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>

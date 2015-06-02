@@ -1,0 +1,10 @@
+<p>Hi!</p>
+
+<p>Welcome to WesACB!  Thanks for signing up.</p>
+
+<p>Click the link below to activate your account:</b>
+
+<p><b>
+<%= link_to "Activate!", edit_account_activation_url(@user.activation_token,
+                                                     email: @user.email) %>
+</b></p>
