@@ -6,4 +6,4 @@ fred:
 
 wilma:
   email: wilma@flintstone.com
-  password_digest: <%= User.digest('foobar') %>
+  password_digest: <%= User.digest('foobarbat') %>

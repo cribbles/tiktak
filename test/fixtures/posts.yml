@@ -1,25 +1,19 @@
-<% (1..21).each do |n| %>
+<% (0..20).each do |n| %>
 post_<%= n %>:
   id: <%= n %>
   content: "post test number <%= n %>"
   created_at: <%= 10.minutes.ago %>
   updated_at: nil
-  topic: topic_1
+  topic: 1
   quote: nil
 <% end %>
 
-callout:
-  id: 22
-  content: "Well that's just not true!"
-  created_at: <%= 5.minutes.ago %>
-  updated_at: <%= 5.minutes.ago %>
-  topic: topic_1
-  quote: 21
-
-response:
-  id: 23
-  content: "Yes it is. You're wrong - dead wrong."
-  created_at: <%= 3.minutes.ago %>
-  updated_at: <%= 3.minutes.ago %>
-  topic: topic_1
-  quote: 22
+<% (2..25).each do |n| %>
+post_<%= 19+n %>:
+  id: <%= 19+n %>
+  content: "post test number <%= 19+n %>"
+  created_at: <%= 10.minutes.ago %>
+  updated_at: nil
+  topic: <%= n %>
+  quote: nil
+<% end %>
