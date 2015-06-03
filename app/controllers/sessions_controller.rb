@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       if !user.activated?
         message = "Please check your e-mail to activate your account."
-        flash[:warning] = message
+        flash.now[:warning] = message
         render 'new'
       else
         log_in user

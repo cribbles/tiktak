@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @user.send_activation_email(request.remote_ip)
       message  = "Thanks for signing up!  Please check your e-mail "
       message += "to activate your account."
-      flash[:success] = message
+      flash[:info] = message
       redirect_to root_url
     else
       render 'new'
