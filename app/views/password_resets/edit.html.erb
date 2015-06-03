@@ -1,0 +1,39 @@
+<% provide(:title, 'Reset Password')
+   provide(:width, '460')
+   provide(:form_first, 'true') %>
+<%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+<table width="100%" class="content" style="<%= width_override yield(:width) %>">
+  <%= render 'layouts/header' %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= hidden_field_tag :email, @user.email %>
+  <tr class="cell4">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :password %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.password_field :password %>
+      </p>
+    </td>
+  </tr>
+  <tr class="info">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :password_confirmation, "Confirm Password" %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.password_field :password_confirmation %>
+      </p>
+    </td>
+  </tr>
+  <tr class="cell1">
+    <td colspan="2" class="footer">
+      <%= f.submit "Update password" %>
+    </td>
+  </tr>
+</table>
+<% end %>

@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  get 'users/new'
-
   root                'topics#index'
   get    'terms'   => 'static#terms'
   get    'faq'     => 'static#faq'
@@ -12,6 +8,7 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get 'posts/:topic_id/:id/new', to: 'posts#new', as: 'quote'
 
   resources :users
   resources :posts
@@ -19,6 +16,5 @@ Rails.application.routes.draw do
     resources :posts
   end
   resources :account_activations, only: :edit
-
-  get 'posts/:topic_id/:id/new', to: 'posts#new', as: 'quote'
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end
