@@ -26,6 +26,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def activated?
+    logged_in? && current_user.activated?
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)

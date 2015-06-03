@@ -9,7 +9,8 @@ User.create!(email: "foobar@example.org",
 # Topics
 
 25.times do |n|
-  Topic.create!(title: Faker::Lorem.sentence(3, false, 10))
+  Topic.create!(title: Faker::Lorem.sentence(3, false, 10),
+                last_posted: Time.zone.now)
 end
 
 Topic.all.each do |topic|

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150603134552) do
     t.text     "title"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "last_posted"
+    t.datetime "last_posted", null: false
   end
 
   create_table "users", force: :cascade do |t|

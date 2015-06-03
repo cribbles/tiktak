@@ -4,4 +4,5 @@ topic_<%= n %>:
   title: "topic test number <%= n %>"
   created_at: <%= 10.minutes.ago %>
   updated_at: <%= 10.minutes.ago %>
+  last_posted: <%= 5.minutes.ago %>
 <% end %>

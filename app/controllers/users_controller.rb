@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.send_activation_email
+      @user.send_activation_email(request.remote_ip)
       message  = "Thanks for signing up!  Please check your e-mail "
       message += "to activate your account."
       flash[:success] = message

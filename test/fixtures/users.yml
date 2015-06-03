@@ -3,7 +3,9 @@
 fred:
   email: fred@flintstone.com
   password_digest: <%= User.digest('password') %>
+  activated: true
 
 wilma:
   email: wilma@flintstone.com
   password_digest: <%= User.digest('foobarbat') %>
+  activated: false
