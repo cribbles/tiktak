@@ -1,0 +1,8 @@
+Hi!
+
+Welcome to WesACB!  Thanks for signing up.
+
+Click the link below to activate your account:
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
+
+This request was sent from the IP address <%= @client_ip %>.

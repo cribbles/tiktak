@@ -1,0 +1,25 @@
+<% provide(:title, "Reset Password")
+   provide(:width, '460')
+   provide(:form_first, 'true') %>
+<%= form_for(:password_reset, url: password_resets_path) do |f| %>
+<table width="100%" class="content" style="<%= width_override yield(:width) %>">
+<%= render 'layouts/header' %>
+  <tr class="info">
+    <td align="left">
+      <p class="info" align="center">
+        <b><%= f.label :email, 'E-mail' %></b>
+      </p>
+    </td>
+    <td align="right">
+      <p align="center">
+        <%= f.email_field :email %>
+      </p>
+    </td>
+  </tr>
+  <tr class="cell1">
+    <td align="center" colspan="2" class="footer">
+      <%= f.submit 'Submit' %>
+    </td>
+  </tr>
+</table>
+<% end %>
