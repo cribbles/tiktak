@@ -7,5 +7,5 @@ fred:
 
 wilma:
   email: wilma@flintstone.com
-  password_digest: <%= User.digest('foobarbat') %>
+  password_digest: <%= User.digest('password') %>
   activated: false
