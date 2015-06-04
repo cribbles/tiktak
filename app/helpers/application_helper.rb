@@ -18,8 +18,4 @@ module ApplicationHelper
   def sanitize_date(datetime)
     datetime.strftime("%-m/%-d/%y %I\:%M %p")
   end
-
-  def last_page_of(topic)
-    topic.posts.paginate(page: 1, per_page: 20).total_pages
-  end
 end

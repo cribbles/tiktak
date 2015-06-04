@@ -4,7 +4,8 @@ class UserMailerTest < ActionMailer::TestCase
 
   def setup
     @user = users(:fred)
-#    @request.remote_addr = '1.2.3.4'
+    @request = ActionController::TestRequest.new
+    @request.remote_ip = '1.2.3.4'
   end
 
   test "account_activation" do

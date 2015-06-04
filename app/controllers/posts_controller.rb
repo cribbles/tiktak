@@ -16,6 +16,7 @@ class PostsController < ApplicationController
     @post  = @topic.posts.build(post_params)
     if @post.save
       @topic.update_attributes(last_posted: @post.created_at)
+      @post.update_attributes(ip_address: request.remote_ip)
       redirect_to topic_path(@topic, page: last_page_of(@topic),
                                      anchor: "p" + @post.id.to_s)
     else
@@ -33,5 +34,9 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:topic_id, :content, :quote)
+    end
+
+    def last_page_of(topic)
+      topic.posts.paginate(page: 1, per_page: 20).total_pages
     end
 end

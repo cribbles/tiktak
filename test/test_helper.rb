@@ -4,6 +4,12 @@ require 'rails/test_help'
 require 'minitest/reporters'
 Minitest::Reporters.use!
 
+class ActionDispatch::TestRequest
+  def remote_ip=(value)
+    @env['REMOTE_ADDR'] = value.to_s
+  end
+end
+
 class ActiveSupport::TestCase
   fixtures :all
 
