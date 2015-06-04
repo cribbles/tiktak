@@ -6,6 +6,7 @@ post_<%= n %>:
   updated_at: nil
   topic: 1
   quote: nil
+  ip_address: '1.2.3.4'
 <% end %>
 
 <% (2..25).each do |n| %>
@@ -16,4 +17,5 @@ post_<%= 19+n %>:
   updated_at: nil
   topic: <%= n %>
   quote: nil
+  ip_address: '1.2.3.4'
 <% end %>
