@@ -12,7 +12,7 @@ Rails.application.routes.draw do
                                         as: 'quote'
   get 'forgot-password', to: 'password_resets#new',
                          as: 'new_password_reset'
-  get 'password-reset/:id/', to: 'password_resets#edit',
+  get 'reset-password/:id/', to: 'password_resets#edit',
                              as: 'edit_password_reset'
 
   resources :users
