@@ -57,7 +57,7 @@ class PasswordResetsController < ApplicationController
     def check_expiration
       if !logged_in? && @user.password_reset_expired?
         flash[:danger] = "Your password reset token has expired."
-        redirect_to new_password_reset_url
+        redirect_to lost_password_url
       end
     end
 end

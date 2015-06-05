@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  get 'posts/:topic_id/:id/new', to: 'posts#new', as: 'quote'
+  get 'topics/:topic_id/posts/:id/new', to: 'posts#new',
+                                        as: 'quote'
+  get 'forgot-password', to: 'password_resets#new',
+                         as: 'new_password_reset'
+  get 'password-reset/:id/', to: 'password_resets#edit',
+                             as: 'edit_password_reset'
 
   resources :users
   resources :posts
@@ -16,5 +21,5 @@ Rails.application.routes.draw do
     resources :posts
   end
   resources :account_activations, only: :edit
-  resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :password_resets,     only: [:create, :update]
 end
