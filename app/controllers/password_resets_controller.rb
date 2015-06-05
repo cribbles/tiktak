@@ -43,18 +43,19 @@ class PasswordResetsController < ApplicationController
     end
 
     def get_user
-      @user = User.find_by(email: params[:email])
+      @user   = current_user
+      @user ||= User.find_by(email: params[:email])
     end
 
     def valid_user
-      unless (@user && @user.activated? &&
-              @user.authenticated?(:reset, params[:id]))
+      unless logged_in? || (@user && @user.activated? &&
+                            @user.authenticated?(:reset, params[:id]))
         redirect_to root_url
       end
     end
 
     def check_expiration
-      if @user.password_reset_expired?
+      if !logged_in? && @user.password_reset_expired?
         flash[:danger] = "Your password reset token has expired."
         redirect_to new_password_reset_url
       end
