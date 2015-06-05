@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     if @post.save
       @topic.update_attributes(last_posted: @post.created_at)
       @post.update_attributes(ip_address: request.remote_ip)
+      @post.update_attributes(user_id: current_user.id) if logged_in?
       redirect_to topic_path(@topic, page: last_page_of(@topic),
                                      anchor: "p" + @post.id.to_s)
     else
