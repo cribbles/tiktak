@@ -4,6 +4,9 @@
   <td colspan="100%">
     <a name="p<%= post.id %>"></a>
     <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
+    <% if post.contact %>
+      <b><%= link_to "Contact", '#' %></b> &nbsp;|&nbsp;
+    <% end %>
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
     <%= link_to "Quote",  quote_path(@topic, post) %>
   </td>

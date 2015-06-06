@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:topic_id, :content, :quote)
+      params.require(:post).permit(:topic_id, :content, :quote, :contact)
     end
 
     def last_page_of(topic)

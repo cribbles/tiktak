@@ -6,14 +6,7 @@
   <%= f.hidden_field :topic_id, value: @topic.id %>
   <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
-  <% if !@quote.nil? %>
-  <tr class="cell2">
-    <td colspan="3">
-      <%= f.label :quote, "Quote" %>
-    </td>
-  </tr>
-  <%= render @quote %>
-  <% end %>
+  <%= render 'quote', f: f if @quote %>
   <tr class="cell2">
     <td colspan="3">
       <%= f.label :content, "Message" %>
@@ -26,26 +19,7 @@
       </p>
     </td>
   </tr>
-  <% if !@quote.nil? %>
-  <tr class="cell2">
-    <td colspan="3">
-      Options
-    </td>
-  </tr>
-  <tr class="info">
-    <td style="width: 145px;">
-      &nbsp;
-    </td>
-    <td>
-      <p align="center">
-        <%= f.check_box :quote, { checked: true }, @quote.id, nil %> <b>Include quote?</b>
-      </p>
-    </td>
-    <td style="width: 145px;">
-      &nbsp;
-    </td>
-  </tr>
-  <% end %>
+  <%= render 'options', f: f if @quote || logged_in? %>
   <tr class="cell1">
     <td colspan="3" class="footer">
       <p align="center">

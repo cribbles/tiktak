@@ -8,6 +8,9 @@
   <td style="<%= top_partial %>">
     <p class="post4">
       <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
+      <% if topic.posts.first.contact %>
+        <b>&middot; <%= link_to "contact", '#' %></b>
+      <% end %>
       <br />
       <%= sanitize_date(topic.last_posted) %>
     </p>
