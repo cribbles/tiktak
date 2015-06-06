@@ -5,40 +5,11 @@
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
   <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
-  <tr class="cell2">
-    <td colspan="3">
-      <%= f.label :title, "Title" %>
-    </td>
-  </tr>
-  <tr class="info">
-    <td colspan="3">
-      <p align="center">
-        <%= f.text_field :title, size: 60 %>
-      </p>
-    </td>
-  </tr>
-  <%= f.fields_for :posts do |builder| %>
-    <tr class="cell2">
-      <td colspan="3">
-        <%= builder.label :content, "Message" %>
-      </td>
-    </tr>
-    <tr class="info">
-      <td colspan="3">
-        <p align="center">
-          <%= builder.text_area :content, cols: 60, rows: 20 %>
-        </p>
-      </td>
-    </tr>
-    <%= render 'posts/options', f: builder if logged_in? %>
+  <%= render 'shared/title_form', f: f %>
+  <%= f.fields_for :posts do |ff| %>
+    <%= render 'shared/content_form', f: ff %>
+    <%= render 'shared/post_options', f: ff if logged_in? %>
   <% end %>
-  <tr class="cell1">
-    <td colspan="3" class="footer">
-      <p align="center">
-        <%= f.submit "Post",    name: 'submit' %>
-        <%= f.submit "Preview", name: 'preview', disabled: true %>
-      </p>
-    </td>
-  </tr>
+  <%= render 'shared/submit_form', f: f %>
 </table>
 <% end %>

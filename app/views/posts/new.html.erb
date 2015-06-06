@@ -6,27 +6,9 @@
   <%= f.hidden_field :topic_id, value: @topic.id %>
   <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= render 'quote', f: f if @quote %>
-  <tr class="cell2">
-    <td colspan="3">
-      <%= f.label :content, "Message" %>
-    </td>
-  </tr>
-  <tr class="info">
-    <td colspan="3">
-      <p align="center">
-        <%= f.text_area :content, cols: 60, rows: 20 %>
-      </p>
-    </td>
-  </tr>
-  <%= render 'options', f: f if @quote || logged_in? %>
-  <tr class="cell1">
-    <td colspan="3" class="footer">
-      <p align="center">
-        <%= f.submit "Post",    name: 'submit' %>
-        <%= f.submit "Preview", name: 'preview', disabled: true %>
-      </p>
-    </td>
-  </tr>
+  <%= render 'quote',               f: f if @quote %>
+  <%= render 'shared/content_form', f: f %>
+  <%= render 'shared/post_options', f: f if @quote || logged_in? %>
+  <%= render 'shared/submit_form',  f: f %>
 </table>
 <% end %>
