@@ -1,9 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :topics do
-    def <<(topic)
-      topic.posts.first
-    end
-  end
+  has_many :topics, dependent: :nullify
   has_many :posts,  dependent: :nullify
   has_many :sent_pm_topics, class_name: "PmTopic",
                             foreign_key: "sender_id",

@@ -21,6 +21,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     if @topic.save
       @topic.update_attributes(last_posted: @topic.posts.first.created_at)
+      @topic.update_attributes(user_id: current_user.id) if logged_in?
       redirect_to @topic
     else
       render 'new'
