@@ -3,6 +3,7 @@ topic_<%= n %>:
   id: <%= n %>
   title: "topic test number <%= n %>"
   created_at: <%= 10.minutes.ago %>
-  updated_at: <%= 10.minutes.ago %>
+  updated_at: nil
   last_posted: <%= 5.minutes.ago %>
+  user_id: nil
 <% end %>

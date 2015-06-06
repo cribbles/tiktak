@@ -1,21 +1,23 @@
-<% (0..20).each do |n| %>
+<% (1..21).each do |n| %>
 post_<%= n %>:
   id: <%= n %>
   content: "post test number <%= n %>"
   created_at: <%= 10.minutes.ago %>
   updated_at: nil
-  topic: 1
+  topic: topic_1
   quote: nil
   ip_address: '1.2.3.4'
+  user_id: nil
 <% end %>
 
 <% (2..25).each do |n| %>
-post_<%= 19+n %>:
-  id: <%= 19+n %>
-  content: "post test number <%= 19+n %>"
+post_<%= 20+n %>:
+  id: <%= 20+n %>
+  content: "post test number <%= 20+n %>"
   created_at: <%= 10.minutes.ago %>
   updated_at: nil
-  topic: <%= n %>
+  topic: topic_<%= n %>
   quote: nil
   ip_address: '1.2.3.4'
+  user_id: nil
 <% end %>
