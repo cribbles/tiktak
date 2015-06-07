@@ -1,6 +1,6 @@
 class PmPostsController < ApplicationController
   before_action :ensure_logged_in
-#  before_action :ensure_valid_user
+  before_action :ensure_valid_user
 
   def new
     @pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
@@ -20,9 +20,10 @@ class PmPostsController < ApplicationController
       @pm_post.update_attributes(ip_address: request.remote_ip,
                                  user_id:    current_user.id)
       if pm_post_params[:handshake]
-        if @pm_topic.sender_id == current_user.id
+        case current_user.id
+        when @pm_topic.sender_id
           @pm_post.update_attributes(sender_handshake: true)
-        elsif @pm_topic.recipient_id == current_user.id
+        when @pm_topic.recipient_id
           @pm_post.update_attributes(recipient_handshake: true)
         end
       end
@@ -47,7 +48,8 @@ class PmPostsController < ApplicationController
     end
 
     def ensure_valid_user
-      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+      pm_topic_id = params[:pm_topic_id] || pm_post_params[:pm_topic_id]
+      pm_topic = PmTopic.find_by(id: pm_topic_id)
       valid_users = [pm_topic.sender_id, pm_topic.recipient_id]
       redirect_to root_url unless valid_users.include?(current_user.id)
     end

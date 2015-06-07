@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get  'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
                                                   as: 'new_pm_topic'
   post 'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
-                                                  as: 'create_pm_topics'
+                                                  as: 'create_pm_topic'
   get 'topics/:topic_id/posts/:id/new', to: 'posts#new',
                                         as: 'quote'
   get 'forgot-password', to: 'password_resets#new',

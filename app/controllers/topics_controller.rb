@@ -20,8 +20,11 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
-      @topic.update_attributes(last_posted: @topic.posts.first.created_at)
-      @topic.update_attributes(user_id: current_user.id) if logged_in?
+      @post = @topic.posts.first
+      @topic.update_attributes(last_posted: @post.created_at)
+      if logged_in?
+        [@topic, @post].each {|t| t.update_attributes(user_id: current_user.id)}
+      end
       redirect_to @topic
     else
       render 'new'
