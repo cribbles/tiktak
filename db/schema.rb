@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20150607013037) do
   add_index "pm_posts", ["user_id"], name: "index_pm_posts_on_user_id"
 
   create_table "pm_topics", force: :cascade do |t|
-    t.string   "title"
     t.datetime "last_posted"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
