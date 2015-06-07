@@ -14,12 +14,12 @@ class PmTopicsController < ApplicationController
     @pm_topic = PmTopic.new(pm_topic_params)
     @post  = Post.find_by(id: pm_topic_params[:post_id])
     if @pm_topic.save
-      @pm_topic.update_attributes(sender_id:    current_user.id,
-                                  recipient_id: @post.user_id)
-#                                 sender_handshake: pm_topic_params[:handshake])
       @pm_post = @pm_topic.pm_posts.first
       @pm_post.update_attributes(user_id: current_user.id,
                                  ip_address: request.remote_ip)
+      @pm_topic.update_attributes(sender_id:    current_user.id,
+                                  recipient_id: @post.user_id,
+                                  last_posted:  @pm_post.created_at)
       redirect_to new_pm_post_path(@pm_topic, anchor: "p" + @pm_post.id.to_s)
     else
       render 'new'
