@@ -5,7 +5,7 @@
     <a name="p<%= post.id %>"></a>
     <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
     <% if post.contact %>
-      <b><%= link_to "Contact", '#' %></b> &nbsp;|&nbsp;
+      <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b> &nbsp;|&nbsp;
     <% end %>
     <%= link_to "Report", '#' %> &nbsp;|&nbsp;
     <%= link_to "Quote",  quote_path(@topic, post) %>

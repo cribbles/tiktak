@@ -9,7 +9,8 @@
     <p class="post4">
       <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
       <% if topic.posts.first.contact %>
-        <b>&middot; <%= link_to "contact", '#' %></b>
+        <b>&middot; <%= link_to "contact",
+                        new_pm_topic_path(topic, topic.posts.first.id) %></b>
       <% end %>
       <br />
       <%= sanitize_date(topic.last_posted) %>

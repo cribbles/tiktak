@@ -8,5 +8,11 @@
       <p align="center">
         <%= f.text_area :content, cols: 60, rows: 20 %>
       </p>
+      <% if local_assigns[:pm_handshake] %>
+        <p class="info" align="center">
+          <%= f.check_box :handshake, { checked: false }, true, false %>
+          <b>Offer to exchange e-mails?</b>
+        </p>
+      <% end %>
     </td>
   </tr>

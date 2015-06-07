@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PmRelationshipTest < ActiveSupport::TestCase
+class PmPostsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

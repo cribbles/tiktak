@@ -1,0 +1,14 @@
+<% provide(:title, @title)
+   provide(:form_first, 'true') %>
+<%= form_for @pm_topic do |f| %>
+<table width="100%" class="content" style="">
+  <%= f.hidden_field :topic_id, value: @topic.id %>
+  <%= f.hidden_field :post_id,  value: @post.id  %>
+  <%= render 'layouts/header' %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.fields_for :pm_posts do |ff| %>
+    <%= render 'shared/content_form', f: ff %>
+  <% end %>
+  <%= render 'shared/submit_form',  f: f %>
+</table>
+<% end %>

@@ -1,0 +1,17 @@
+<% provide(:title, @title)
+   provide(:form_first, 'true') %>
+<%= form_for @pm_post do |f| %>
+<table width="100%" class="content" style="">
+  <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
+  <%= render 'layouts/header' %>
+  <tr class="cell2">
+    <td colspan="2">
+      Private Message
+    </td>
+  </tr>
+  <%= render @pm_posts %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= render 'shared/content_form', f: f, pm_handshake: @handshake %>
+  <%= render 'shared/submit_form',  f: f %>
+</table>
+<% end %>

@@ -1,0 +1,2 @@
+module PmTopicsHelper
+end
