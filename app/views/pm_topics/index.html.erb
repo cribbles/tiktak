@@ -1,0 +1,11 @@
+<% provide(:title, "Private Messages") %>
+
+<tr class="cell2">
+  <td>Title</td>
+  <td>Correspondent</td>
+  <td>Last Response</td>
+</tr>
+
+<%= render @pm_topics %>
+
+<%= render 'shared/pagination_footer', collection: @pm_topics %>

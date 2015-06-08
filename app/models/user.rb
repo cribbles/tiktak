@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
                             dependent: :destroy
   has_many :received_pm_topics, class_name: "PmTopic",
                                 foreign_key: "recipient_id",
-                                dependent: :destroy 
-  has_many :pm_posts, dependent: :destroy
+                                dependent: :destroy
+  has_many :pm_posts,  dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -66,6 +67,10 @@ class User < ActiveRecord::Base
 
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  def pm_topics
+    PmTopic.where("sender_id = ? OR recipient_id = ?", id, id)
   end
 
   private

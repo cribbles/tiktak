@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get 'private-messages', to: 'pm_topics#index',
+                          as: 'pm_topics'
   get 'private-messages/:pm_topic_id', to: 'pm_posts#new',
-                                       as: 'new_pm_post'
+                                       as: 'new_pm_topic_post'
   get  'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
                                                   as: 'new_pm_topic'
   post 'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',

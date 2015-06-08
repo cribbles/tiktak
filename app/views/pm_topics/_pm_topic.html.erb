@@ -1,0 +1,17 @@
+  <tr class="info">
+    <td>
+      <p class="info">
+        <%= link_to pm_topic.title, new_pm_topic_post_path(pm_topic) %>
+      </p>
+    </td>
+    <td>
+      <p align="center">
+        Anonymous
+      </p>
+    </td>
+    <td>
+      <p align="center">
+        <%= sanitize_date(pm_topic.last_posted) %>
+      </p>
+    </td>
+  </tr>
