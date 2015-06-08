@@ -18,4 +18,9 @@ module ApplicationHelper
   def sanitize_date(datetime)
     datetime.strftime("%-m/%-d/%y %I\:%M %p")
   end
+
+  def info_cell
+    @info_cell ||= 'info'
+    @info_cell = (@info_cell == 'info') ? 'cell4' : 'info'
+  end
 end

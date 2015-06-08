@@ -22,7 +22,8 @@ class PmPostsController < ApplicationController
           @pm_post.update_attributes(recipient_handshake: true)
         end
       end
-      redirect_to new_pm_post_path(@pm_topic.id, anchor: "p" + @pm_post.id.to_s)
+      redirect_to new_pm_topic_post_path(@pm_topic.id,
+                                         anchor: "p" + @pm_post.id.to_s)
     else
       render 'new'
     end

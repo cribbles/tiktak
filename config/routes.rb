@@ -10,12 +10,14 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   get 'private-messages', to: 'pm_topics#index',
                           as: 'pm_topics'
+  post 'private-messages', to: 'pm_topics#create',
+                           as: 'create_pm_topic'
   get 'private-messages/:pm_topic_id', to: 'pm_posts#new',
                                        as: 'new_pm_topic_post'
   get  'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
                                                   as: 'new_pm_topic'
-  post 'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
-                                                  as: 'create_pm_topic'
+#  post 'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#create',
+#                                                  as: 'create_pm_topic'
   get 'topics/:topic_id/posts/:id/new', to: 'posts#new',
                                         as: 'quote'
   get 'forgot-password', to: 'password_resets#new',

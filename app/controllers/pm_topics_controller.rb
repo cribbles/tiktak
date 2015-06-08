@@ -28,7 +28,7 @@ class PmTopicsController < ApplicationController
       @pm_topic.update_attributes(sender_id:    current_user.id,
                                   recipient_id: @post.user_id,
                                   last_posted:  @pm_post.created_at)
-      redirect_to new_pm_topic_post_path(@pm_topic, anchor: "p" + @pm_post.id.to_s)
+      redirect_to new_pm_topic_post_path(@pm_topic)
     else
       render 'new'
     end
