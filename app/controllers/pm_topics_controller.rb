@@ -19,15 +19,17 @@ class PmTopicsController < ApplicationController
   end
 
   def create
+    handshake = pm_topic_params.delete(:handshake)
     @post = Post.find_by(id: pm_topic_params[:post_id])
     @pm_topic = PmTopic.new(pm_topic_params)
     if @pm_topic.save
       @pm_post = @pm_topic.pm_posts.first
-      @pm_post.update_attributes(user_id: current_user.id,
+      @pm_post.update_attributes(user_id:    current_user.id,
                                  ip_address: request.remote_ip)
-      @pm_topic.update_attributes(sender_id:    current_user.id,
-                                  recipient_id: @post.user_id,
-                                  last_posted:  @pm_post.created_at)
+      @pm_topic.update_attributes(sender_id:        current_user.id,
+                                  recipient_id:     @post.user_id,
+                                  last_posted:      @pm_post.created_at,
+                                  sender_handshake: handshake)
       redirect_to new_pm_topic_post_path(@pm_topic)
     else
       render 'new'
@@ -37,8 +39,8 @@ class PmTopicsController < ApplicationController
   private
 
     def pm_topic_params
-      params.require(:pm_topic).permit(:topic_id, :post_id,
-                                pm_posts_attributes: [:content])
+      params.require(:pm_topic).permit(:topic_id, :post_id, #:handshake,
+                                pm_posts_attributes: :content)
     end
 
     def ensure_logged_in

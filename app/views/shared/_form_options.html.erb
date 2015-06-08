@@ -13,7 +13,7 @@
         <%= f.check_box :quote, { checked: true }, @quote.id, nil %>
         <b>Include quote?</b>
       <% end %>
-      <% if !@quote.nil? and logged_in? %>
+      <% if @quote && logged_in? %>
         <br />
       <% end %>
       <% if logged_in? %>

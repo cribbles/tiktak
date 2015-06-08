@@ -13,7 +13,7 @@
                         new_pm_topic_path(topic, topic.posts.first.id) %></b>
       <% end %>
       <br />
-      <%= sanitize_date(topic.last_posted) %>
+      <%= format_date(topic.last_posted) %>
     </p>
   </td>
 </tr>

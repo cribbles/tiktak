@@ -3,7 +3,7 @@
   </td>
   <td colspan="100%">
     <a name="p<%= post.id %>"></a>
-    <b>Posted:</b> <%= sanitize_date(post.created_at) %> &nbsp;|&nbsp;
+    <b>Posted:</b> <%= format_date(post.created_at) %> &nbsp;|&nbsp;
     <% if post.contact %>
       <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b> &nbsp;|&nbsp;
     <% end %>

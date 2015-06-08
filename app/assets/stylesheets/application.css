@@ -151,8 +151,12 @@ tr.info {
 	font-size: 13px;
 }
 .info td {
-	border-top: 1px solid #E5E5E5 !important;
-	border-bottom: 1px solid #E5E5E5 !important
+	border-top: 1px solid #E5E5E5;
+	border-bottom: 1px solid #E5E5E5;
+}
+.info td.no_border {
+	border-top: none !important;
+	border-top: none !important;
 }
 .search {
 	display: inline;

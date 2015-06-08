@@ -5,13 +5,14 @@
   <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
   <%= render 'layouts/header' %>
   <tr class="cell2">
-    <td colspan="2">
+    <td colspan="100%">
       Private Message
     </td>
   </tr>
   <%= render @pm_posts %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= render 'shared/content_form', f: f, pm_handshake: @handshake %>
-  <%= render 'shared/submit_form',  f: f %>
+  <%= render 'shared/content_form',   f: f %>
+  <%= render 'shared/handshake_form', f: f %>
+  <%= render 'shared/submit_form',    f: f %>
 </table>
 <% end %>

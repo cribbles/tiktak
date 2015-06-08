@@ -15,7 +15,7 @@ module ApplicationHelper
     page_title.empty? ? base_title : base_title + " - " + page_title
   end
 
-  def sanitize_date(datetime)
+  def format_date(datetime)
     datetime.strftime("%-m/%-d/%y %I\:%M %p")
   end
 
