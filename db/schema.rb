@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609132931) do
+ActiveRecord::Schema.define(version: 20150609212212) do
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "pm_topic_id"
     t.integer  "user_id"
     t.string   "ip_address"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "handshake_sent", default: false
   end
 
   add_index "pm_posts", ["pm_topic_id"], name: "index_pm_posts_on_pm_topic_id"

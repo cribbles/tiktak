@@ -13,7 +13,7 @@
   <%= render @pm_posts %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= render 'shared/content_form',   f: f %>
-  <%= render 'shared/handshake_form', f: f %>
+  <%= render 'shared/handshake_form', f: f unless handshake_offered %>
   <%= render 'shared/submit_form',    f: f %>
 </table>
 <% end %>
