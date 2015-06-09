@@ -8,6 +8,7 @@ class PmPostsController < ApplicationController
     @pm_post  = @pm_topic.pm_posts.build(pm_post_params)
     if @pm_post.save
       @pm_topic.update_attributes(user_handshake => handshake) if handshake
+      @pm_topic.update_attributes(last_posted: @pm_post.created_at)
       @pm_post.update_attributes(ip_address: request.remote_ip,
                                  user_id:    current_user.id)
       redirect_to pm_topic_path(@pm_topic.id, anchor: "p" + @pm_post.id.to_s)
