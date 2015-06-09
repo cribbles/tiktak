@@ -16,9 +16,9 @@ module RoutesHelper
     end
   end
 
-  def new_pm_topic_post?
+  def pm_topics_show?
     return false unless defined? @pm_topic.id
     return false if @pm_topic.id.nil?
-    current_page?(new_pm_topic_post_path(@pm_topic))
+    current_page?(pm_topic_path(@pm_topic))
   end
 end

@@ -10,6 +10,12 @@ class PmTopicsController < ApplicationController
                              .paginate(page: params[:page], per_page: 10)
   end
 
+  def show
+    @pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+    @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
+    @pm_post  = @pm_topic.pm_posts.build
+  end
+
   def new
     @pm_topic = PmTopic.new
     @pm_topic.pm_posts.build

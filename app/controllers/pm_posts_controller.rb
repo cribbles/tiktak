@@ -2,12 +2,6 @@ class PmPostsController < ApplicationController
   before_action :ensure_logged_in
   before_action :ensure_valid_user
 
-  def new
-    @pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
-    @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
-    @pm_post  = @pm_topic.pm_posts.build
-  end
-
   def create
     handshake = pm_post_params.delete(:handshake)
     @pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
@@ -16,8 +10,7 @@ class PmPostsController < ApplicationController
       @pm_topic.update_attributes(user_handshake => handshake) if handshake
       @pm_post.update_attributes(ip_address: request.remote_ip,
                                  user_id:    current_user.id)
-      redirect_to new_pm_topic_post_path(@pm_topic.id,
-                                         anchor: "p" + @pm_post.id.to_s)
+      redirect_to pm_topic_path(@pm_topic.id, anchor: "p" + @pm_post.id.to_s)
     else
       render 'new'
     end

@@ -1,6 +1,7 @@
 <% provide(:title, @pm_topic.title)
    provide(:form_first, 'true') %>
-<%= form_for @pm_post do |f| %>
+<%= form_for @pm_post, url: create_pm_topic_post_path(@pm_topic.id),
+                       method: :post do |f| %>
 <table width="100%" class="content" style="">
   <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
   <%= render 'layouts/header' %>
