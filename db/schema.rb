@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607013037) do
+ActiveRecord::Schema.define(version: 20150609132931) do
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150607013037) do
     t.boolean  "handshake_declined",  default: false
     t.integer  "post_id"
     t.integer  "topic_id"
+    t.string   "title"
   end
 
   create_table "posts", force: :cascade do |t|

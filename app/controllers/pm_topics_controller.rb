@@ -3,6 +3,7 @@ class PmTopicsController < ApplicationController
   before_action :ensure_topic_post_associated, only: [:new, :create]
   before_action :ensure_contact,               only: [:new, :create]
   before_action :ensure_distinct_users,        only: [:new, :create]
+  before_action :ensure_valid_user,            only: :show
 
   def index
     @pm_topics = current_user.pm_topics
@@ -21,7 +22,6 @@ class PmTopicsController < ApplicationController
     @pm_topic.pm_posts.build
     @topic = Topic.find_by(id: params[:topic_id])
     @post  = Post.find_by(id: params[:post_id])
-    @title = 'Re: ' + @topic.title
   end
 
   def create
@@ -36,7 +36,7 @@ class PmTopicsController < ApplicationController
                                   recipient_id:     @post.user_id,
                                   last_posted:      @pm_post.created_at,
                                   sender_handshake: handshake)
-      redirect_to new_pm_topic_post_path(@pm_topic)
+      redirect_to @pm_topic
     else
       render 'new'
     end
@@ -45,7 +45,7 @@ class PmTopicsController < ApplicationController
   private
 
     def pm_topic_params
-      params.require(:pm_topic).permit(:topic_id, :post_id, #:handshake,
+      params.require(:pm_topic).permit(:topic_id, :post_id, :title, #:handshake,
                                 pm_posts_attributes: :content)
     end
 
@@ -76,5 +76,11 @@ class PmTopicsController < ApplicationController
         flash[:warning] = "You can't send yourself a private message!"
         redirect_to :back
       end
+    end
+
+    def ensure_valid_user
+      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+      valid_users = [pm_topic.sender_id, pm_topic.recipient_id]
+      redirect_to root_url unless valid_users.include?(current_user.id)
     end
 end

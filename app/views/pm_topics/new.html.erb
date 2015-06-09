@@ -6,6 +6,7 @@
   <%= f.hidden_field :post_id,  value: @post.id  %>
   <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
+  <%= render 'shared/title_form', f: f %>
   <%= f.fields_for :pm_posts do |ff| %>
     <%= render 'shared/content_form', f: ff %>
   <% end %>

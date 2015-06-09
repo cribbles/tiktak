@@ -32,15 +32,13 @@ class PmPostsController < ApplicationController
     end
 
     def ensure_valid_user
-      pm_topic_id = params[:pm_topic_id] || pm_post_params[:pm_topic_id]
-      pm_topic = PmTopic.find_by(id: pm_topic_id)
+      pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
       valid_users = [pm_topic.sender_id, pm_topic.recipient_id]
       redirect_to root_url unless valid_users.include?(current_user.id)
     end
 
     def user_handshake
-      pm_topic_id = params[:pm_topic_id] || pm_post_params[:pm_topic_id]
-      pm_topic = PmTopic.find_by(id: pm_topic_id)
+      pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
       return case current_user.id
       when pm_topic.sender_id
         :sender_handshake
