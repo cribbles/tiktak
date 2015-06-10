@@ -32,8 +32,7 @@ class PmPostsController < ApplicationController
 
     def ensure_valid_user
       pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
-      valid_users = [pm_topic.sender_id, pm_topic.recipient_id]
-      redirect_to root_url unless valid_users.include?(current_user.id)
+      redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
     end
 
     def user_handshake

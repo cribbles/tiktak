@@ -5,4 +5,18 @@ class PmTopic < ActiveRecord::Base
   accepts_nested_attributes_for :pm_posts
   attr_accessor :handshake
   validates :title, presence: true, length: { maximum: 140 }
+
+  def valid_users
+    [sender_id, recipient_id]
+  end
+
+  def handshake_status
+    if handshake_declined
+      :declined
+    elsif sender_handshake && recipient_handshake
+      :accepted
+    elsif sender_handshake || recipient_handshake
+      :sent
+    end
+  end
 end
