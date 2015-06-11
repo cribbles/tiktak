@@ -36,11 +36,10 @@ class PmPostsController < ApplicationController
     end
 
     def user_handshake
-      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
-      return case current_user.id
-      when pm_topic.sender_id
+      pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
+      if pm_topic.sender_id == current_user.id
         :sender_handshake
-      when pm_topic.recipient_id
+      elsif pm_topic.recipient_id = current_user.id
         :recipient_handshake
       end
     end

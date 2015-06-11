@@ -13,11 +13,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<center>
 <div class="container">
 <% flash.each do |msg_type, msg| %>
   <div class="alert alert-<%= msg_type %>"><%= msg %></div>
 <% end %>
+</div>
 <%= render 'layouts/title' %>
 <% unless yield(:form_first) == 'true' %>
 <table width="100%" class="content" style="<%= width_override yield(:width) %>">
@@ -27,14 +27,13 @@
 <% unless yield(:form_first) == 'true' %>
 </table>
 <% end %>
-<p>
+<p align="center">
   <%= link_to "Terms of Use", terms_path %> |
   <%= link_to "FAQ",          faq_path %> |
   <%= link_to "Statistics",   stats_path %>
   <br />
   Page generated in <%= (Time.now-benchmark).round(3) %> seconds
 </p>
-</center>
 <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

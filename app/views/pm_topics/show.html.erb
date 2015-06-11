@@ -1,19 +1,22 @@
 <% provide(:title, @pm_topic.title)
-   provide(:form_first, 'true') %>
-<%= form_for @pm_post, url: create_pm_topic_post_path(@pm_topic.id),
-                       method: :post do |f| %>
-<table width="100%" class="content" style="">
-  <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
-  <%= render 'layouts/header' %>
-  <tr class="cell2">
-    <td colspan="100%">
+   provide(:form_first, true) %>
+<div width="100%" class="content" style="width:695px;">
+  <%= render 'layouts/divs/header' %>
+  <div class="cell2">
       Private Message
-    </td>
-  </tr>
+  </div>
   <%= render @pm_posts %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= render 'shared/content_form',   f: f %>
-  <%= render 'shared/handshake_form', f: f unless handshake_offered %>
-  <%= render 'shared/submit_form',    f: f %>
-</table>
-<% end %>
+  <%    if @pm_topic.handshake_status == :sent %>
+    <%= render 'handshake_response_form' %>
+  <% elsif @pm_topic_handshake_status == :declined %>
+    <%= render 'handshake_declined' %>
+  <% end %>
+  <%= form_for @pm_post, url: create_pm_topic_post_path(@pm_topic.id),
+                         method: :post do |f| %>
+    <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
+    <%= render 'shared/divs/error_messages', object: f.object %>
+    <%= render 'shared/divs/content_form',   f: f %>
+    <%= render 'handshake_form', f: f unless handshake_offered %>
+    <%= render 'shared/divs/submit_form',    f: f %>
+  <% end %>
+</div>

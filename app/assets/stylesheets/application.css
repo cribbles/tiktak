@@ -13,15 +13,35 @@ table {
 	border-spacing: 0px;
 	width: 695px;
 	border-collapse: none;
-	border: #F8F8F8 5px solid
+	border: #F8F8F8 0px solid;
+        -moz-border-radius: 17px 17px 17px 17px;
+        -webkit-border-radius: 17px;
+        border-radius: 17px 17px 17px 17px;
+}
+form {
+	margin: 0;
+}
+div.content {
+	display: table;
 }
 .content {
-	-moz-border-radius: 17px;
+	margin: 0 auto;
+	-moz-border-radius: 17px 17px 17px 17px;
 	-webkit-border-radius: 17px;
-	border-radius: 17px;
+	border-radius: 17px 17px 17px 17px;
 	-moz-box-shadow: 0 0 16px #B4B4B4;
 	-webkit-box-shadow: 0 0 16px #B4B4B4;
 	box-shadow: 0 0 16px #B4B4B4
+}
+.cell1:first-child {
+        -moz-border-radius: 17px 17px 0 0;
+        -webkit-border-radius: 17px 17px 0 0;
+        border-radius: 17px 17px 0 0;
+}
+.cell1:last-child {
+	-moz-border-radius: 0 0 17px 17px;
+        -webkit-border-radius: 0 0 17px 17px;
+        border-radius: 0 0 17px 17px;
 }
 .site_title a, a:hover, a:visited, a:active {
 	text-decoration: none
@@ -126,7 +146,7 @@ div.title {
 	font-size: 13px;
         color: #222222 !important;
 }
-.cell3 td {
+div.cell3, .cell3 td {
         border-top: 2px solid #888 !important;
 	border-bottom: 1px solid #DDDDDD !important;
 }
@@ -146,17 +166,19 @@ div.title {
 	background-color: #DBDBDB;
 	font-size: 13px
 }
-tr.info {
+.info {
 	background-color: #F8F8F8;
 	font-size: 13px;
 }
-.info td {
+.info td, div.info {
 	border-top: 1px solid #E5E5E5;
 	border-bottom: 1px solid #E5E5E5;
 }
-.info td.no_border {
+.info td.no_border, .info-td-no-border {
+        background-color: #F8F8F8;
+        font-size: 13px;
 	border-top: none !important;
-	border-top: none !important;
+	border-bottom: none !important;
 }
 .search {
 	display: inline;
@@ -180,6 +202,12 @@ tr.info {
 .topic_title a:link, a:visited, a:active, a:hover {
 	color: #000000;
 	text-decoration: none !important
+}
+.handshake-sent {
+	color: #008000;
+}
+.handshake-declined {
+	color: #8B0000;
 }
 p.post {
 	padding-top: 15px;

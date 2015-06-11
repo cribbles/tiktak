@@ -1,15 +1,11 @@
-  <tr class="cell3">
-    <td colspan="100%" class="cell3">
+  <div class="cell3">
       <a name="p<%= pm_post.id %>"></a>
       &nbsp;
       <%= format_date(pm_post.created_at) %> &nbsp;|&nbsp;
       <b><%= who_posted(pm_post) %></b> said:
-    </td>
-  </tr>
-  <tr class="cell4">
-    <td colspan="100%" class="cell4">
+  </div>
+  <div class="cell4">
       <p class="post">
         <%= pm_post.content %>
       </p>
-    </td>
-  </tr>
+  </div>

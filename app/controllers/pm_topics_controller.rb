@@ -15,6 +15,7 @@ class PmTopicsController < ApplicationController
     @pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
     @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
     @pm_post  = @pm_topic.pm_posts.build
+    @user_handshake = user_handshake
   end
 
   def new
@@ -81,6 +82,15 @@ class PmTopicsController < ApplicationController
     def ensure_valid_user
       pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
       redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
+    end
+
+    def user_handshake
+      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+      if pm_topic.sender_id == current_user.id
+        :sender_handshake
+      elsif pm_topic.recipient_id = current_user.id
+        :recipient_handshake
+      end
     end
 
     def handshake_sent

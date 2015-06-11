@@ -9,7 +9,7 @@
   <%= render 'shared/title_form', f: f %>
   <%= f.fields_for :pm_posts do |ff| %>
     <%= render 'shared/content_form', f: ff %>
-    <%= render 'shared/handshake_form', f: ff %>
+    <%= render 'handshake_form', f: ff %>
   <% end %>
   <%= render 'shared/submit_form', f: f %>
 </table>
