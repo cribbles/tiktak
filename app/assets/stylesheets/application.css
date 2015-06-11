@@ -166,7 +166,7 @@ div.cell3, .cell3 td {
 	background-color: #DBDBDB;
 	font-size: 13px
 }
-.info {
+tr.info, div.info {
 	background-color: #F8F8F8;
 	font-size: 13px;
 }
