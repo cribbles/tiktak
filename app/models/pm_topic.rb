@@ -9,14 +9,4 @@ class PmTopic < ActiveRecord::Base
   def valid_users
     [sender_id, recipient_id]
   end
-
-  def handshake_status
-    if handshake_declined
-      :declined
-    elsif sender_handshake && recipient_handshake
-      :accepted
-    elsif sender_handshake || recipient_handshake
-      :sent
-    end
-  end
 end

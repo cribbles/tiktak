@@ -2,23 +2,29 @@
     Exchange E-mails
   </div>
   <div class="info">
-    <%= form_for @pm_topic, url: edit_pm_topic_path(@pm_topic.id),
-                            method: :patch do |f| %>
-    <p class="post">
-      <span class="handshake-sent">
-        <b>
-        Your correspondent has offered to exchange e-mails.
-        Will you reciprocate?
-        </b>
-      </span>
-      <br />
-      <br />
-      If you choose to do so, you'll lose your anonymity -- but so will
-      the person you're talking to.
-    </p>
-    <p align="center">
-      <%= f.submit "Exchange e-mails", name: @user_handshake.to_s %>
-      <%= f.submit "No thanks",        name: 'handshake_declined' %>
-    </p>
-  <% end %>
+    <% if @user_sent_handshake %>
+      <p class="post">
+        You offered to exchange e-mails, but your correspondent has
+        not yet made a decision. Check back later.
+      </p>
+    <% else %>
+      <%= form_for @pm_topic, url: update_pm_topic_path(params[:id]) do |f| %>
+      <p class="post">
+        <span class="handshake-sent">
+          <b>
+          Your correspondent has offered to exchange e-mails.
+          Will you reciprocate?
+          </b>
+        </span>
+        <br />
+        <br />
+        If you choose to do so, you'll lose your anonymity -- but so will
+        the person you're talking to.
+      </p>
+      <p align="center">
+        <%= f.submit "Exchange e-mails", name: "pm_topic[#{@user_handshake}]", value: "true" %>
+        <%= f.submit "No thanks",        name: "pm_topic[handshake_declined]", value: "true" %>
+      </p>
+      <% end %>
+    <% end %>
   </div>

@@ -3,7 +3,7 @@ class PmTopicsController < ApplicationController
   before_action :ensure_topic_post_associated, only: [:new, :create]
   before_action :ensure_contact,               only: [:new, :create]
   before_action :ensure_distinct_users,        only: [:new, :create]
-  before_action :ensure_valid_user,            only: :show
+  before_action :ensure_valid_user,            only: [:show, :update]
 
   def index
     @pm_topics = current_user.pm_topics
@@ -12,10 +12,11 @@ class PmTopicsController < ApplicationController
   end
 
   def show
-    @pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+    @pm_topic = PmTopic.find_by(id: params[:id])
     @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
     @pm_post  = @pm_topic.pm_posts.build
-    @user_handshake = user_handshake
+    @user_handshake = user_handshake.to_s
+    @user_sent_handshake = @pm_topic.send(user_handshake)
   end
 
   def new
@@ -42,12 +43,27 @@ class PmTopicsController < ApplicationController
     end
   end
 
+  def update
+    @pm_topic = PmTopic.find_by(id: params[:id])
+    if valid_patch && @pm_topic.update_attributes(patch_params)
+      redirect_to @pm_topic
+    else
+      render 'new'
+    end
+  end
+
   private
 
     def pm_topic_params
       params.require(:pm_topic)
             .permit(:topic_id, :post_id, :title,
                     pm_posts_attributes: [:content, :handshake_sent])
+    end
+
+    def patch_params
+      params.require(:pm_topic)
+            .permit(:id, :handshake_declined,
+                    :sender_handshake, :recipient_handshake)
     end
 
     def ensure_logged_in
@@ -80,12 +96,18 @@ class PmTopicsController < ApplicationController
     end
 
     def ensure_valid_user
-      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+      pm_topic_id = params[:id] || patch_params[:id]
+      pm_topic = PmTopic.find_by(id: pm_topic_id)
       redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
     end
 
+    def handshake_sent
+      pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
+    end
+
     def user_handshake
-      pm_topic = PmTopic.find_by(id: params[:pm_topic_id])
+      pm_topic_id = params[:id] || patch_params[:id]
+      pm_topic = PmTopic.find_by(id: pm_topic_id)
       if pm_topic.sender_id == current_user.id
         :sender_handshake
       elsif pm_topic.recipient_id = current_user.id
@@ -93,7 +115,13 @@ class PmTopicsController < ApplicationController
       end
     end
 
-    def handshake_sent
-      pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
+    def valid_patch
+      @pm_topic = PmTopic.find_by(id: params[:id])
+      user_sent_handshake = @pm_topic.send(user_handshake)
+      return false if patch_params[:handshake_declined] && user_sent_handshake
+      return false if patch_params[:sender_handshake] && patch_params[:recipient_handshake]
+      return false if user_handshake == :sender_handshake && patch_params[:recipient_handshake]
+      return false if user_handshake == :recipient_handshake && patch_params[:sender_handshake]
+      true
     end
 end

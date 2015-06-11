@@ -35,6 +35,10 @@ class PmPostsController < ApplicationController
       redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
     end
 
+    def handshake_sent
+      pm_post_params[:handshake_sent]
+    end
+
     def user_handshake
       pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
       if pm_topic.sender_id == current_user.id
@@ -42,9 +46,5 @@ class PmPostsController < ApplicationController
       elsif pm_topic.recipient_id = current_user.id
         :recipient_handshake
       end
-    end
-
-    def handshake_sent
-      pm_post_params[:handshake_sent]
     end
 end

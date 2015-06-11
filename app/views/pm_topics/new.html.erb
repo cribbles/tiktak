@@ -1,7 +1,7 @@
 <% provide(:title, @title)
    provide(:form_first, 'true') %>
 <%= form_for @pm_topic do |f| %>
-<table width="100%" class="content" style="">
+<table width="100%" class="content" style="width:580px;">
   <%= f.hidden_field :topic_id, value: @topic.id %>
   <%= f.hidden_field :post_id,  value: @post.id  %>
   <%= render 'layouts/header' %>

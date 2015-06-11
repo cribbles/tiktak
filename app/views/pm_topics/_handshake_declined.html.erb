@@ -1,0 +1,14 @@
+  <div class="cell2">
+    Exchange E-mails
+  </div>
+  <div class="cell4">
+    <p class="post">
+      <span class="handshake-declined">
+        <% if @user_sent_handshake %>
+          <b>Your correspondent has declined to exchange e-mails.</b>
+        <% else %>
+          <b>You have declined to exchange e-mails.</b>
+        <% end %>
+      </span>
+    </p>
+  </div>

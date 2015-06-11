@@ -6,17 +6,17 @@
       Private Message
   </div>
   <%= render @pm_posts %>
-  <%    if @pm_topic.handshake_status == :sent %>
+  <% if handshake_in_progress?(@pm_topic) %>
     <%= render 'handshake_response_form' %>
-  <% elsif @pm_topic_handshake_status == :declined %>
+  <% elsif @pm_topic.handshake_declined %>
     <%= render 'handshake_declined' %>
   <% end %>
-  <%= form_for @pm_post, url: create_pm_topic_post_path(@pm_topic.id),
+  <%= form_for @pm_post, url: create_pm_topic_post_path(params[:id]),
                          method: :post do |f| %>
     <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
     <%= render 'shared/divs/error_messages', object: f.object %>
     <%= render 'shared/divs/content_form',   f: f %>
-    <%= render 'handshake_form', f: f unless handshake_offered %>
+    <%= render 'handshake_form', f: f unless handshake_sent?(@pm_topic) %>
     <%= render 'shared/divs/submit_form',    f: f %>
   <% end %>
 </div>

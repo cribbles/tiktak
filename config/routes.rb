@@ -12,12 +12,12 @@ Rails.application.routes.draw do
                           as: 'pm_topics'
   post 'private-messages', to: 'pm_topics#create',
                            as: 'create_pm_topic'
-  get 'private-messages/:pm_topic_id', to: 'pm_topics#show',
-                                       as: 'pm_topic'
-  post 'private-messages/:pm_topic_id', to: 'pm_posts#create',
-                                        as: 'create_pm_topic_post'
-  patch 'private-messages/:pm_topic_id', to: 'pm_topics#edit',
-                                         as: 'edit_pm_topic'
+  get 'private-messages/:id', to: 'pm_topics#show',
+                              as: 'pm_topic'
+  post 'private-messages/:id', to: 'pm_posts#create',
+                               as: 'create_pm_topic_post'
+  patch 'private-messages/:id', to: 'pm_topics#update',
+                                as: 'update_pm_topic'
   get  'topics/:topic_id/posts/:post_id/contact', to: 'pm_topics#new',
                                                   as: 'new_pm_topic'
   get 'topics/:topic_id/posts/:id/new', to: 'posts#new',
