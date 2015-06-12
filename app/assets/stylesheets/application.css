@@ -9,9 +9,10 @@ body {
 	font-size: 13px
 }
 table {
+	margin: 0;
+	width: 100%;
 	empty-cells: show;
 	border-spacing: 0px;
-	width: 695px;
 	border-collapse: none;
 	border: #F8F8F8 0px solid;
         -moz-border-radius: 17px 17px 17px 17px;
@@ -23,6 +24,7 @@ form {
 }
 div.content {
 	display: table;
+	width: 695px;
 }
 .content {
 	margin: 0 auto;
@@ -146,9 +148,15 @@ div.title {
 	font-size: 13px;
         color: #222222 !important;
 }
-div.cell3, .cell3 td {
+div.cell3, .cell3 td, .cell3 th {
         border-top: 2px solid #888 !important;
 	border-bottom: 1px solid #DDDDDD !important;
+}
+.cell3 th {
+	text-align: left;
+}
+.cell3 th:first-child {
+	padding-left: 3px;
 }
 .cell4 {
 	background-color: #FFFFFF;

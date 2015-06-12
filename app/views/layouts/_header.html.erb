@@ -1,5 +1,5 @@
-  <tr class="cell1">
-    <td colspan="100%" class="header">
+  <div class="cell1">
+    <span class="header">
     <% if logged_in? %>
       <span class="header_link">
         <%= link_to(current_user.email, profile_path) %>
@@ -40,5 +40,5 @@
         <%= link_to('Log Out', logout_path, method: :delete) %>
       </span>
     <% end %>
-    </td>
-  </tr>
+    </span>
+  </div>

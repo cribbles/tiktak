@@ -1,28 +1,13 @@
-  <tr class="cell2">
-    <td colspan="3">
-      Options
-    </td>
-  </tr>
-  <tr class="info">
-    <td style="width: 145px;">
-      &nbsp;
-    </td>
-    <td>
-      <p align="center">
-      <% unless @quote.nil? %>
-        <%= f.check_box :quote, { checked: true }, @quote.id, nil %>
-        <b>Include quote?</b>
-      <% end %>
-      <% if @quote && logged_in? %>
-        <br />
-      <% end %>
-      <% if logged_in? %>
-        <%= f.check_box :contact, { checked: true }, true, false %>
-        <b>Allow users to contact you?</b>
-      <% end %>
-      </p>
-    </td>
-    <td style="width: 145px;">
-      &nbsp;
-    </td>
-  </tr>
+  <div class="info-td-no-border" align="center">
+    <% unless @quote.nil? %>
+      <%= f.check_box :quote, { checked: true }, @quote.id, nil %>
+      <b>Include quote?</b>
+    <% end %>
+    <% if @quote && logged_in? %>
+      <br />
+    <% end %>
+    <% if logged_in? %>
+      <%= f.check_box :contact, { checked: true }, true, false %>
+      <b>Allow users to contact you?</b>
+    <% end %>
+  </div>

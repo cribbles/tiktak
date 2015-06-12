@@ -1,14 +1,15 @@
 <%= render 'shared/pagination_header', collection: @topics %>
 
-<tr class="cell3">
-  <td colspan="2">
-    <p style="padding-left: 3px;"><b>Topic</b></p>
-  </td>
-  <td width="125px">
-    <b>Replies</b>
-  </td>
-</tr>
-
+<table>
+  <tr class="cell3">
+    <th colspan="2">
+        <b>Topic</b>
+    </th>
+    <th width="125px">
+      <b>Replies</b>
+    </th>
+  </tr>
 <%= render @topics %>
+</table>
 
 <%= render 'shared/pagination_footer', collection: @topics %>

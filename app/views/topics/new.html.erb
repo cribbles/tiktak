@@ -1,9 +1,6 @@
 <% provide(:title, 'New Topic')
-   provide(:width, '580')
-   provide(:form_first, 'true') %>
+   provide(:width, '580') %>
 <%= form_for @topic do |f| %>
-<table width="100%" class="content" style="<%= width_override yield(:width) %>">
-  <%= render 'layouts/header' %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= render 'shared/title_form', f: f %>
   <%= f.fields_for :posts do |ff| %>
@@ -11,5 +8,4 @@
     <%= render 'shared/form_options', f: ff if logged_in? %>
   <% end %>
   <%= render 'shared/submit_form', f: f %>
-</table>
 <% end %>

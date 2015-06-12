@@ -1,7 +1,4 @@
-<% provide(:title, @pm_topic.title)
-   provide(:form_first, true) %>
-<div width="100%" class="content" style="width:695px;">
-  <%= render 'layouts/divs/header' %>
+<% provide(:title, @pm_topic.title) %>
   <div class="cell2">
       Private Message
   </div>
@@ -14,9 +11,9 @@
   <%= form_for @pm_post, url: create_pm_topic_post_path(params[:id]),
                          method: :post do |f| %>
     <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
-    <%= render 'shared/divs/error_messages', object: f.object %>
-    <%= render 'shared/divs/content_form',   f: f %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'shared/content_form',   f: f %>
     <%= render 'handshake_form', f: f unless handshake_sent?(@pm_topic) %>
-    <%= render 'shared/divs/submit_form',    f: f %>
+    <%= render 'shared/submit_form',    f: f %>
   <% end %>
 </div>

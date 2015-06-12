@@ -1,12 +1,10 @@
 <% provide(:title, 'Log In')
-   provide(:width, '460')
-   provide(:form_first, 'true') %>
+   provide(:width, '460') %>
 <p align="center">
   New user? <b><%= link_to 'Sign up', signup_path %></b> here!
 </p>
 <%= form_for(:session, url: login_path) do |f| %>
-<table width="100%" class="content" style="<%= width_override yield(:width) %>">
-<%= render 'layouts/header' %>
+<table>
   <tr class="info">
     <td align="left">
       <p class="info" align="center">
@@ -46,10 +44,10 @@
       </p>
     </td>
   </tr>
-  <tr class="cell1">
-    <td align="center" colspan="2" class="footer">
-      <%= f.submit 'Log In' %>
-    </td>
-  </tr>
 </table>
+  <div class="cell1">
+    <span class="footer">
+      <%= f.submit 'Log In' %>
+    </span>
+  </div>
 <% end %>

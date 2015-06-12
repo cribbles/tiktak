@@ -1,19 +1,19 @@
-<tr class="cell4">
-  <td colspan="2" style="<%= top_partial %>">
-    <%= link_to topic.title, topic, class: "topic_title" %>
-    <p class="post3">
-      <%= topic.posts.first.content %>
-    </p>
-  </td>
-  <td style="<%= top_partial %>">
-    <p class="post4">
-      <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
-      <% if topic.posts.first.contact %>
-        <b>&middot; <%= link_to "contact",
-                        new_pm_topic_path(topic, topic.posts.first.id) %></b>
-      <% end %>
-      <br />
-      <%= format_date(topic.last_posted) %>
-    </p>
-  </td>
-</tr>
+  <tr class="cell4">
+    <td colspan="2" style="<%= top_partial %>">
+      <%= link_to topic.title, topic, class: "topic_title" %>
+      <p class="post3">
+        <%= topic.posts.first.content %>
+      </p>
+    </td>
+    <td style="<%= top_partial %>">
+      <p class="post4">
+        <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
+        <% if topic.posts.first.contact %>
+          <b>&middot; <%= link_to "contact",
+                          new_pm_topic_path(topic, topic.posts.first.id) %></b>
+        <% end %>
+        <br />
+        <%= format_date(topic.last_posted) %>
+      </p>
+    </td>
+  </tr>

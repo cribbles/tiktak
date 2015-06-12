@@ -1,32 +1,32 @@
-<tr class="cell3">
-  <td width="80px" class="cell3">
-  </td>
-  <td colspan="100%">
-    <a name="p<%= post.id %>"></a>
-    <b>Posted:</b> <%= format_date(post.created_at) %> &nbsp;|&nbsp;
-    <% if post.contact %>
-      <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b> &nbsp;|&nbsp;
-    <% end %>
-    <%= link_to "Report", '#' %> &nbsp;|&nbsp;
-    <%= link_to "Quote",  quote_path(@topic, post) %>
-  </td>
-</tr>
-<tr class="cell4">
-  <td width="80px">
-    <div class="poster">
-      <%= poster_for post, params[:page] %>
-    </div>
-  </td>
-  <td colspan="100%">
-<% if !post.quote.nil? %>
-    <div class="quote">
-      <%= link_to "Quote:", '#' %>
-      <br />
-      <%= Post.find_by(id: post.quote).content %>
-    </div>
-<% end %>
-    <p class="post2">
-      <%= post.content %>
-    </p>
-  </td>
-</tr>
+  <tr class="cell3">
+    <td width="80px" class="cell3">
+    </td>
+    <td colspan="100%">
+      <a name="p<%= post.id %>"></a>
+      <b>Posted:</b> <%= format_date(post.created_at) %> &nbsp;|&nbsp;
+      <% if post.contact %>
+        <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b> &nbsp;|&nbsp;
+      <% end %>
+      <%= link_to "Report", '#' %> &nbsp;|&nbsp;
+      <%= link_to "Quote",  quote_path(@topic, post) %>
+    </td>
+  </tr>
+  <tr class="cell4">
+    <td width="80px">
+      <div class="poster">
+        <%= poster_for post, params[:page] %>
+      </div>
+    </td>
+    <td colspan="100%">
+  <% if !post.quote.nil? %>
+      <div class="quote">
+        <%= link_to "Quote:", '#' %>
+        <br />
+        <%= Post.find_by(id: post.quote).content %>
+      </div>
+  <% end %>
+      <p class="post2">
+        <%= post.content %>
+      </p>
+    </td>
+  </tr>

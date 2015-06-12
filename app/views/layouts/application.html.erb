@@ -1,10 +1,7 @@
 <% benchmark %>
-<?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-      http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="noindex, nofollow" />
   <title><%= full_title yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all',
@@ -19,14 +16,10 @@
 <% end %>
 </div>
 <%= render 'layouts/title' %>
-<% unless yield(:form_first) == 'true' %>
-<table width="100%" class="content" style="<%= width_override yield(:width) %>">
+<div class="content" style="<%= width_override yield(:width) %>">
 <%= render 'layouts/header' %>
-<% end %>
 <%= yield %>
-<% unless yield(:form_first) == 'true' %>
-</table>
-<% end %>
+</div>
 <p align="center">
   <%= link_to "Terms of Use", terms_path %> |
   <%= link_to "FAQ",          faq_path %> |

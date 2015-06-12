@@ -1,10 +1,8 @@
-<% provide(:title,      'Sign Up')
-   provide(:width,      '460')
-   provide(:form_first, 'true') %>
+<% provide(:title, 'Sign Up')
+   provide(:width, '460') %>
 <%= form_for(@user) do |f| %>
-<table width="100%" class="content" style="<%= width_override yield(:width) %>">
-  <%= render 'layouts/header' %>
-  <%= render 'shared/error_messages', object: f.object %>
+<%= render 'shared/error_messages', object: f.object %>
+<table>
   <tr class="info">
     <td align="left">
       <p class="info" align="center">
@@ -41,10 +39,10 @@
       </p>
     </td>
   </tr>
-  <tr class="cell1">
-    <td colspan="2" class="footer">
-      <%= f.submit "Sign up!" %>
-    </td>
-  </tr>
 </table>
+<div class="cell1">
+  <span class="footer">
+    <%= f.submit "Sign up!" %>
+  </span>
+</div>
 <% end %>
