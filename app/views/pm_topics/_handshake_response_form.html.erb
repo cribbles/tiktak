@@ -22,8 +22,8 @@
         the person you're talking to.
       </p>
       <p align="center">
-        <%= f.submit "Exchange e-mails", name: "pm_topic[#{@user_handshake}]", value: "true" %>
-        <%= f.submit "No thanks",        name: "pm_topic[handshake_declined]", value: "true" %>
+        <%= f.button "Exchange e-mails", name: "pm_topic[#{@user_handshake}]", value: "true" %>
+        <%= f.button "No thanks",        name: "pm_topic[handshake_declined]", value: "true" %>
       </p>
       <% end %>
     <% end %>
