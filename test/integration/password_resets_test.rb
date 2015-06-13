@@ -34,7 +34,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
           email: user.email,
           user: { password:              "foobazba",
                   password_confirmation: "barquuxii" }
-    assert_select 'tr.cell2'
+    assert_select 'div.cell2'
     assert_match  'Errors', response.body
     patch password_reset_path(user.reset_token),
           email: user.email,

@@ -14,7 +14,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                password_confirmation: "bar" }
     end
     assert_template 'users/new'
-    assert_select 'tr.cell2'
+    assert_select 'div.cell2'
     assert_match 'Errors', response.body
   end
 
