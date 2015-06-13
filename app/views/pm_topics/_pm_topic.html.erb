@@ -1,7 +1,9 @@
   <tr class="<%= info_cell %>">
     <td>
       <p class="info">
+        <% if unread?(pm_topic) %><b><% end %>
         <%= link_to pm_topic.title, pm_topic_path(pm_topic) %>
+        <% if unread?(pm_topic) %></b><% end %>
       </p>
     </td>
     <td>

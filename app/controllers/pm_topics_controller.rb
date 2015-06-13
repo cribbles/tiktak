@@ -13,6 +13,7 @@ class PmTopicsController < ApplicationController
 
   def show
     @pm_topic = PmTopic.find_by(id: params[:id])
+    mark_as_read(@pm_topic)
     @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
     @pm_post  = @pm_topic.pm_posts.build
     @user_handshake = user_handshake.to_s
@@ -33,9 +34,10 @@ class PmTopicsController < ApplicationController
       @pm_post = @pm_topic.pm_posts.first
       @pm_post.update_attributes(user_id:    current_user.id,
                                  ip_address: request.remote_ip)
-      @pm_topic.update_attributes(sender_id:    current_user.id,
-                                  recipient_id: @post.user_id,
-                                  last_posted:  @pm_post.created_at)
+      @pm_topic.update_attributes(sender_id:     current_user.id,
+                                  recipient_id:  @post.user_id,
+                                  last_posted:   @pm_post.created_at,
+                                  sender_unread: false)
       @pm_topic.update_attributes(sender_handshake: true) if handshake_sent
       redirect_to @pm_topic
     else
@@ -105,14 +107,23 @@ class PmTopicsController < ApplicationController
       pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
     end
 
-    def user_handshake
+    def pm_user
       pm_topic_id = params[:id] || patch_params[:id]
       pm_topic = PmTopic.find_by(id: pm_topic_id)
       if pm_topic.sender_id == current_user.id
-        :sender_handshake
+        'sender'
       elsif pm_topic.recipient_id = current_user.id
-        :recipient_handshake
+        'recipient'
       end
+    end
+
+    def user_handshake
+      "#{pm_user}_handshake".to_sym
+    end
+
+    def mark_as_read(pm_topic)
+      user_unread = "#{pm_user}_unread".to_sym
+      pm_topic.update_attributes(user_unread => false)
     end
 
     def valid_patch

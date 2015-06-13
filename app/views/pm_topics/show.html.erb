@@ -11,7 +11,7 @@
   <%= form_for @pm_post, url: create_pm_topic_post_path(params[:id]),
                          method: :post do |f| %>
     <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
-    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'shared/error_messages', object: f.object if request.post? %>
     <%= render 'shared/content_form',   f: f %>
     <%= render 'handshake_form', f: f unless handshake_sent?(@pm_topic) %>
     <%= render 'shared/submit_form',    f: f %>

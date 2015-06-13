@@ -1,12 +1,6 @@
 class User < ActiveRecord::Base
   has_many :topics, dependent: :nullify
   has_many :posts,  dependent: :nullify
-  has_many :sent_pm_topics, class_name: "PmTopic",
-                            foreign_key: "sender_id",
-                            dependent: :destroy
-  has_many :received_pm_topics, class_name: "PmTopic",
-                                foreign_key: "recipient_id",
-                                dependent: :destroy
   has_many :pm_posts,  dependent: :destroy
 
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -71,6 +65,13 @@ class User < ActiveRecord::Base
 
   def pm_topics
     PmTopic.where("sender_id = ? OR recipient_id = ?", id, id)
+  end
+
+  def unread_pm_topics
+    truth_term = Rails.env.production? ? "true" : "'t'" # for sqlite
+    query  = "(sender_id = ? AND sender_unread = #{truth_term}) OR "
+    query += "(recipient_id = ? AND recipient_unread = #{truth_term})"
+    !PmTopic.where(query, id, id).first.nil?
   end
 
   private

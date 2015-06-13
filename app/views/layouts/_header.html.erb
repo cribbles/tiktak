@@ -3,6 +3,9 @@
     <% if logged_in? %>
       <span class="header_link">
         <%= link_to(current_user.email, profile_path) %>
+        <% if current_user.unread_pm_topics %>
+          (<%= link_to('New PMs!', pm_topics_path) %>)
+        <% end %>
       </span>
     <% end %>
     <% unless current_page?(root_path) %>
