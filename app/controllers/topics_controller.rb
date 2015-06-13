@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
     @posts = @topic.posts
                    .order(created_at: :asc)
                    .paginate(page: params[:page], per_page: 20)
+    @topic.update_attributes(views: @topic.views+1)
   end
 
   def new

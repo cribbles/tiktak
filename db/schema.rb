@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609212212) do
+ActiveRecord::Schema.define(version: 20150613132540) do
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"
@@ -57,10 +57,11 @@ ActiveRecord::Schema.define(version: 20150609212212) do
 
   create_table "topics", force: :cascade do |t|
     t.text     "title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.datetime "last_posted"
     t.integer  "user_id"
+    t.integer  "views",       default: 0
   end
 
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
