@@ -12,7 +12,7 @@
 <body>
 <div class="container">
 <% flash.each do |msg_type, msg| %>
-  <% unless msg_type == :recaptcha_error %>
+  <% unless msg_type == 'recaptcha_error' %>
     <div class="alert alert-<%= msg_type %>"><%= msg %></div>
   <% end %>
 <% end %>
