@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find_by(id: post_params[:topic_id])
     @post  = @topic.posts.build(post_params)
-    if @post.save
+    if captcha_verified(@post) && @post.save
       @topic.update_attributes(last_posted: @post.created_at)
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?

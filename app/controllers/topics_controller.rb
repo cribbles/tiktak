@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-    if @topic.save
+    if captcha_verified(@topic) && @topic.save
       @post = @topic.posts.first
       @topic.update_attributes(last_posted: @post.created_at)
       if logged_in?

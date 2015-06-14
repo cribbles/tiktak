@@ -312,3 +312,6 @@ p.info {
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+div.containter div.alert.alert-recaptcha_error {
+  display: none;
+}

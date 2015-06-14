@@ -8,6 +8,7 @@ gem 'uglifier',		'2.7.1'
 gem 'jquery-rails',	'4.0.3'
 gem 'turbolinks',	'2.5.3'
 gem 'jbuilder',		'2.2.16'
+gem 'recaptcha',	'0.4.0', require: 'recaptcha/rails'
 gem 'will_paginate',	'3.0.4'#, path: 'vendor/gems/will_paginate'
 gem 'sdoc',		'0.4.1', group: :doc
 

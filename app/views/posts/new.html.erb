@@ -5,6 +5,7 @@
   <%= render 'shared/error_messages', object: f.object %>
   <%= render 'quote',               f: f if @quote %>
   <%= render 'shared/content_form', f: f %>
+  <%= render 'shared/recaptcha',    f: f unless logged_in? %>
   <%= render 'shared/form_options', f: f if @quote || logged_in? %>
   <%= render 'shared/submit_form',  f: f %>
 <% end %>

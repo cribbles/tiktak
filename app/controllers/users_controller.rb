@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if captcha_verified(@user) && @user.save
       @user.send_activation_email(request.remote_ip)
       message  = "Thanks for signing up!  Please check your e-mail "
       message += "to activate your account."
