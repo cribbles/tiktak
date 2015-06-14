@@ -185,8 +185,8 @@ tr.info, div.info {
 .info td.no_border, .info-td-no-border {
         background-color: #F8F8F8;
         font-size: 13px;
-	border-top: none !important;
-	border-bottom: none !important;
+	border-top: 1px solid #F8F8F8;
+	border-bottom: 1px solid #F8F8F8;
 }
 .search {
 	display: inline;

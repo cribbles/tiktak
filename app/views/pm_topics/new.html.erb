@@ -1,5 +1,5 @@
-<% provide(:title, @title)
-   provide(:form_first, 'true') %>
+<% provide(:title, 'Send Private Message')
+   provide(:width, '580') %>
 <%= form_for @pm_topic do |f| %>
   <%= f.hidden_field :topic_id, value: @topic.id %>
   <%= f.hidden_field :post_id,  value: @post.id  %>
