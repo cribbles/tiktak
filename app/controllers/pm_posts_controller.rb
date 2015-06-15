@@ -10,8 +10,13 @@ class PmPostsController < ApplicationController
       @pm_post.update_attributes(ip_address: request.remote_ip,
                                  user_id:    current_user.id)
       @pm_topic.update_attributes(user_handshake => true) if handshake_sent
+      redirect_to pm_topic_path(@pm_topic.id, anchor: "p" + @pm_post.id.to_s)
+    else
+      @pm_posts = @pm_topic.pm_posts.order(created_at: :asc)
+      @user_handshake = user_handshake.to_s
+      @user_sent_handshake = @pm_topic.send(user_handshake)
+      render 'pm_topics/show'
     end
-    redirect_to pm_topic_path(@pm_topic.id, anchor: "p" + @pm_post.id.to_s)
   end
 
   private

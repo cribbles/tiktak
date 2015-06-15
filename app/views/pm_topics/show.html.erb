@@ -4,16 +4,16 @@
   </div>
   <%= render @pm_posts %>
   <% if handshake_in_progress?(@pm_topic) %>
-    <%= render 'handshake_response_form' %>
+    <%= render 'pm_topics/handshake_response_form' %>
   <% elsif @pm_topic.handshake_declined %>
-    <%= render 'handshake_declined' %>
+    <%= render 'pm_topics/handshake_declined' %>
   <% end %>
   <%= form_for @pm_post, url: create_pm_topic_post_path(params[:id]),
                          method: :post do |f| %>
     <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
     <%= render 'shared/error_messages', object: f.object if request.post? %>
     <%= render 'shared/content_form',   f: f %>
-    <%= render 'handshake_form', f: f unless handshake_sent?(@pm_topic) %>
+    <%= render 'pm_topics/handshake_form', f: f unless handshake_sent?(@pm_topic) %>
     <%= render 'shared/submit_form',    f: f %>
   <% end %>
 </div>
