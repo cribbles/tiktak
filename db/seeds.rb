@@ -1,6 +1,13 @@
 # Users
 
-test_users = ['foobar@example.org', 'yaphet@gmail.com', 'giallo@network.com']
+User.create!(email: 'foobar@example.org',
+             password:              "password",
+             password_confirmation: "password",
+             activated: true,
+             activated_at: Time.zone.now,
+             admin: true)
+
+test_users = ['yaphet@gmail.com', 'giallo@network.com']
 test_users.each do |email|
   User.create!(email: email,
                password:              "password",
