@@ -25,6 +25,7 @@ class PmTopicsController < ApplicationController
     @pm_topic.pm_posts.build
     @topic = Topic.find_by(id: params[:topic_id])
     @post  = Post.find_by(id: params[:post_id])
+    redirect_to root_url unless @post.visible
   end
 
   def create

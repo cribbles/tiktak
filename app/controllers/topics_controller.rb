@@ -1,13 +1,15 @@
 class TopicsController < ApplicationController
-#  before_action :ensure_authorized, only: :destroy
+  before_action :admin_check, only: :destroy
 
   def index
-    @topics = Topic.order(last_posted: :desc)
+    @topics = Topic.where(visible: true)
+                   .order(last_posted: :desc)
                    .paginate(page: params[:page], per_page: 20)
   end
 
   def show
     @topic = Topic.find_by(id: params[:id])
+    redirect_to root_url unless @topic.visible
     @posts = @topic.posts
                    .order(created_at: :asc)
                    .paginate(page: params[:page], per_page: 20)
@@ -37,7 +39,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by(id: params[:id])
     @topic.update_attributes(visible: false)
     @topic.posts.each {|post| post.update_attributes(visible: false)}
-    flash.now[:info] = "Topic #{@topic.id} was successfully deleted."
+    flash[:danger] = "Topic #{@topic.id} was successfully deleted."
     redirect_to request.referrer || root_url
   end
 

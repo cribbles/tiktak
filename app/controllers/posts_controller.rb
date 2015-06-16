@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-#  before_action :ensure_authorized, only: :delete
+  before_action :admin_check, only: :delete
 
   def show
     @post  = Post.find_by(id: params[:id])
@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def new
     @topic = Topic.find_by(id: params[:topic_id])
     @quote = @topic.posts.find_by(id: params[:id])
+    @quote = nil unless @quote.visible
     @post  = @topic.posts.build
   end
 
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.update_attributes(visible: false)
-    flash.now[:info] = "Post #{@post.id} was successfully deleted."
+    flash[:danger] = "Post #{@post.id} was successfully deleted."
     redirect_to request.referrer || root_url
   end
 

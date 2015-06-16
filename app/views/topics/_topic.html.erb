@@ -2,6 +2,10 @@
     <td colspan="2" style="<%= top_partial %>">
       <%= link_to topic.title, topic, class: "topic_title",
                                       title: pluralize(topic.views, 'view') %>
+      <% if admin_check %>
+        <%= link_to 'X', topic, class: 'crimson', method: :delete,
+                         data: { confirm: "Really delete this topic?" } %>
+      <% end %>
       <p class="post3">
         <%= topic.posts.first.content %>
       </p>

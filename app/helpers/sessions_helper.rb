@@ -56,4 +56,8 @@ module SessionsHelper
     message += "Please try again"
     verify_recaptcha(model: model, message: message, error: nil) || logged_in?
   end
+
+  def admin_check
+    logged_in? && current_user.admin
+  end
 end

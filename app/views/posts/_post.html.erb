@@ -1,3 +1,4 @@
+<% if post.visible %>
   <tr class="cell3">
     <td width="80px" class="cell3">
     </td>
@@ -9,6 +10,11 @@
       <% end %>
       <%= link_to "Report", '#' %> &nbsp;|&nbsp;
       <%= link_to "Quote",  quote_path(@topic, post) %>
+      <% if admin_check %>
+        &nbsp;|&nbsp;
+        <%= link_to 'X', post, class: 'crimson', method: :delete,
+                         data: { confirm: "Really delete this post?" } %>
+      <% end %>
     </td>
   </tr>
   <tr class="cell4">
@@ -18,7 +24,7 @@
       </div>
     </td>
     <td colspan="100%">
-  <% if !post.quote.nil? %>
+  <% unless post.quote.nil? || !Post.find_by(id: post.quote).visible %>
       <div class="quote">
         <%= link_to "Quote:", '#' %>
         <br />
@@ -30,3 +36,6 @@
       </p>
     </td>
   </tr>
+<% else %>
+  <!-- <%= poster_for post,params[:page] %> -->
+<% end %>
