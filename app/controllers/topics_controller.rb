@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+#  before_action :ensure_authorized, only: :destroy
 
   def index
     @topics = Topic.order(last_posted: :desc)
@@ -32,10 +33,12 @@ class TopicsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def destroy
+    @topic = Topic.find_by(id: params[:id])
+    @topic.update_attributes(visible: false)
+    @topic.posts.each {|post| post.update_attributes(visible: false)}
+    flash.now[:info] = "Topic #{@topic.id} was successfully deleted."
+    redirect_to request.referrer || root_url
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613140740) do
+ActiveRecord::Schema.define(version: 20150616164228) do
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150613140740) do
     t.string   "ip_address"
     t.integer  "user_id"
     t.boolean  "contact",    default: false
+    t.boolean  "visible",    default: true
   end
 
   add_index "posts", ["topic_id", "created_at"], name: "index_posts_on_topic_id_and_created_at"
@@ -59,11 +60,12 @@ ActiveRecord::Schema.define(version: 20150613140740) do
 
   create_table "topics", force: :cascade do |t|
     t.text     "title"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.datetime "last_posted"
     t.integer  "user_id"
     t.integer  "views",       default: 0
+    t.boolean  "visible",     default: true
   end
 
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
