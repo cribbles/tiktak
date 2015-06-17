@@ -4,12 +4,18 @@
     </td>
     <td colspan="100%">
       <a name="p<%= post.id %>"></a>
-      <b>Posted:</b> <%= format_date(post.created_at) %> &nbsp;|&nbsp;
+      <b>Posted:</b> <%= format_date(post.created_at) %>
       <% if post.contact %>
-        <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b> &nbsp;|&nbsp;
+        &nbsp;|&nbsp;
+        <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b>
       <% end %>
-      <%= link_to "Report", '#' %> &nbsp;|&nbsp;
-      <%= link_to "Quote",  quote_path(@topic, post) %>
+      <% if logged_in? %>
+        &nbsp;|&nbsp;
+        <%= link_to "Report", post, method: :patch,
+                              data: { confirm: "Flag this post for moderation?" } %>
+      <% end %>
+      &nbsp;|&nbsp;
+      <%= link_to "Quote", quote_path(@topic, post) %>
       <% if admin_check %>
         &nbsp;|&nbsp;
         <%= link_to 'X', post, class: 'crimson', method: :delete,

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :admin_check, only: :delete
+  before_action :ensure_logged_in, only: :edit
+  before_action :admin_check,      only: [:edit, :delete]
 
   def show
     @post  = Post.find_by(id: params[:id])
@@ -27,6 +28,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def update 
+    @post = Post.find_by(id: params[:id])
+    @post.update_attributes(flagged: true)
+    flash[:info] = "Post has been marked for moderation. Thanks!"
+    redirect_to request.referrer || root_url
+  end
+
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.update_attributes(visible: false)
@@ -42,5 +50,13 @@ class PostsController < ApplicationController
 
     def last_page_of(topic)
       topic.posts.paginate(page: 1, per_page: 20).total_pages
+    end
+
+    def ensure_logged_in
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
     end
 end
