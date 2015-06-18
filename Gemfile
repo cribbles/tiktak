@@ -9,8 +9,9 @@ gem 'jquery-rails',	'4.0.3'
 gem 'turbolinks',	'2.5.3'
 gem 'jbuilder',		'2.2.16'
 gem 'recaptcha',	'0.4.0', require: 'recaptcha/rails'
-gem 'will_paginate',	'3.0.4'#, path: 'vendor/gems/will_paginate'
+gem 'will_paginate',	'3.0.4'
 gem 'sdoc',		'0.4.1', group: :doc
+gem 'rack-attack',	'4.3.0'
 
 group :development, :test do
   gem 'sqlite3',	'1.3.10'
