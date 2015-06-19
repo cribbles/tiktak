@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def new
     @topic = Topic.find_by(id: params[:topic_id])
     @quote = @topic.posts.find_by(id: params[:id])
-    @quote = nil unless @quote.visible
+    @quote = nil unless @quote && @quote.visible
     @post  = @topic.posts.build
   end
 
