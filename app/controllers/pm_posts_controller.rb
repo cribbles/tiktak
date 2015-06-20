@@ -1,6 +1,7 @@
 class PmPostsController < ApplicationController
   before_action :ensure_logged_in
   before_action :ensure_valid_user
+  before_action :proxy_check
 
   def create
     @pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])

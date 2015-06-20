@@ -29,3 +29,6 @@ config/secrets.yml
 
 # Ignore captcha configuration
 /config/initializers/recaptcha.rb
+
+# Ignore security settings
+/app/helpers/security_helper.rb
