@@ -4,7 +4,6 @@ class PmTopicsController < ApplicationController
   before_action :ensure_contact,               only: [:new, :create]
   before_action :ensure_distinct_users,        only: [:new, :create]
   before_action :ensure_valid_user,            only: [:show, :update]
-  before_action :proxy_check,                  only: [:create, :update]
 
   def index
     @pm_topics = current_user.pm_topics

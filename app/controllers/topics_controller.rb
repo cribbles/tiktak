@@ -1,6 +1,5 @@
 class TopicsController < ApplicationController
   before_action :admin_check, only: :destroy
-  before_action :proxy_check, only: :create
 
   def index
     @topics = Topic.where(visible: true)
