@@ -6,7 +6,7 @@ body {
   padding: 0;
   color: #000000;
   background-color: #FFFFFF;
-  font-family: Arial, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Lucida Grande", sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   text-align: justify;
   font-size: 13px;
   a {
@@ -56,8 +56,8 @@ form {
   text-align: center;
   text-decoration: none;
   text-shadow: 0 0 30px #FFFFFF;
-  a {
-    text-decoration: none;
+  a, a.hover, a.visited, a.active {
+    text-decoration: none !important;
   }
 }
 
