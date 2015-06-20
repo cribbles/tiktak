@@ -60,4 +60,7 @@ module SessionsHelper
   def admin_check
     logged_in? && current_user.admin
   end
+
+  def proxy_check
+  end
 end
