@@ -23,4 +23,8 @@ module ApplicationHelper
     @info_cell ||= 'info'
     @info_cell = (@info_cell == 'info') ? 'cell4' : 'info'
   end
+
+  def dot_notation(ip_addr)
+    [24, 16, 8, 0].map {|b| (ip_addr.to_i >> b) & 255}.join('.')
+  end
 end

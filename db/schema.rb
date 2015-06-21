@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617150757) do
+ActiveRecord::Schema.define(version: 20150621130514) do
+
+  create_table "ip_caches", force: :cascade do |t|
+    t.integer  "ip_addr",     limit: 8,                 null: false
+    t.string   "hostname",                              null: false
+    t.boolean  "blacklisted",           default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "ip_caches", ["ip_addr"], name: "index_ip_caches_on_ip_addr", unique: true
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"
