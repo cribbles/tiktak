@@ -3,6 +3,7 @@ class PmTopicsController < ApplicationController
   before_action :ensure_topic_post_associated, only: [:new, :create]
   before_action :ensure_contact,               only: [:new, :create]
   before_action :ensure_distinct_users,        only: [:new, :create]
+  before_action :ensure_exists,                only: [:show, :update]
   before_action :ensure_valid_user,            only: [:show, :update]
   before_action :mark_as_read,                 only: :show
 
@@ -46,11 +47,8 @@ class PmTopicsController < ApplicationController
   end
 
   def update
-    if valid_patch && pm_topic.update_attributes(patch_params)
-      redirect_to pm_topic
-    else
-      render 'new'
-    end
+    pm_topic.update_attributes(patch_params) if valid_patch
+    redirect_to pm_topic
   end
 
   private
@@ -63,8 +61,7 @@ class PmTopicsController < ApplicationController
 
     def patch_params
       params.require(:pm_topic)
-            .permit(:id, :handshake_declined,
-                    :sender_handshake, :recipient_handshake)
+            .permit(:id, :handshake_declined, user_handshake)
     end
 
     def pm_topic
@@ -99,6 +96,10 @@ class PmTopicsController < ApplicationController
       end
     end
 
+    def ensure_exists
+      redirect_to root_url if pm_topic.nil?
+    end
+
     def ensure_valid_user
       redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
     end
@@ -126,10 +127,9 @@ class PmTopicsController < ApplicationController
 
     def valid_patch
       user_sent_handshake = pm_topic.send(user_handshake)
-      return false if patch_params[:handshake_declined] && user_sent_handshake
-      return false if patch_params[:sender_handshake] && patch_params[:recipient_handshake]
-      return false if user_handshake == :sender_handshake && patch_params[:recipient_handshake]
-      return false if user_handshake == :recipient_handshake && patch_params[:sender_handshake]
-      true
+      forbidden_actions = [
+        patch_params[:handshake_declined] && user_sent_handshake,
+        patch_params[:sender_handshake] && patch_params[:recipient_handshake]]
+      forbidden_actions.none?
     end
 end
