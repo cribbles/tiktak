@@ -47,7 +47,7 @@ class PmTopicsController < ApplicationController
   end
 
   def update
-    pm_topic.update_attributes(patch_params) if valid_patch
+    pm_topic.update_attributes(patch_params) unless invalid_patch
     redirect_to pm_topic
   end
 
@@ -121,8 +121,8 @@ class PmTopicsController < ApplicationController
       pm_topic.update_attributes(user_unread => false)
     end
 
-    def valid_patch
+    def invalid_patch
       handshake = patch_params[user_handshake] || pm_topic.send(user_handshake)
-      patch_params[:handshake_declined] && handshake_patch
+      patch_params[:handshake_declined] && handshake
     end
 end
