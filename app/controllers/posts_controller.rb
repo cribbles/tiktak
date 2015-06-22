@@ -51,12 +51,4 @@ class PostsController < ApplicationController
     def last_page_of(topic)
       topic.posts.paginate(page: 1, per_page: 20).total_pages
     end
-
-    def ensure_logged_in
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
 end

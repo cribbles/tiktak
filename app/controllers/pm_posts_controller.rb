@@ -25,14 +25,6 @@ class PmPostsController < ApplicationController
       params.require(:pm_post).permit(:pm_topic_id, :content, :handshake_sent)
     end
 
-    def ensure_logged_in
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
     def ensure_valid_user
       pm_topic = PmTopic.find_by(id: pm_post_params[:pm_topic_id])
       redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)

@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def ensure_logged_in
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
     def cached_ip
       IpCache.find_by(ip_addr: formatted_ip)
     end

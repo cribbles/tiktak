@@ -26,12 +26,4 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
     end
-
-    def ensure_logged_in
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
 end
