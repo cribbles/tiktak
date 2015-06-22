@@ -8,4 +8,9 @@ class Rack::Attack
       req.ip
     end
   end
+
+  standard_fail = ->(env) {[503, {}, ['503: Service Unavailable']]}
+
+  throttled_response   = standard_fail
+  blacklisted_response = standard_fail
 end

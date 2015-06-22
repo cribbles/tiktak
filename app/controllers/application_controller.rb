@@ -3,29 +3,38 @@ require 'resolv'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  before_action :call_cache
+  before_action :cache_ip
+
+  protected
+
+    def cached_ip
+      IpCache.find_by(ip_addr: formatted_ip)
+    end
+
+    def forbid_blacklisted
+      Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
+        cached_ip.blacklisted
+      end
+      head :service_unavailable if cached_ip.blacklisted
+    end
 
   private
 
-    def call_cache
-      unless session[:user_cached]
-        ip_addr    = IPAddr.new(request.remote_ip).to_i
-        user_cache = IpCache.find_by(ip_addr: ip_addr)
-          if user_cache.nil?
-            hostname  = Resolv.getname(request.remote_ip)
-            new_cache = IpCache.new(ip_addr: ip_addr, hostname: hostname)
-            new_cache.save!
-          else
-            blacklist(user_cache)
-          end
-        session[:user_cached] = true
-      end
+    def formatted_ip
+      IPAddr.new(request.remote_ip).to_i
     end
 
-    def blacklist(user)
-      ip = request.remote_ip
-      Rack::Attack.blacklist("block #{ip}") do |req|
-        user.blacklisted
+    def cache_ip
+      unless session[:ip_cached]
+        if cached_ip.nil?
+          hostname  = Resolv.getname(request.remote_ip)
+          new_cache = IpCache.new(ip_addr:  formatted_ip,
+                                  hostname: hostname)
+          new_cache.save!
+        else
+          forbid_blacklisted
+        end
+        session[:ip_cached] = true
       end
     end
 end
