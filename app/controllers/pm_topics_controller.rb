@@ -109,11 +109,7 @@ class PmTopicsController < ApplicationController
     end
 
     def pm_user
-      if pm_topic.sender_id == current_user.id
-        'sender'
-      elsif pm_topic.recipient_id = current_user.id
-        'recipient'
-      end
+      pm_topic.sender_id == current_user.id ? 'sender' : 'recipient'
     end
 
     def user_handshake
@@ -126,10 +122,7 @@ class PmTopicsController < ApplicationController
     end
 
     def valid_patch
-      user_sent_handshake = pm_topic.send(user_handshake)
-      forbidden_actions = [
-        patch_params[:handshake_declined] && user_sent_handshake,
-        patch_params[:sender_handshake] && patch_params[:recipient_handshake]]
-      forbidden_actions.none?
+      handshake = patch_params[user_handshake] || pm_topic.send(user_handshake)
+      patch_params[:handshake_declined] && handshake_patch
     end
 end
