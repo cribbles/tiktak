@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   before_action :cache_ip
+  before_action :forbid_blacklisted, only: [:create, :update, :destroy]
 
   protected
 
