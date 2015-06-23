@@ -50,14 +50,4 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
-
-  def captcha_verified(model)
-    message  = "There was a problem with your captcha verification - "
-    message += "Please try again"
-    verify_recaptcha(model: model, message: message, error: nil) || logged_in?
-  end
-
-  def admin_check
-    logged_in? && current_user.admin
-  end
 end

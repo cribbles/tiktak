@@ -9,8 +9,8 @@ class Rack::Attack
     end
   end
 
-  standard_fail = lambda {[503, {}, ['503: Service Unavailable']]}
+  standard_fail = ->(env) {[503, {}, ['503: Service Unavailable']]}
 
-  throttled_response   = standard_fail.call
-  blacklisted_response = standard_fail.call
+  throttled_response   = standard_fail
+  blacklisted_response = standard_fail
 end

@@ -8,12 +8,22 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def captcha_verified(model)
+      msg  = "There was a problem with your captcha verification - "
+      msg += "Please try again"
+      verify_recaptcha(model: model, message: msg, error: nil) || logged_in?
+    end
+
     def ensure_logged_in
       unless logged_in?
         store_location
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
+    end
+
+    def admin_check
+      logged_in? && current_user.admin
     end
 
     def cached_ip
