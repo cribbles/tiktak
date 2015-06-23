@@ -4,4 +4,8 @@ class Post < ActiveRecord::Base
   validates :topic,   presence: true
   validates :content, presence: true,
                       length: { maximum: 50000 }
+
+  def has_quote?
+    self.quote && Post.find_by(id: self.quote).visible
+  end
 end

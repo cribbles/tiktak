@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :admin_check, only: :destroy
+  before_action :ensure_admin, only: :destroy
 
   def index
     @topics = Topic.where(visible: true)

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :ensure_logged_in, only: :update
-  before_action :admin_check,      only: [:update, :destroy]
+  before_action :ensure_admin,     only: [:update, :destroy]
 
   def show
     @post  = Post.find_by(id: params[:id])

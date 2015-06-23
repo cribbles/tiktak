@@ -16,7 +16,7 @@
       <% end %>
       &nbsp;|&nbsp;
       <%= link_to "Quote", quote_path(@topic, post) %>
-      <% if admin_check %>
+      <% if admin_user %>
         &nbsp;|&nbsp;
         <%= link_to 'X', post, class: 'crimson', method: :delete,
                          data: { confirm: "Really delete this post?" } %>
@@ -30,7 +30,7 @@
       </div>
     </td>
     <td colspan="100%">
-  <% unless post.quote.nil? || !Post.find_by(id: post.quote).visible %>
+  <% if post.has_quote? %>
       <div class="quote">
         <%= link_to "Quote:", '#' %>
         <br />

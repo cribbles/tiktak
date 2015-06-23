@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def admin_check
-      logged_in? && current_user.admin
+    def ensure_admin
+      redirect_to root_url unless admin_user
     end
 
     def cached_ip
