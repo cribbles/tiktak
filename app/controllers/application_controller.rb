@@ -26,21 +26,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_url unless admin_user
     end
 
-    def cached_ip
-      IpCache.find_by(ip_addr: formatted_ip)
-    end
+  private
 
     def forbid_blacklisted
       Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
         cached_ip.blacklisted
       end
       head :service_unavailable if cached_ip.blacklisted
-    end
-
-  private
-
-    def formatted_ip
-      IPAddr.new(request.remote_ip).to_i
     end
 
     def cache_ip

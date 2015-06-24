@@ -5,7 +5,11 @@ class Post < ActiveRecord::Base
   validates :content, presence: true,
                       length: { maximum: 50000 }
 
+  def visible?
+    self.visible || !self.hellbanned
+  end
+
   def has_quote?
-    self.quote && Post.find_by(id: self.quote).visible
+    self.quote && Post.find_by(id: self.quote).visible?
   end
 end

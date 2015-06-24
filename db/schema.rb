@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621130514) do
+ActiveRecord::Schema.define(version: 20150624133341) do
 
   create_table "ip_caches", force: :cascade do |t|
     t.integer  "ip_addr",     limit: 8,                 null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150621130514) do
     t.boolean  "blacklisted",           default: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.boolean  "hellbanned",            default: false
   end
 
   add_index "ip_caches", ["ip_addr"], name: "index_ip_caches_on_ip_addr", unique: true
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150621130514) do
     t.boolean  "contact",    default: false
     t.boolean  "visible",    default: true
     t.boolean  "flagged",    default: false
+    t.boolean  "hellbanned", default: false
   end
 
   add_index "posts", ["topic_id", "created_at"], name: "index_posts_on_topic_id_and_created_at"
@@ -71,12 +73,14 @@ ActiveRecord::Schema.define(version: 20150621130514) do
 
   create_table "topics", force: :cascade do |t|
     t.text     "title"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "last_posted"
     t.integer  "user_id"
-    t.integer  "views",       default: 0
-    t.boolean  "visible",     default: true
+    t.integer  "views",          default: 0
+    t.boolean  "visible",        default: true
+    t.boolean  "hellbanned",     default: false
+    t.datetime "last_posted_hb"
   end
 
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
