@@ -2,7 +2,6 @@ class TopicsController < ApplicationController
   before_action :ensure_admin, only: :destroy
 
   def index
-    flash[:info] = IpCache.find(1)
     @topics = Topic.where(visible: true)
                    .order(last_posted: :desc)
                    .paginate(page: params[:page], per_page: 20)
