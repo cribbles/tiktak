@@ -1,3 +1,8 @@
+# IpCache
+
+IpCache.create!(ip_addr: 16909060,
+                hostname: '1.2.3.4.fake.hostname.com')
+
 # Users
 
 User.create!(email: 'foobar@example.org',
@@ -20,13 +25,15 @@ end
 
 25.times do |n|
   Topic.create!(title: Faker::Lorem.sentence(3, false, 10),
-                last_posted: Time.zone.now)
+                last_posted: Time.zone.now,
+                last_posted_hb: Time.zone.now)
 end
 
 Topic.all.each do |topic|
   25.times do |n|
     @post = Post.new(content: Faker::Lorem.sentence(18), topic: topic)
     @post.save
-    topic.update_attributes(last_posted: @post.created_at)
+    topic.update_attributes(last_posted: @post.created_at,
+                            last_posted_hb: @post.created_at)
   end
 end

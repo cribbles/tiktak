@@ -29,16 +29,18 @@ class ApplicationController < ActionController::Base
   private
 
     def forbid_blacklisted
-      Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
-        cached_ip.blacklisted
+      unless Rails.env.test?
+        Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
+          cached_ip.blacklisted
+        end
       end
       head :service_unavailable if cached_ip.blacklisted
     end
 
     def cache_ip
-      unless session[:ip_cached]
+      unless session[:ip_cached] || Rails.env.test?
         if cached_ip.nil?
-          hostname  = Resolv.getname(request.remote_ip)
+          hostname = Resolv.getname(request.remote_ip)
           new_cache = IpCache.new(ip_addr:  formatted_ip,
                                   hostname: hostname)
           new_cache.save!

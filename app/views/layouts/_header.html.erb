@@ -8,7 +8,7 @@
         <% end %>
       </span>
     <% end %>
-    <% unless current_page?(root_path) %>
+    <% unless topics_index? %>
       <span class="header_link">
         <%= link_to('Home', root_path) %>
       </span>
@@ -23,7 +23,7 @@
         <%= link_to('Topic', @topic) %>
       </span>
     <% end %>
-    <% if current_page?(root_path) %>
+    <% if topics_index? %>
       <span class="header_link">
         <%= link_to('New Topic', new_topic_path) %>
       </span>

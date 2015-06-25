@@ -18,9 +18,11 @@ class PostsController < ApplicationController
     @topic = Topic.find_by(id: post_params[:topic_id])
     @post  = @topic.posts.build(post_params)
     if captcha_verified(@post) && @post.save
-      @topic.update_attributes(last_posted: @post.created_at)
+      @topic.update_attributes(last_posted_hb: @post.created_at)
+      @topic.update_attributes(last_posted: @post.created_at) unless hellbanned?
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?
+      @post.update_attributes(hellbanned: true) if hellbanned?
       redirect_to topic_path(@topic, page: last_page_of(@topic),
                                      anchor: "p" + @post.id.to_s)
     else

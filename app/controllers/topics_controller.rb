@@ -2,14 +2,14 @@ class TopicsController < ApplicationController
   before_action :ensure_admin, only: :destroy
 
   def index
-    @topics = Topic.where(visible: true)
-                   .order(last_posted: :desc)
+    @topics = Topic.where(displayable)
+                   .order(order)
                    .paginate(page: params[:page], per_page: 20)
   end
 
   def show
     @topic = Topic.find_by(id: params[:id])
-    redirect_to root_url unless @topic.visible
+    redirect_to root_url unless displayable?(@topic)
     @posts = @topic.posts
                    .order(created_at: :asc)
                    .paginate(page: params[:page], per_page: 20)
@@ -25,10 +25,10 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     if captcha_verified(@topic) && @topic.save
       @post = @topic.posts.first
-      @topic.update_attributes(last_posted: @post.created_at)
-      if logged_in?
-        [@topic, @post].each {|t| t.update_attributes(user_id: current_user.id)}
-      end
+      @topic.update_attributes(last_posted:    @post.created_at,
+                               last_posted_hb: @post.created_at)
+      update_each(@topic, @post, user_id: current_user.id) if logged_in?
+      update_each(@topic, @post, hellbanned: true) if hellbanned?
       redirect_to @topic
     else
       render 'new'
@@ -48,5 +48,23 @@ class TopicsController < ApplicationController
     def topic_params
       params.require(:topic).permit(:title,
                                     posts_attributes: [:content, :contact])
+    end
+
+    def update_each(*rows, params)
+      rows.each {|r| r.update_attributes(params)}
+    end
+
+    def displayable?(topic)
+      hellbanned? ? topic.visible : topic.visible && !topic.hellbanned
+    end
+
+    def displayable
+      where_params = {visible: true}
+      where_params.merge!(hellbanned: false) unless hellbanned?
+      where_params
+    end
+
+    def order
+      hellbanned? ? {last_posted_hb: :desc} : {last_posted: :desc}
     end
 end

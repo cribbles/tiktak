@@ -64,7 +64,6 @@ module SessionsHelper
   end
 
   def hellbanned?
-    @user_ip = cached_ip
-    @user_ip.hellbanned
+    cached_ip.hellbanned
   end
 end

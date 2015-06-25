@@ -6,6 +6,10 @@ module RoutesHelper
     current_page?(topic_path(@topic))
   end
 
+  def topics_index?
+    current_page?(root_path) || current_page?(topics_path)
+  end
+
   def posts_new?
     return false unless defined? @topic.id
     return false if @topic.id.nil?

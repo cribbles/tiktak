@@ -18,7 +18,7 @@
                           new_pm_topic_path(topic, topic.posts.first.id) %></b>
         <% end %>
         <br />
-        <%= format_date(topic.last_posted) %>
+        <%= format_date(last_posted_for(topic)) %>
       </p>
     </td>
   </tr>
