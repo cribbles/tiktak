@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
                       length: { maximum: 50000 }
 
   def visible?
-    self.visible || !self.hellbanned
+    self.visible && !self.hellbanned
   end
 
   def has_quote?

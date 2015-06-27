@@ -26,6 +26,9 @@ Rails.application.routes.draw do
                          as: 'new_password_reset'
   get 'reset-password/:id/', to: 'password_resets#edit',
                              as: 'edit_password_reset'
+  patch 'dismiss/:id/', to: 'admin#update',
+                        as: 'dismiss'
+  get 'queue' => 'admin#index'
   resources :users
   resources :posts
   resources :topics do

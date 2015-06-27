@@ -18,8 +18,7 @@
       <%= link_to "Quote", quote_path(@topic, post) %>
       <% if admin_user %>
         &nbsp;|&nbsp;
-        <%= link_to 'X', post, class: 'crimson', method: :delete,
-                         data: { confirm: "Really delete this post?" } %>
+        <%= delete_link_for(@topic, post) %>
       <% end %>
     </td>
   </tr>

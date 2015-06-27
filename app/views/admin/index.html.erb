@@ -1,0 +1,11 @@
+<% provide(:title, 'Moderation Queue') %>
+  <div class="cell2">
+    Flagged Posts
+  </div>
+  <% @flagged_posts.each do |post| %>
+    <%= render partial: 'posts/flagged_post',
+               locals: { post: post, topic: Topic.find_by(id: post.topic_id) } %>
+  <% end %>
+  <div class="cell1">
+    &nbsp;
+  </div>

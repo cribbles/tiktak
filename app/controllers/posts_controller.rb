@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :ensure_logged_in, only: :update
-  before_action :ensure_admin,     only: [:update, :destroy]
+  before_action :ensure_admin,     only: :destroy
 
   def show
     @post  = Post.find_by(id: params[:id])
@@ -32,14 +32,14 @@ class PostsController < ApplicationController
 
   def update 
     @post = Post.find_by(id: params[:id])
-    @post.update_attributes(flagged: true)
+    @post.update_attributes(flagged: true) if @post.visible
     flash[:info] = "Post has been marked for moderation. Thanks!"
     redirect_to request.referrer || root_url
   end
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    @post.update_attributes(visible: false)
+    @post.update_attributes(visible: false, flagged: false)
     flash[:danger] = "Post #{@post.id} was successfully deleted."
     redirect_to request.referrer || root_url
   end

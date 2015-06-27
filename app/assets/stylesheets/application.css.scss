@@ -272,6 +272,10 @@ div.title {
   color: #8B0000;
 }
 
+.dismiss {
+  color: #008B00;
+}
+
 p {
   &.post {
     padding-top: 15px;
@@ -363,7 +367,7 @@ p {
   border-color: #ebccd1;
 }
 
-div.containter div.alert.alert-recaptcha_error {
+div.container div.alert.alert-recaptcha_error {
   display: none;
 }
 

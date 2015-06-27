@@ -38,7 +38,9 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find_by(id: params[:id])
     @topic.update_attributes(visible: false)
-    @topic.posts.each {|post| post.update_attributes(visible: false)}
+    @topic.posts.each do |post|
+      post.update_attributes(visible: false, flagged: false)
+    end
     flash[:danger] = "Topic #{@topic.id} was successfully deleted."
     redirect_to request.referrer || root_url
   end

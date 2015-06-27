@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
+  before_action :flash_queue
 
   protected
 
@@ -28,13 +29,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def forbid_blacklisted
-      Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
-        cached_ip.blacklisted
-      end
-      head :service_unavailable if cached_ip.blacklisted
-    end
-
     def cache_ip
       unless session[:ip_cached]
         if cached_ip.nil?
@@ -46,6 +40,24 @@ class ApplicationController < ActionController::Base
           forbid_blacklisted
         end
         session[:ip_cached] = true
+      end
+    end
+
+    def forbid_blacklisted
+      Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
+        cached_ip.blacklisted
+      end
+      head :service_unavailable if cached_ip.blacklisted
+    end
+
+    def flash_queue
+      num_flagged = Post.where(flagged: true).count
+      if admin_user && flash.empty? && num_flagged > 0
+        are = num_flagged == 1 ? 'is' : 'are'
+        flagged_posts = view_context.pluralize(num_flagged, 'flagged post')
+        msg  = "There #{are} #{flagged_posts} "
+        msg += "waiting in the queue for moderation."
+        flash.now[:danger] = view_context.link_to(msg, queue_path)
       end
     end
 end
