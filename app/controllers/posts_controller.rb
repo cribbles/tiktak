@@ -32,8 +32,10 @@ class PostsController < ApplicationController
 
   def update 
     @post = Post.find_by(id: params[:id])
-    @post.update_attributes(flagged: true) if @post.visible
-    flash[:info] = "Post has been marked for moderation. Thanks!"
+    if @post.visible
+      @post.update_attributes(flagged: true) 
+      flash[:info] = "Post has been marked for moderation. Thanks!"
+    end
     redirect_to request.referrer || root_url
   end
 
