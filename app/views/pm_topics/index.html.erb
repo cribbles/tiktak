@@ -6,7 +6,7 @@
   <th>Correspondent</th>
   <th>Last Response</th>
 </tr>
-<%= render @pm_topics %>
+<%= render (@pm_topics.count > 0 ? @pm_topics : 'placeholder') %>
 </table>
 
 <%= render 'shared/pagination_footer', collection: @pm_topics %>
