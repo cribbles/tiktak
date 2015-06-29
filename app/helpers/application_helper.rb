@@ -11,8 +11,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-    base_title = "WesACB"
-    page_title.empty? ? base_title : base_title + " - " + page_title
+    page_title.empty? ? Settings.site_name : Settings.site_name + " - " + page_title
   end
 
   def format_date(datetime)

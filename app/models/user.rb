@@ -7,10 +7,9 @@ class User < ActiveRecord::Base
   before_save   :downcase_email
   before_create :create_activation_digest
 
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence:   true,
                     length:     { maximum: 255 },
-                    format:     { with: EMAIL_REGEX },
+                    format:     { with: Settings.email_regex },
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }

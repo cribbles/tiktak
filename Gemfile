@@ -12,6 +12,7 @@ gem 'recaptcha',	'0.4.0', require: 'recaptcha/rails'
 gem 'will_paginate',	'3.0.4'
 gem 'sdoc',		'0.4.1', group: :doc
 gem 'rack-attack',	'4.3.0'
+gem 'settingslogic',    '2.0.9'
 
 group :development, :test do
   gem 'sqlite3',	'1.3.10'
