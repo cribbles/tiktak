@@ -6,7 +6,7 @@ describe Topic do
   end
 
   it 'is valid with valid attributes' do
-    topic.should be_valid
+    expect(topic).to be_valid
   end
 
   it 'should be visible by default' do
@@ -20,12 +20,12 @@ describe Topic do
   describe 'validations' do
     it 'requires a title' do
       topic.title = nil
-      topic.should_not be_valid
+      expect(topic).to_not be_valid
     end
 
     it 'requires a subject less than 140 characters' do
       topic.title = 'x' * 141
-      topic.should_not be_valid
+      expect(topic).to_not be_valid
     end
   end
 end
