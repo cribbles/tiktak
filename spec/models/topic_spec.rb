@@ -23,7 +23,7 @@ describe Topic do
       expect(topic).to_not be_valid
     end
 
-    it 'requires a subject less than 140 characters' do
+    it 'limits a title to 140 characters' do
       topic.title = 'x' * 141
       expect(topic).to_not be_valid
     end
