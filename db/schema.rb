@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(version: 20150624133341) do
 
   create_table "ip_caches", force: :cascade do |t|
-    t.integer  "ip_addr",     limit: 8,                 null: false
-    t.string   "hostname",                              null: false
-    t.boolean  "blacklisted",           default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "hellbanned",            default: false
+    t.string   "ip_address",                  null: false
+    t.string   "hostname",                    null: false
+    t.boolean  "blacklisted", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "hellbanned",  default: false
   end
 
-  add_index "ip_caches", ["ip_addr"], name: "index_ip_caches_on_ip_addr", unique: true
+  add_index "ip_caches", ["ip_address"], name: "index_ip_caches_on_ip_address", unique: true
 
   create_table "pm_posts", force: :cascade do |t|
     t.text     "content"

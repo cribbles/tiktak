@@ -55,12 +55,8 @@ module SessionsHelper
     logged_in? && current_user.admin
   end
 
-  def formatted_ip
-    IPAddr.new(request.remote_ip).to_i
-  end
-
   def cached_ip
-    IpCache.find_by(ip_addr: formatted_ip)
+    IpCache.find_by(ip_address: request.remote_ip)
   end
 
   def hellbanned?

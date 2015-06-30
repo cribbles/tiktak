@@ -1,7 +1,7 @@
 # IpCache
 
-IpCache.create!(ip_addr: 16909060,
-                hostname: '1.2.3.4.fake.hostname.com')
+IpCache.create!(ip_address: '1.2.3.4',
+                hostname:   '1.2.3.4.fake.hostname.com')
 
 # Users
 

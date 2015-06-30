@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
       unless session[:ip_cached]
         if cached_ip.nil?
           hostname = Resolv.getname(request.remote_ip)
-          new_cache = IpCache.new(ip_addr:  formatted_ip,
-                                  hostname: hostname)
+          new_cache = IpCache.new(ip_address: request.remote_ip,
+                                  hostname:   hostname)
           new_cache.save!
         else
           forbid_blacklisted
