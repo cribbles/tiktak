@@ -1,0 +1,31 @@
+require 'rails_helper'
+
+describe Topic do
+  let(:topic) do
+    FactoryGirl.create(:topic)
+  end
+
+  it 'is valid with valid attributes' do
+    topic.should be_valid
+  end
+
+  it 'should be visible by default' do
+    expect(topic.visible).to be true
+  end
+
+  it 'should not be hellbanned by default' do
+    expect(topic.hellbanned).to be false 
+  end
+
+  describe 'validations' do
+    it 'requires a title' do
+      topic.title = nil
+      topic.should_not be_valid
+    end
+
+    it 'requires a subject less than 140 characters' do
+      topic.title = 'x' * 141
+      topic.should_not be_valid
+    end
+  end
+end
