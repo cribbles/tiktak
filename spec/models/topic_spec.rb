@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 describe Topic do
-  let(:topic) do
-    FactoryGirl.create(:topic)
-  end
+  let(:topic) { FactoryGirl.create(:topic) }
 
   it 'is valid with valid attributes' do
     expect(topic).to be_valid

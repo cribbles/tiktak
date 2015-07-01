@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 describe Post do
-  let(:post) do
-    FactoryGirl.create(:post)
-  end
+  let(:post) { FactoryGirl.create(:post) }
 
   it 'is valid with valid attributes' do
     expect(post).to be_valid

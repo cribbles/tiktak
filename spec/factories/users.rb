@@ -1,7 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    password_digest 'password'
-    
+    email 'user@example.com'
+    password              'password'
+    password_confirmation 'password'
+ 
     trait :admin do
       admin true
     end
