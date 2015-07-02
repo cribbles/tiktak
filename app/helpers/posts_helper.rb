@@ -25,7 +25,7 @@ module PostsHelper
 
   def delete_link_for(topic, post = nil)
     if post && post != topic.posts.first
-      path = post
+      path = topic_post_path(topic, post)
       msg = 'Really remove this post?'
     else
       path = topic

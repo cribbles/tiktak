@@ -11,7 +11,8 @@
       <% end %>
       <% if logged_in? %>
         &nbsp;|&nbsp;
-        <%= link_to "Report", post, method: :patch,
+        <%= link_to "Report", topic_post_path(@topic, post),
+                              method: :patch,
                               data: { confirm: "Flag this post for moderation?" } %>
       <% end %>
       &nbsp;|&nbsp;
@@ -29,11 +30,11 @@
       </div>
     </td>
     <td colspan="100%">
-  <% if post.has_quote? %>
+  <% if post.quoted && displayable?(post.quoted) %>
       <div class="quote">
         <%= link_to "Quote:", '#' %>
         <br />
-        <%= Post.find_by(id: post.quote).content %>
+        <%= post.quoted.content %>
       </div>
   <% end %>
       <p class="post2">
@@ -42,5 +43,5 @@
     </td>
   </tr>
 <% else %>
-  <!-- <%= poster_for post,params[:page] %> -->
+  <!-- <%= poster_for post, params[:page] %> -->
 <% end %>

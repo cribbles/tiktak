@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get    'stats'   => 'static#stats'
   get    'signup'  => 'users#new'
   get    'profile' => 'users#show'
+  get    'queue'   => 'admin#index'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
                              as: 'edit_password_reset'
   patch 'dismiss/:id/', to: 'admin#update',
                         as: 'dismiss'
-  get 'queue' => 'admin#index'
   resources :users
   resources :posts
   resources :topics do

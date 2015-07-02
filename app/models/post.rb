@@ -9,7 +9,9 @@ class Post < ActiveRecord::Base
     self.visible && !self.hellbanned
   end
 
-  def has_quote?
-    self.quote && Post.find_by(id: self.quote).visible?
+  def quoted
+    if self.quote && Post.find_by(id: self.quote).visible
+      Post.find_by(id: self.quote)
+    end
   end
 end
