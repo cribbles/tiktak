@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
+  before_action :ensure_topic_exists
   before_action :ensure_logged_in,        only: :update
   before_action :ensure_admin,            only: :destroy
-  before_action :ensure_topic_exists,     only: [:new, :create]
-  before_action :ensure_displayable,      only: [:new, :create]
   before_action :ensure_quote_associated, only: [:new, :create] 
   before_action :ensure_post_exists,      only: [:update, :destroy]
 
@@ -68,13 +67,5 @@ class PostsController < ApplicationController
 
     def ensure_quote_associated
       redirect_to root_url if params[:id] && !post
-    end
-
-    def ensure_displayable
-      [topic, post].each do |row|
-        conditions = [row && !row.visible,
-                      row && row.hellbanned && !hellbanned?]
-        redirect_to root_url if conditions.any?
-      end
     end
 end
