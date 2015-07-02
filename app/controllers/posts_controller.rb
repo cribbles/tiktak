@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-  before_action :ensure_logged_in, only: :update
-  before_action :ensure_admin,     only: :destroy
+  before_action :ensure_logged_in,    only: :update
+  before_action :ensure_admin,        only: :destroy
+  before_action :ensure_topic_exists, only: [:new, :create]
+  before_action :ensure_post_exists,  only: [:show, :update, :destroy]
 
   def show
     @post  = post 
@@ -54,6 +56,14 @@ class PostsController < ApplicationController
 
     def post
       topic.posts.find_by(id: params[:id], visible: true)
+    end
+
+    def ensure_topic_exists
+      redirect_to root_url unless topic
+    end
+
+    def ensure_post_exists
+      redirect_to root_url unless post
     end
 
     def last_page_of(topic)

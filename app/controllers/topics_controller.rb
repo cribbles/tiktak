@@ -1,5 +1,7 @@
 class TopicsController < ApplicationController
-  before_action :ensure_admin, only: :destroy
+  before_action :ensure_admin,       only: :destroy
+  before_action :ensure_exists,      only: [:show, :destroy]
+  before_action :ensure_displayable, only: :show
 
   def index
     @topics = Topic.where(displayable)
@@ -8,7 +10,6 @@ class TopicsController < ApplicationController
   end
 
   def show
-    redirect_to root_url unless topic && topic_displayable?
     @topic = topic
     @posts = topic.posts
                   .order(created_at: :asc)
@@ -55,12 +56,18 @@ class TopicsController < ApplicationController
       Topic.find_by(id: params[:id])
     end
 
-    def update_each(*rows, params)
-      rows.each {|r| r.update_attributes(params)}
+    def ensure_exists
+      redirect_to root_url unless topic
     end
 
-    def topic_displayable?
-      hellbanned? ? topic.visible : topic.visible && !topic.hellbanned
+    def ensure_displayable
+      conditions = [!topic.visible,
+                    topic.hellbanned && !hellbanned?]
+      redirect_to root_url if conditions.any?
+    end
+
+    def update_each(*rows, params)
+      rows.each {|r| r.update_attributes(params)}
     end
 
     def displayable
