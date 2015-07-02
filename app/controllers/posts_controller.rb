@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update 
-    post.update_attributes(flagged: true) 
+    post.update_attributes(flagged: true) unless hellbanned?
     flash[:info] = "Post has been marked for moderation. Thanks!"
     redirect_to request.referrer || root_url
   end
