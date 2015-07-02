@@ -1,11 +1,10 @@
 class PmTopicsController < ApplicationController
   before_action :ensure_logged_in
-  before_action :ensure_topic_post_associated, only: [:new, :create]
-  before_action :ensure_contact,               only: [:new, :create]
-  before_action :ensure_distinct_users,        only: [:new, :create]
-  before_action :ensure_exists,                only: [:show, :update]
-  before_action :ensure_valid_user,            only: [:show, :update]
-  before_action :mark_as_read,                 only: :show
+  before_action :ensure_contactable,    only: [:new, :create]
+  before_action :ensure_distinct_users, only: [:new, :create]
+  before_action :ensure_exists,         only: [:show, :update]
+  before_action :ensure_valid_user,     only: [:show, :update]
+  before_action :mark_as_read,          only: :show
 
   def index
     @pm_topics = current_user.pm_topics
@@ -24,9 +23,8 @@ class PmTopicsController < ApplicationController
   def new
     @pm_topic = PmTopic.new
     @pm_topic.pm_posts.build
-    @topic = original_topic 
-    @post  = original_post
-    redirect_to root_url unless @post.visible
+    @topic = topic 
+    @post  = post
   end
 
   def create
@@ -36,7 +34,7 @@ class PmTopicsController < ApplicationController
       @pm_post.update_attributes(user_id:    current_user.id,
                                  ip_address: request.remote_ip)
       @pm_topic.update_attributes(sender_id:     current_user.id,
-                                  recipient_id:  original_post.user_id,
+                                  recipient_id:  post.user_id,
                                   last_posted:   @pm_post.created_at,
                                   sender_unread: false)
       @pm_topic.update_attributes(sender_handshake: true) if handshake_sent
@@ -69,27 +67,26 @@ class PmTopicsController < ApplicationController
       PmTopic.find_by(id: id)
     end
 
-    def original_topic
+    def topic
       id = params[:topic_id] || pm_topic_params[:topic_id]
       Topic.find_by(id: id)
     end
 
-    def original_post
+    def post
       id = params[:post_id] || pm_topic_params[:post_id]
-      Post.find_by(id: id)
+      topic.posts.find_by(id: id)
     end
 
-    def ensure_topic_post_associated
-      associated_id = original_post.topic_id
-      redirect_to root_url unless associated_id == original_topic.id
-    end
-
-    def ensure_contact
-      redirect_to root_url unless original_post.contact
+    def ensure_contactable
+      redirect_to root_url unless post
+      conditions = [!post.contact,
+                    !post.visible,
+                    post.hellbanned && !hellbanned?] 
+      redirect_to root_url if conditions.any?
     end
 
     def ensure_distinct_users
-      recipient_id = original_post.user_id
+      recipient_id = post.user_id
       if recipient_id == current_user.id
         flash[:warning] = "You can't send yourself a private message!"
         redirect_to :back
