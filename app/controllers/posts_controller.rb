@@ -19,7 +19,8 @@ class PostsController < ApplicationController
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?
       @post.update_attributes(hellbanned: true) if hellbanned?
-      redirect_to path_for(@post)
+      redirect_to topic_path(topic, page: last_page,
+                                    anchor: "p" + @post.id.to_s)
     else
       render 'new'
     end
@@ -32,9 +33,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    id = post.id
     post.update_attributes(visible: false, flagged: false)
-    flash[:danger] = "Post #{id} was successfully deleted."
+    flash[:danger] = "Post #{params[:id]} was successfully deleted."
     redirect_to request.referrer || root_url
   end
 
@@ -67,5 +67,9 @@ class PostsController < ApplicationController
 
     def ensure_quote_associated
       redirect_to root_url if params[:id] && !post
+    end
+
+    def last_page
+      topic.posts.paginate(page: 1, per_page: 20).total_pages
     end
 end
