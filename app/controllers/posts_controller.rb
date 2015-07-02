@@ -1,17 +1,14 @@
 class PostsController < ApplicationController
-  before_action :ensure_logged_in,    only: :update
-  before_action :ensure_admin,        only: :destroy
-  before_action :ensure_topic_exists, only: [:new, :create]
-  before_action :ensure_post_exists,  only: [:show, :update, :destroy]
-
-  def show
-    @post  = post 
-    @topic = Topic.find_by(id: post.topic_id)
-  end
+  before_action :ensure_logged_in,        only: :update
+  before_action :ensure_admin,            only: :destroy
+  before_action :ensure_topic_exists,     only: [:new, :create]
+  before_action :ensure_displayable,      only: [:new, :create]
+  before_action :ensure_quote_associated, only: [:new, :create] 
+  before_action :ensure_post_exists,      only: [:update, :destroy]
 
   def new
     @topic = topic
-    @quote = post
+    @quote = post 
     @post  = @topic.posts.build
   end
 
@@ -23,8 +20,7 @@ class PostsController < ApplicationController
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?
       @post.update_attributes(hellbanned: true) if hellbanned?
-      redirect_to topic_path(topic, page: last_page_of(topic),
-                                    anchor: "p" + @post.id.to_s)
+      redirect_to path_for(@post)
     else
       render 'new'
     end
@@ -51,11 +47,15 @@ class PostsController < ApplicationController
 
     def topic
       id = params[:topic_id] || post_params[:topic_id]
-      Topic.find_by(id: id, visible: true)
+      args = { id: id, visible: true }
+      args.merge!( hellbanned: false ) unless hellbanned?
+      Topic.find_by(args)
     end
 
     def post
-      topic.posts.find_by(id: params[:id], visible: true)
+      args = { id: params[:id], visible: true }
+      args.merge!( hellbanned: false ) unless hellbanned?
+      topic.posts.find_by(args)
     end
 
     def ensure_topic_exists
@@ -66,7 +66,15 @@ class PostsController < ApplicationController
       redirect_to root_url unless post
     end
 
-    def last_page_of(topic)
-      topic.posts.paginate(page: 1, per_page: 20).total_pages
+    def ensure_quote_associated
+      redirect_to root_url if params[:id] && !post
+    end
+
+    def ensure_displayable
+      [topic, post].each do |row|
+        conditions = [row && !row.visible,
+                      row && row.hellbanned && !hellbanned?]
+        redirect_to root_url if conditions.any?
+      end
     end
 end

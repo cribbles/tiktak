@@ -71,8 +71,8 @@ class TopicsController < ApplicationController
     end
 
     def displayable
-      where_params = {visible: true}
-      where_params.merge!(hellbanned: false) unless hellbanned?
+      where_params = { visible: true }
+      where_params.merge!( hellbanned: false ) unless hellbanned?
       where_params
     end
 
