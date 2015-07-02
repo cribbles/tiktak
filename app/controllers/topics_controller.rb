@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    redirect_to root_url unless topic_displayable?
+    redirect_to root_url unless topic && topic_displayable?
     @topic = topic
     @posts = topic.posts
                   .order(created_at: :asc)
