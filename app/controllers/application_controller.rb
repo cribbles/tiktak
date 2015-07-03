@@ -6,6 +6,24 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :flash_queue
+  helper_method :topic_path_for, :page_for
+
+  def topic_path_for(post)
+    anchor = 'p' + post.id.to_s
+    topic = Topic.find_by(id: post.topic_id)
+    topic_path(topic, page: page_for(topic, post), anchor: anchor)
+  end
+
+  def page_for(topic, post)
+    page = 1
+    posts = topic.posts.inject([]) {|acc,p| acc << p.id}
+    post_index = posts.index(post.id.to_i)
+    until post_index < 20
+      post_index -= 20
+      page += 1
+    end
+    page
+  end
 
   protected
 
