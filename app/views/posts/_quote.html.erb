@@ -1,5 +1,5 @@
   <div class="quote">
     <%= link_to "Quote:", topic_path_for(quote) %>
     <br />
-    <%= quote.content %>
+    <%= truncate(quote.content, length: 256) %>
   </div>

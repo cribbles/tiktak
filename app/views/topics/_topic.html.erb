@@ -4,7 +4,7 @@
                                       title: pluralize(topic.views, 'view') %>
       <%= delete_link_for(topic) if admin_user %>
       <p class="post3">
-        <%= topic.posts.first.content %>
+        <%= truncate(topic.posts.first.content, length: 256) %>
       </p>
     </td>
     <td style="<%= top_partial %>">
