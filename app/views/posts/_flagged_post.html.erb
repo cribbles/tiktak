@@ -10,6 +10,9 @@
     <%= link_to 'Unflag', dismiss_path(post), class: 'dismiss', method: :patch %>
   </div>
   <div class="cell4">
+    <% if post.quoted && displayable?(post.quoted) %>
+      <%= render 'posts/quote', quote: post.quoted %>
+    <% end %>
     <p class="post">
       <%= post.content %>
     </p>

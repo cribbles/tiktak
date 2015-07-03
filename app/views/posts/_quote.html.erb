@@ -1,8 +1,5 @@
-<table>
-  <tr class="cell2">
-    <td colspan="3">
-      <%= f.label :quote, "Quote" %>
-    </td>
-  </tr>
-  <%= render @quote %>
-</table>
+  <div class="quote">
+    <%= link_to "Quote:", topic_path_for(quote) %>
+    <br />
+    <%= quote.content %>
+  </div>
