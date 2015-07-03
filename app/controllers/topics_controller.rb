@@ -70,12 +70,6 @@ class TopicsController < ApplicationController
       rows.each {|r| r.update_attributes(params)}
     end
 
-    def displayable
-      where_params = { visible: true }
-      where_params.merge!( hellbanned: false ) unless hellbanned?
-      where_params
-    end
-
     def order
       last_posted = hellbanned? ? :last_posted_hb : :last_posted
       { last_posted => :desc }

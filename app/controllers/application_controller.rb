@@ -27,12 +27,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def captcha_verified(model)
-      msg  = "There was a problem with your captcha verification - "
-      msg += "Please try again"
-      verify_recaptcha(model: model, message: msg, error: nil) || logged_in?
-    end
-
     def ensure_logged_in
       unless logged_in?
         store_location
@@ -43,6 +37,18 @@ class ApplicationController < ActionController::Base
 
     def ensure_admin
       redirect_to root_url unless admin_user
+    end
+
+    def displayable(args = {})
+      args.merge!( visible: true )
+      args.merge!( hellbanned: false ) unless hellbanned?
+      args
+    end
+
+    def captcha_verified(model)
+      msg  = "There was a problem with your captcha verification - "
+      msg += "Please try again"
+      verify_recaptcha(model: model, message: msg, error: nil) || logged_in?
     end
 
   private

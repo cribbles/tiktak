@@ -45,15 +45,12 @@ class PostsController < ApplicationController
 
     def topic
       id = params[:topic_id] || post_params[:topic_id]
-      args = { id: id, visible: true }
-      args.merge!( hellbanned: false ) unless hellbanned?
-      Topic.find_by(args)
+      Topic.find_by(displayable(id: id))
     end
 
     def post
-      args = { id: params[:id], visible: true }
-      args.merge!( hellbanned: false ) unless hellbanned?
-      topic.posts.find_by(args)
+      id = params[:id]
+      topic.posts.find_by(displayable(id: id))
     end
 
     def ensure_topic_exists
