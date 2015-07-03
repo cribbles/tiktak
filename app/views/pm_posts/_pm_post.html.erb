@@ -1,5 +1,5 @@
   <div class="cell3">
-      <a name="p<%= pm_post.id %>"></a>
+      <a name="<%= anchor_for(pm_post) %>"></a>
       &nbsp;
       <%= format_date(pm_post.created_at) %> &nbsp;|&nbsp;
       <b><%= who_posted(pm_post) %></b> said:

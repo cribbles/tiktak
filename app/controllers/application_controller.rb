@@ -6,12 +6,11 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :flash_queue
-  helper_method :topic_path_for, :topic_for, :page_for
+  helper_method :topic_path_for, :topic_for, :page_for, :anchor_for
 
   def topic_path_for(post)
     topic = topic_for(post)
-    anchor = 'p' + post.id.to_s
-    topic_path(topic, page: page_for(topic, post), anchor: anchor)
+    topic_path(topic, page: page_for(topic, post), anchor: anchor_for(post))
   end
 
   def topic_for(post)
@@ -27,6 +26,10 @@ class ApplicationController < ActionController::Base
       page += 1
     end
     page
+  end
+
+  def anchor_for(post)
+    'p' + post.id.to_s
   end
 
   protected

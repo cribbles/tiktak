@@ -3,7 +3,7 @@
     <td width="80px" class="cell3">
     </td>
     <td colspan="100%">
-      <a name="p<%= post.id %>"></a>
+      <a name="<%= anchor_for(post) %>"></a>
       <b>Posted:</b> <%= format_date(post.created_at) %>
       <% if post.contact %>
         &nbsp;|&nbsp;
@@ -11,8 +11,7 @@
       <% end %>
       <% if logged_in? %>
         &nbsp;|&nbsp;
-        <%= link_to "Report", topic_post_path(@topic, post),
-                              method: :patch,
+        <%= link_to "Report", topic_post_path(@topic, post), method: :patch,
                               data: { confirm: "Flag this post for moderation?" } %>
       <% end %>
       &nbsp;|&nbsp;
