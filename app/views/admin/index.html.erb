@@ -5,7 +5,7 @@
   <%= render 'placeholder' if @flagged_posts.count == 0 %>
   <% @flagged_posts.each do |post| %>
     <%= render partial: 'posts/flagged_post',
-               locals: { post: post, topic: Topic.find_by(id: post.topic_id) } %>
+               locals: { post: post, topic: topic_for(post) } %>
   <% end %>
   <div class="cell1">
     &nbsp;

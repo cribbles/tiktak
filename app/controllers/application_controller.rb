@@ -6,12 +6,16 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :flash_queue
-  helper_method :topic_path_for, :page_for
+  helper_method :topic_path_for, :topic_for, :page_for
 
   def topic_path_for(post)
+    topic = topic_for(post)
     anchor = 'p' + post.id.to_s
-    topic = Topic.find_by(id: post.topic_id)
     topic_path(topic, page: page_for(topic, post), anchor: anchor)
+  end
+
+  def topic_for(post)
+    Topic.find_by(id: post.topic_id)
   end
 
   def page_for(topic, post)
