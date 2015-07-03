@@ -2,6 +2,7 @@
   <div class="cell2">
     Flagged Posts
   </div>
+  <%= render 'placeholder' if @flagged_posts.count == 0 %>
   <% @flagged_posts.each do |post| %>
     <%= render partial: 'posts/flagged_post',
                locals: { post: post, topic: Topic.find_by(id: post.topic_id) } %>

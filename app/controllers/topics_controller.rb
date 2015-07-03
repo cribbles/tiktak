@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :ensure_admin,       only: :destroy
-  before_action :ensure_exists,      only: [:show, :destroy]
+  before_action :ensure_admin,  only: :destroy
+  before_action :ensure_exists, only: [:show, :destroy]
 
   def index
     @topics = Topic.where(displayable)
