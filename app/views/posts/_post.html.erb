@@ -33,7 +33,7 @@
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
       <p class="post2">
-        <%= post.content %>
+      <%= format_text(post.content) %>
       </p>
     </td>
   </tr>

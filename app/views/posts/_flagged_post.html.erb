@@ -14,6 +14,6 @@
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
     <p class="post">
-      <%= post.content %>
+      <%= format_text(post.content) %>
     </p>
   </div>

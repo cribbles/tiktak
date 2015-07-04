@@ -11,11 +11,15 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-    page_title.empty? ? Settings.site_name : Settings.site_name + " - " + page_title
+    Settings.site_name + (page_title.empty? ? '' : ' - ' + page_title)
   end
 
   def format_date(datetime)
     datetime.strftime("%-m/%-d/%y %I\:%M %p")
+  end
+
+  def format_text(text)
+    (h text).gsub("\n", '<br />').html_safe
   end
 
   def info_cell
