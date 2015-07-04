@@ -27,8 +27,8 @@ class TopicsController < ApplicationController
       post = @topic.posts.first
       @topic.update_attributes(last_posted:    post.created_at,
                                last_posted_hb: post.created_at)
-      update_each(@topic, post, user_id: current_user.id) if logged_in?
-      update_each(@topic, post, hellbanned: true) if hellbanned?
+      update_each(@topic, post) {{ user_id: current_user.id }} if logged_in?
+      update_each(@topic, post) {{ hellbanned: true }} if hellbanned?
       redirect_to @topic
     else
       render 'new'
@@ -57,10 +57,6 @@ class TopicsController < ApplicationController
 
     def ensure_exists
       redirect_to root_url unless topic
-    end
-
-    def update_each(*rows, params)
-      rows.each {|r| r.update_attributes(params)}
     end
 
     def order

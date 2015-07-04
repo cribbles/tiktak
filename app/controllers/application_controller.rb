@@ -58,6 +58,14 @@ class ApplicationController < ActionController::Base
       verify_recaptcha(model: model, message: msg, error: nil) || logged_in?
     end
 
+    def update_each(*rows, &params)
+      if params.call.is_a?(Hash)
+        rows.each { |row| row.update_attributes(params.call) }
+      else
+        raise TypeError, "expected Hash, received #{params.call.class}"
+      end
+    end
+
   private
 
     def cache_ip
