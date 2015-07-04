@@ -86,15 +86,14 @@ class PmTopicsController < ApplicationController
     end
 
     def ensure_distinct_users
-      recipient_id = post.user_id
-      if recipient_id == current_user.id
+      if post.user_id == current_user.id
         flash[:warning] = "You can't send yourself a private message!"
         redirect_to :back
       end
     end
 
     def ensure_exists
-      redirect_to root_url if pm_topic.nil?
+      redirect_to root_url unless pm_topic
     end
 
     def ensure_valid_user
