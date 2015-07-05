@@ -1,10 +1,11 @@
 class PmTopicsController < ApplicationController
   before_action :ensure_logged_in
-  before_action :ensure_contactable,    only: [:new, :create]
-  before_action :ensure_distinct_users, only: [:new, :create]
-  before_action :ensure_exists,         only: [:show, :update]
-  before_action :ensure_valid_user,     only: [:show, :update]
-  before_action :mark_as_read,          only: :show
+  before_action :ensure_post_exists,     only: [:new, :create]
+  before_action :ensure_contactable,     only: [:new, :create]
+  before_action :ensure_distinct_users,  only: [:new, :create]
+  before_action :ensure_pm_topic_exists, only: [:show, :update]
+  before_action :ensure_valid_user,      only: [:show, :update]
+  before_action :mark_as_read,           only: :show
 
   def index
     @pm_topics = current_user.pm_topics
@@ -77,8 +78,11 @@ class PmTopicsController < ApplicationController
       topic.posts.find_by(id: id)
     end
 
+    def ensure_post_exists
+      redirect_to root_url if !topic || !post
+    end
+
     def ensure_contactable
-      redirect_to root_url unless post
       conditions = [!post.contact,
                     !post.visible,
                     post.hellbanned && !hellbanned?] 
@@ -92,7 +96,7 @@ class PmTopicsController < ApplicationController
       end
     end
 
-    def ensure_exists
+    def ensure_pm_topic_exists
       redirect_to root_url unless pm_topic
     end
 
