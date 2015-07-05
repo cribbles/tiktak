@@ -3,21 +3,20 @@ FactoryGirl.define do
     email 'user@example.com'
     password              'password'
     password_confirmation 'password'
- 
-    trait :admin do
-      admin true
-    end
-    
-    trait :activated do
-      activated true
-    end
+  end
 
-    trait :inactivated do
-      activated false
-    end
+  factory :activated_user, class: User do
+    email 'user@example.com'
+    password              'password'
+    password_confirmation 'password'
+    activated true
+  end
 
-    factory :admin_user,       traits: [:admin, :activated]
-    factory :activated_user,   traits: :activated
-    factory :inactivated_user, traits: :inactivated
+  factory :admin_user, class: User do
+    email 'user@example.com'
+    password              'password'
+    password_confirmation 'password'
+    activated true
+    admin     true
   end
 end
