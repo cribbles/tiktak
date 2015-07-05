@@ -6,7 +6,7 @@ class AccountActivationsController < ApplicationController
       user.activate
       log_in user
       flash[:success] = "Your account has been activated!"
-      redirect_to profile_url
+      redirect_to root_url
     else
       flash[:danger] = "Invalid activation link."
       redirect_to root_url
