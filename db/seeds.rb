@@ -1,8 +1,3 @@
-# IpCache
-
-IpCache.create!(ip_address: '1.2.3.4',
-                hostname:   '1.2.3.4.fake.hostname.com')
-
 # Users
 
 User.create!(email: 'foobar@example.org',

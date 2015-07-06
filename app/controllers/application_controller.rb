@@ -1,5 +1,3 @@
-require 'resolv'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
@@ -71,9 +69,9 @@ class ApplicationController < ActionController::Base
     def cache_ip
       unless session[:ip_cached]
         if cached_ip.nil?
-          hostname = Resolv.getname(request.remote_ip)
           new_cache = IpCache.new(ip_address: request.remote_ip,
-                                  hostname:   hostname)
+                                  user_agent: request.user_agent,
+                                  referrer:   request.env['HTTP_REFERER'])
           new_cache.save!
         else
           forbid_blacklisted

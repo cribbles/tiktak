@@ -31,4 +31,8 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.before(:each) do
+    page.driver.options[:headers] = {'REMOTE_ADDR' => '1.2.3.4'}
+  end
 end
