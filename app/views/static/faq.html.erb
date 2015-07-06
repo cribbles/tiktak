@@ -1,16 +1,18 @@
 <% provide(:title, 'FAQ')
    provide(:width, '460') %>
+<% 3.times do %>
 <div class="info">
   <p class="post">
-    <b>Q: Is there any possibility of getting a room for me and
-    my Hammie (Fiona) @ Wes next year? Hammie lovers??</b>
+    <b>Q: <%= word_wrap(Faker::Lorem.sentence(3, false, 10)
+                                    .gsub('.', '?')) %></b>
   </p>
 </div>
 <div class="cell4">
   <p class="post">
-    <b>A:</b> no
+    <b>A:</b> <%= word_wrap(Faker::Lorem.sentence(18)) %>
   </p>
 </div>
+<% end %>
 <div class="cell1">
   <span class="footer">
     &nbsp;

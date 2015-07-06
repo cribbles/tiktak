@@ -1,7 +1,10 @@
 defaults: &defaults
-  site_name: WesACB
+  site_name: TikTak
+  campus_name: TikTak
   email_regex: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-#  email_regex: !ruby/regexp /\A[\w+\-.]+@wesleyan.edu\z/i
+
+#  This line provides an alternative regex for campus/institutional use-cases.
+#  email_regex: !ruby/regexp /\A[\w+\-.]+@campus-domain-goes-here.edu\z/i
 
 development:
   <<: *defaults
