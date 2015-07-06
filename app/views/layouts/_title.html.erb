@@ -3,6 +3,6 @@
     <%= link_to "tik", root_path %><%= link_to "tak", root_path, class: "crimson" %>
   </div>
 <% unless yield(:title).empty? %>
-  <font size="4"><center><b><%= yield(:title) %></b></center></font>
+  <div class="page_title"><%= yield(:title) %></div>
 <% end %>
 <p></p>
