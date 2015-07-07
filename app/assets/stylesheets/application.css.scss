@@ -108,6 +108,10 @@ a {
   -webkit-border-bottom-right-radius: 7px;
 }
 
+p.footer-links {
+  text-align: center !important;
+}
+
 .header_link:not(:last-child):after {
   content: ' \00a0|\00a0 ';
 }
