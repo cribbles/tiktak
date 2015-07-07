@@ -32,7 +32,7 @@
     <% if post.quoted && displayable?(post.quoted) %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
-      <p class="post2">
+      <p class="tabular-post">
       <%= format_text(post.content) %>
       </p>
     </td>

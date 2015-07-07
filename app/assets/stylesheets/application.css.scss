@@ -49,7 +49,7 @@ form {
   margin: 0;
 }
 
-.site_title {
+.site-title {
   font-size: 56px;
   font-weight: bold;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -112,11 +112,11 @@ p.footer-links {
   text-align: center !important;
 }
 
-.header_link:not(:last-child):after {
+.header-link:not(:last-child):after {
   content: ' \00a0|\00a0 ';
 }
 
-.page_title {
+.page-title {
   font-size: 18px;
   text-align: center;
   font-weight: bold;
@@ -198,7 +198,7 @@ tr.info, div.info {
   border-bottom: 1px solid #E5E5E5;
 }
 
-.info td.no_border, .info-td-no-border {
+.info-td-no-border {
   background-color: #F8F8F8;
   font-size: 13px;
   border-top: 1px solid #F8F8F8;
@@ -207,7 +207,7 @@ tr.info, div.info {
 
 /* text blocks */
 
-.topic_title {
+.topic-title {
   padding-left: 3px;
   padding-top: 6px;
   font-size: 15px;
@@ -275,7 +275,7 @@ p {
     font-size: 13px;
     text-align: left !important;
   }
-  &.post2 {
+  &.tabular-post {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 30px;
@@ -283,7 +283,7 @@ p {
     font-size: 13px;
     text-align: left !important;
   }
-  &.post3 {
+  &.post-preview {
     padding-bottom: 2px;
     padding-right: 18px;
     padding-left: 18px;
@@ -291,7 +291,7 @@ p {
     font-size: 13px;
     text-align: left !important;
   }
-  &.post4 {
+  &.topic-info {
     font-size: 13px;
     text-align: left !important;
   }
