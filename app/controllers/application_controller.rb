@@ -51,9 +51,10 @@ class ApplicationController < ActionController::Base
     end
 
     def captcha_verified(model)
+      bypass = logged_in? || Rails.env.test?
       msg  = "There was a problem with your captcha verification - "
       msg += "Please try again"
-      verify_recaptcha(model: model, message: msg, error: nil) || logged_in?
+      bypass || verify_recaptcha(model: model, message: msg, error: nil)
     end
 
     def update_each(*rows, &params)
