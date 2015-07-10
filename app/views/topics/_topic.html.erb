@@ -1,5 +1,5 @@
   <tr class="topic-preview">
-    <td colspan="2">
+    <td>
       <%= link_to topic.title, topic,
             class: "topic-title", title: pluralize(topic.views, 'view') %>
       <%= delete_link_for topic if admin_user %>
