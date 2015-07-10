@@ -11,8 +11,10 @@
       <p class="topic-info">
         <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
         <% if topic.posts.first.contact %>
-          <b>&middot; <%= link_to "contact",
-                          new_pm_topic_path(topic, topic.posts.first.id) %></b>
+          <strong>&middot;</strong>
+          <%= link_to "contact",
+                new_pm_topic_path(topic, topic.posts.first.id),
+                class: "contact" %>
         <% end %>
         <br />
         <%= format_date(last_posted_for(topic)) %>

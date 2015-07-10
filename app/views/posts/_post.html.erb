@@ -1,18 +1,20 @@
 <% if displayable?(post)  %>
   <tr class="cell3">
-    <td width="80px" class="cell3">
+    <td class="poster">
     </td>
-    <td colspan="100%">
+    <td>
       <a name="<%= anchor_for(post) %>"></a>
-      <b>Posted:</b> <%= format_date(post.created_at) %>
+      <strong>Posted:</strong> <%= format_date(post.created_at) %>
       <% if post.contact %>
         &nbsp;|&nbsp;
-        <b><%= link_to "Contact", new_pm_topic_path(@topic, post)  %></b>
+        <%= link_to "Contact", new_pm_topic_path(@topic, post),
+              class: "contact" %>
       <% end %>
       <% if logged_in? %>
         &nbsp;|&nbsp;
-        <%= link_to "Report", topic_post_path(@topic, post), method: :patch,
-                              data: { confirm: "Flag this post for moderation?" } %>
+        <%= link_to "Report", topic_post_path(@topic, post),
+              method: :patch,
+              data: { confirm: "Flag this post for moderation?" } %>
       <% end %>
       &nbsp;|&nbsp;
       <%= link_to "Quote", quote_path(@topic, post) %>
@@ -23,12 +25,12 @@
     </td>
   </tr>
   <tr class="cell4">
-    <td width="80px">
+    <td class="poster">
       <div class="poster">
         <%= poster_for post, params[:page] %>
       </div>
     </td>
-    <td colspan="100%">
+    <td>
     <% if post.quoted && displayable?(post.quoted) %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>

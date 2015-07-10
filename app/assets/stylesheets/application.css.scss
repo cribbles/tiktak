@@ -68,11 +68,14 @@ a {
     text-decoration: none;
     color: #000000;
   }
-  &.crimson {
+  &.delete, &.site-title {
     color: #cc0000;
     &:hover, &:visited, &:active {
       color: #cc0000;
     }
+  }
+  &.contact {
+    font-weight: bold;
   }
 }
 
@@ -225,8 +228,12 @@ tr.info, div.info {
   }
 }
 
-.poster {
-  color: #888888;
+td.poster {
+  width: 80px;
+}
+
+div.poster {
+  color: #888;
   font-size: 28px;
   padding: 15px 25px;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;

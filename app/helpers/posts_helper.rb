@@ -25,6 +25,6 @@ module PostsHelper
       path = topic
       msg = 'This action will remove the entire topic. Are you sure?'
     end
-    link_to 'X', path, class: 'crimson', method: :delete, data: { confirm: msg }
+    link_to 'X', path, class: 'delete', method: :delete, data: { confirm: msg }
   end
 end
