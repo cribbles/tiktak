@@ -3,14 +3,15 @@
     <b>Posted:</b>
     <%= format_date(post.created_at) %>
     &nbsp;|&nbsp;
-    <%= link_to 'Context', topic_path_for(post) %>
+    <%= link_to 'Context', topic_path_for post %>
     &nbsp;|&nbsp;
-    <%= delete_link_for(topic, post) %>
+    <%= delete_link_for topic, post: post %>
     &nbsp;|&nbsp;
-    <%= link_to 'Unflag', dismiss_path(post), class: 'dismiss', method: :patch %>
+    <%= link_to 'Unflag', dismiss_path(post),
+          class: 'dismiss', method: :patch %>
   </div>
   <div class="cell4">
-    <% if post.quoted && displayable?(post.quoted) %>
+    <% if post.has_displayable_quote? %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
     <p class="post">
