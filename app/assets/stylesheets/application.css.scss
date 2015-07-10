@@ -116,8 +116,12 @@ p.footer-links {
   text-align: center !important;
 }
 
-.header-link:not(:last-child):after {
+.post-info:not(:last-child):after, .header-link:not(:last-child):after {
   content: ' \00a0|\00a0 ';
+}
+
+.post-info:first-child:before {
+  content: '\00a0 ';
 }
 
 .page-title {

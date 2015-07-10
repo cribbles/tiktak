@@ -1,7 +1,8 @@
   <tr class="topic-preview">
     <td>
       <%= link_to topic.title, topic,
-            class: "topic-title", title: pluralize(topic.views, 'view') %>
+            title: pluralize(topic.views, 'view'),
+            class: 'topic-title' %>
       <%= delete_link_for topic if admin_user %>
       <p class="post-preview">
         <%= truncate(topic.content, length: 256) %>
@@ -12,9 +13,7 @@
         <%= link_to pluralize(topic.replies, 'reply'), topic %>
         <% if topic.contactable? %>
           <strong>&middot;</strong>
-          <%= link_to "contact",
-                new_pm_topic_path(topic, topic.post_id),
-                class: "contact" %>
+          <%= contact_link_for topic %>
         <% end %>
         <br />
         <%= format_date(last_posted_for topic) %>

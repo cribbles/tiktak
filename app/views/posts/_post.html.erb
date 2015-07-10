@@ -1,42 +1,38 @@
 <% if displayable?(post)  %>
   <tr class="cell3">
-    <td class="poster">
-    </td>
+    <%= content_tag :td, nil, class: 'poster' %>
     <td>
-      <a name="<%= anchor_for post %>"></a>
-      <strong>Posted:</strong> <%= format_date(post.created_at) %>
+      <%= anchor_tag(post) %>
+      <span class="post-info">
+        <strong>Posted:</strong> <%= format_date(post.created_at) %>
+      </span>
       <% if post.contact %>
-        &nbsp;|&nbsp;
-        <%= link_to "Contact", new_pm_topic_path(@topic, post),
-              class: "contact" %>
+        <%= content_tag :span, contact_link_for(@topic, post: post),
+              class: 'post-info' %>
       <% end %>
       <% if logged_in? %>
-        &nbsp;|&nbsp;
-        <%= link_to "Report", topic_post_path(@topic, post),
-              method: :patch,
-              data: { confirm: "Flag this post for moderation?" } %>
+        <%= content_tag :span, report_link_for(@topic, post: post),
+              class: 'post-info' %>
       <% end %>
-      &nbsp;|&nbsp;
-      <%= link_to "Quote", quote_path(@topic, post) %>
+      <%= content_tag :span, quote_link_for(post),
+            class: "post-info" %>
       <% if admin_user %>
-        &nbsp;|&nbsp;
-        <%= delete_link_for @topic, post: post %>
+        <%= content_tag :span, delete_link_for(@topic, post: post),
+              class: 'post-info' %>
       <% end %>
     </td>
   </tr>
   <tr class="cell4">
     <td class="poster">
-      <div class="poster">
-        <%= poster_for post, page: params[:page] %>
-      </div>
+      <%= content_tag :div, poster_for(post, page: params[:page]),
+            class: 'poster' %>
     </td>
     <td>
-    <% if has_displayable_quote?(post) %>
-      <%= render 'posts/quote', quote: post.quoted %>
-    <% end %>
-      <p class="tabular-post">
-      <%= format_text(post.content) %>
-      </p>
+      <% if has_displayable_quote?(post) %>
+        <%= render 'posts/quote', quote: post.quoted %>
+      <% end %>
+      <%= content_tag :p, format_text(post.content),
+            class: 'tabular-post' %>
     </td>
   </tr>
 <% else %>

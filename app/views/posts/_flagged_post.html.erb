@@ -1,20 +1,17 @@
   <div class="cell3">
-    &nbsp;
-    <b>Posted:</b>
-    <%= format_date(post.created_at) %>
-    &nbsp;|&nbsp;
-    <%= link_to 'Context', topic_path_for post %>
-    &nbsp;|&nbsp;
-    <%= delete_link_for topic, post: post %>
-    &nbsp;|&nbsp;
-    <%= link_to 'Unflag', dismiss_path(post),
-          class: 'dismiss', method: :patch %>
+    <span class="post-info">
+      <strong>Posted:</strong> <%= format_date(post.created_at) %>
+    </span>
+    <%= content_tag :span, context_link_for(post),
+          class: 'post-info' %>
+    <%= content_tag :span, delete_link_for(topic, post: post),
+          class: 'post-info' %>
+    <%= content_tag :span, unflag_link_for(post),
+          class: 'post-info' %>
   </div>
   <div class="cell4">
-    <% if post.has_displayable_quote? %>
+    <% if has_displayable_quote?(post) %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
-    <p class="post">
-      <%= format_text(post.content) %>
-    </p>
+    <%= content_tag :p, format_text(post.content), class: 'post' %>
   </div>
