@@ -5,7 +5,7 @@ Check out a demo of the latest stable build on
 
 ## About
 
-TikTak provides a light-weight, Yik Yak-like forums system with
+TikTak provides a light-weight, Yik Yak-like anonymous forums system with
 BBS-style assets including private messaging, quoting, user registration,
 hellbanning, IP whitelisting / blacklisting / caching, post reporting,
 and an easy-to-use moderation system.
