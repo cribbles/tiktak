@@ -1,23 +1,23 @@
   <tr class="topic-preview">
     <td colspan="2">
-      <%= link_to topic.title, topic, class: "topic-title",
-                                      title: pluralize(topic.views, 'view') %>
-      <%= delete_link_for(topic) if admin_user %>
+      <%= link_to topic.title, topic,
+            class: "topic-title", title: pluralize(topic.views, 'view') %>
+      <%= delete_link_for topic if admin_user %>
       <p class="post-preview">
-        <%= truncate(topic.posts.first.content, length: 256) %>
+        <%= truncate(topic.content, length: 256) %>
       </p>
     </td>
     <td>
       <p class="topic-info">
-        <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
-        <% if topic.posts.first.contact %>
+        <%= link_to pluralize(topic.replies, 'reply'), topic %>
+        <% if topic.contactable? %>
           <strong>&middot;</strong>
           <%= link_to "contact",
-                new_pm_topic_path(topic, topic.posts.first.id),
+                new_pm_topic_path(topic, topic.post_id),
                 class: "contact" %>
         <% end %>
         <br />
-        <%= format_date(last_posted_for(topic)) %>
+        <%= format_date(last_posted_for topic) %>
       </p>
     </td>
   </tr>

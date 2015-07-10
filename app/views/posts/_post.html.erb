@@ -3,7 +3,7 @@
     <td class="poster">
     </td>
     <td>
-      <a name="<%= anchor_for(post) %>"></a>
+      <a name="<%= anchor_for post %>"></a>
       <strong>Posted:</strong> <%= format_date(post.created_at) %>
       <% if post.contact %>
         &nbsp;|&nbsp;
@@ -20,18 +20,18 @@
       <%= link_to "Quote", quote_path(@topic, post) %>
       <% if admin_user %>
         &nbsp;|&nbsp;
-        <%= delete_link_for(@topic, post) %>
+        <%= delete_link_for @topic, post: post %>
       <% end %>
     </td>
   </tr>
   <tr class="cell4">
     <td class="poster">
       <div class="poster">
-        <%= poster_for post, params[:page] %>
+        <%= poster_for post, page: params[:page] %>
       </div>
     </td>
     <td>
-    <% if post.quoted && displayable?(post.quoted) %>
+    <% if has_displayable_quote?(post) %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
       <p class="tabular-post">
@@ -40,5 +40,5 @@
     </td>
   </tr>
 <% else %>
-  <!-- <%= poster_for post, params[:page] %> -->
+  <!-- <%= poster_for post, page: params[:page] %> -->
 <% end %>

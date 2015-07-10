@@ -1,6 +1,6 @@
 module PostsHelper
 
-  def poster_for(post, page)
+  def poster_for(post, page: page)
     page   ||= 1
     @count ||= 0
     if @count < 1 and page.to_i < 2
@@ -17,7 +17,11 @@ module PostsHelper
     post.visible? || (hellbanned? && post.hellbanned)
   end
 
-  def delete_link_for(topic, post = nil)
+  def has_displayable_quote?(post)
+    post.quoted && displayable?(post.quoted)
+  end
+
+  def delete_link_for(topic, post: nil)
     if post && post != topic.posts.first
       path = topic_post_path(topic, post)
       msg = 'Really remove this post?'
