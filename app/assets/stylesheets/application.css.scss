@@ -158,13 +158,11 @@ p.footer-links {
   background-color: #F8F8F8;
   font-size: 13px;
   color: #222222 !important;
-  td {
+  td, th {
     border-top: 2px solid #888 !important;
-    border-bottom: 1px solid #DDDDDD !important;
+    border-bottom: 1px solid #DDD !important;
   }
   th {
-    border-top: 2px solid #888 !important;
-    border-bottom: 1px solid #DDDDDD !important;
     text-align: left;
     &:first-child {
       padding-left: 3px;
@@ -183,9 +181,15 @@ div.cell3 {
   border-bottom: 1px solid #DDDDDD !important;
 }
 
-.cell4 {
+.topic-preview, .cell4 {
   background-color: #FFFFFF;
   font-size: 13px;
+}
+
+.topic-preview td {
+  &:first-child {
+    border-top: 6px solid #FFFFFF !important;
+  }
 }
 
 tr.info, div.info {

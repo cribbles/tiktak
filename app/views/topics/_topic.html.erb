@@ -1,5 +1,5 @@
-  <tr class="cell4">
-    <td colspan="2" style="<%= top_partial %>">
+  <tr class="topic-preview">
+    <td colspan="2">
       <%= link_to topic.title, topic, class: "topic-title",
                                       title: pluralize(topic.views, 'view') %>
       <%= delete_link_for(topic) if admin_user %>
@@ -7,7 +7,7 @@
         <%= truncate(topic.posts.first.content, length: 256) %>
       </p>
     </td>
-    <td style="<%= top_partial %>">
+    <td>
       <p class="topic-info">
         <%= link_to pluralize(topic.posts.count-1, 'reply'), topic %>
         <% if topic.posts.first.contact %>
