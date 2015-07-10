@@ -1,6 +1,4 @@
-# tiktak
-
-A rewrite of the [WesACB](http://wesacb.net/) engine using Rails 4.
+# TikTak
 
 Check out a demo of the latest stable build on
 [Heroku](http://acb-api.herokuapp.com/).
