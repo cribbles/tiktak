@@ -4,10 +4,24 @@
   <%= render 'shared/error_messages', object: f.object %>
   <%= hidden_field_tag :email, @user.email %>
   <table>
+  <% if logged_in? %>
+    <tr class="info">
+      <td align="left">
+        <p class="info" align="center">
+          <b><%= f.label :old_password, "Current Password" %></b>
+        </p>
+      </td>
+      <td align="right">
+        <p align="center">
+          <%= f.password_field :old_password %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
     <tr class="cell4">
       <td align="left">
         <p class="info" align="center">
-          <b><%= f.label :password %></b>
+          <b><%= f.label :password, "New Password" %></b>
         </p>
       </td>
       <td align="right">
@@ -19,7 +33,7 @@
     <tr class="info">
       <td align="left">
         <p class="info" align="center">
-          <b><%= f.label :password_confirmation, "Confirm Password" %></b>
+          <b><%= f.label :password_confirmation, "Confirm New Password" %></b>
         </p>
       </td>
       <td align="right">

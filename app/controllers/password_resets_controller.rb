@@ -24,10 +24,14 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
+    @user = user
     if params[:user][:password].empty?
       flash.now[:danger] = "Your password can't be blank."
       render 'edit'
-    elsif user.update_attributes(user_params)
+    elsif user && !user.authenticate(params[:user][:old_password])
+      flash.now[:danger] = "Your current password was entered incorrectly."
+      render 'edit'
+    elsif user.update_attributes(update_params)
       flash[:success] = "Your password has been reset."
       log_in user if !logged_in?
       redirect_to root_url
@@ -39,7 +43,15 @@ class PasswordResetsController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:password, :password_confirmation)
+      user_params = [:password, :password_confirmation]
+      user_params << :old_password if user
+      params.require(:user).permit(*user_params)
+    end
+
+    def update_params
+      params[:user].delete(:old_password)
+
+      user_params
     end
 
     def user
