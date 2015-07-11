@@ -18,4 +18,12 @@ class Topic < ActiveRecord::Base
   def replies
     posts.count-1
   end
+
+  def remove!
+    posts.each do |post|
+      post.update_attributes(visible: false, flagged: false)
+    end
+
+    update_attributes(visible: false)
+  end
 end
