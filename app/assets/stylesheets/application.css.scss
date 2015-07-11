@@ -92,6 +92,10 @@ a {
   text-decoration: none;
 }
 
+a.unread {
+  font-weight: bold !important;
+}
+
 /* headers and footers */
 
 .header {
@@ -189,9 +193,13 @@ div.cell3 {
   border-bottom: 1px solid #DDDDDD !important;
 }
 
-.topic-preview, .cell4 {
+@mixin cell4 {
   background-color: #FFFFFF;
   font-size: 13px;
+}
+
+.topic-preview, .cell4 {
+  @include cell4;
 }
 
 .topic-preview td {
@@ -200,14 +208,35 @@ div.cell3 {
   }
 }
 
-tr.info, div.info {
+@mixin info {
   background-color: #F8F8F8;
   font-size: 13px;
 }
 
-.info td, div.info {
+@mixin info-borders {
   border-top: 1px solid #E5E5E5;
   border-bottom: 1px solid #E5E5E5;
+}
+
+tr.info, div.info {
+  @include info;
+}
+
+tr.info td, div.info {
+  @include info-borders; 
+}
+
+tr.list, div.list {
+  &:nth-child(odd) {
+    @include cell4;
+  }
+  &:nth-child(even) {
+    @include info;
+    @include info-borders;
+    td {
+      @include info-borders;
+    }
+  }
 }
 
 .info-td-no-border {
@@ -285,39 +314,50 @@ div.title {
   color: #008B00;
 }
 
+@mixin info-p {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+@mixin post-p {
+  font-size: 13px;
+  text-align: left !important;
+}
+
 p {
   &.post {
+    @include post-p;
+    @include info-p;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-right: 20px;
-    padding-left: 20px;
     line-height: 1.4;
-    font-size: 13px;
-    text-align: left !important;
   }
   &.tabular-post {
+    @include post-p;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 30px;
     line-height: 1.4;
-    font-size: 13px;
-    text-align: left !important;
   }
   &.post-preview {
+    @include post-p;
     padding-bottom: 2px;
     padding-right: 18px;
     padding-left: 18px;
     line-height: 1.4;
-    font-size: 13px;
-    text-align: left !important;
   }
   &.topic-info {
-    font-size: 13px;
-    text-align: left !important;
+    @include post-p;
   }
   &.info {
-    padding-right: 20px;
-    padding-left: 20px;
+    @include info-p;
+  }
+  &.selector {
+    @include info-p;
+    text-align: center;
+    a {
+      font-weight: bold !important;
+    }
   }
 }
 

@@ -1,14 +1,13 @@
-  <tr class="<%= info_cell %>">
+  <tr class="list">
     <td>
       <p class="info">
-        <% if unread?(pm_topic) %><b><% end %>
-        <%= link_to pm_topic.title, pm_topic_path(pm_topic) %>
-        <% if unread?(pm_topic) %></b><% end %>
+        <%= link_to pm_topic.title, pm_topic_path(pm_topic),
+              class: unread_class?(pm_topic) %>
       </p>
     </td>
     <td>
       <p align="center">
-        <%= correspondent_for(pm_topic) %>
+        <%= correspondent(pm_topic) %>
       </p>
     </td>
     <td>

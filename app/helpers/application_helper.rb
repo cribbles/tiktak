@@ -7,11 +7,14 @@ module ApplicationHelper
 
   def width_override(width)
     width = 695 if width.empty?
+
     "width: #{width}px !important;"
   end
 
   def full_title(page_title = '')
-    Settings.site_name + (page_title.empty? ? '' : ' - ' + page_title)
+    page_name = page_title.empty? ? '' : (' - ' + page_title)
+
+    Settings.site_name + page_name 
   end
 
   def format_date(datetime)
@@ -20,10 +23,5 @@ module ApplicationHelper
 
   def format_text(text)
     (h text).gsub("\n", '<br />').html_safe
-  end
-
-  def info_cell
-    @info_cell ||= 'info'
-    @info_cell = (@info_cell == 'info') ? 'cell4' : 'info'
   end
 end

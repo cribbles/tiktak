@@ -4,29 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :check_for_flagged_posts
-  helper_method :topic_path_for, :topic_for, :page_for, :anchor_for
+  helper_method :topic_path_for, :anchor_for
 
   def topic_path_for(post)
-    topic = topic_for(post)
+    topic = post.topic 
 
     topic_path(topic, page: page_for(topic, post), anchor: anchor_for(post))
-  end
-
-  def topic_for(post)
-    Topic.find_by(id: post.topic_id)
-  end
-
-  def page_for(topic, post)
-    page = 1
-    posts = topic.posts.inject([]) {|acc,p| acc << p.id}
-    post_index = posts.index(post.id.to_i)
-
-    until post_index < 20
-      post_index -= 20
-      page += 1
-    end
-
-    page
   end
 
   def anchor_for(post)
@@ -64,11 +47,7 @@ class ApplicationController < ActionController::Base
     end
 
     def update_each(*rows, &params)
-      if params.call.is_a?(Hash)
-        rows.each { |row| row.update_attributes(params.call) }
-      else
-        raise TypeError, "expected Hash, received #{params.call.class}"
-      end
+      rows.each { |row| row.update_attributes(params.call) }
     end
 
     def send_email(mail_type, options = {})
@@ -76,6 +55,19 @@ class ApplicationController < ActionController::Base
     end
 
   private
+
+    def page_for(topic, post)
+      page = 1
+      posts = topic.posts.inject([]) {|acc,p| acc << p.id}
+      post_index = posts.index(post.id.to_i)
+
+      until post_index < 20
+        post_index -= 20
+        page += 1
+      end
+
+      page
+    end
 
     def cache_ip
       unless session[:ip_cached]
@@ -95,6 +87,7 @@ class ApplicationController < ActionController::Base
       Rack::Attack.blacklist("block #{request.remote_ip}") do |req|
         cached_ip.blacklisted
       end
+
       head :service_unavailable if cached_ip.blacklisted
     end
 
