@@ -21,6 +21,10 @@ class Post < ActiveRecord::Base
     update_attributes(flagged: true)
   end
 
+  def unflag
+    update_attributes(flagged: false)
+  end
+
   def remove
     update_attributes(visible: false, flagged: false)
   end

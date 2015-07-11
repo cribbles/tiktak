@@ -6,8 +6,8 @@ class AdminController < ApplicationController
   end
 
   def update
-    post = Post.find_by(id: params[:id])
-    post.update_attributes(flagged: false)
+    Post.find_by(id: params[:id]).unflag
+
     flash[:info] = "Report for post #{params[:id]} has been dismissed."
     redirect_to queue_path 
   end
