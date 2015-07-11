@@ -6,10 +6,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
+    @user = User.find_by(email: user_email)
     if @user
       @user.create_reset_digest
-      @user.send_password_reset_email(request.remote_ip)
+      send_email(:password_reset, email_params)
+
       msg = "Check your e-mail for instructions to reset your password."
       flash[:info] = msg
       redirect_to root_url
@@ -48,12 +49,16 @@ class PasswordResetsController < ApplicationController
       params.require(:user).permit(*user_params)
     end
 
-    def old_password 
-      params[:user].delete(:old_password)
+    def email_params
+      { user: @user, ip_address: request.remote_ip }
     end
 
     def user
       current_user || User.find_by(email: params[:email])
+    end
+
+    def user_email
+      params[:password_reset][:email].downcase
     end
 
     def user_with_token?
@@ -62,6 +67,10 @@ class PasswordResetsController < ApplicationController
 
     def ensure_valid_user
       redirect_to root_url unless logged_in? || user_with_token?
+    end
+
+    def old_password
+      params[:user].delete(:old_password)
     end
 
     def check_expiration

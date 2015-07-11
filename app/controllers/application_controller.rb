@@ -65,6 +65,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def send_email(mail_type, options = nil)
+      options ||= { user: current_user, ip_address: request.remote_ip }
+
+      UserMailer.send(mail_type, options).deliver_now
+    end
+
   private
 
     def cache_ip

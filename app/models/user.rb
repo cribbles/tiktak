@@ -44,18 +44,10 @@ class User < ActiveRecord::Base
     update_attribute(:activated_at, Time.zone.now)
   end
 
-  def send_activation_email(client_ip = '0.0.0.0') # request.remote_ip
-    UserMailer.account_activation(self, client_ip).deliver_now
-  end
-
   def create_reset_digest
     self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
-  end
-
-  def send_password_reset_email(client_ip = '0.0.0.0') # request.remote_ip
-    UserMailer.password_reset(self, client_ip).deliver_now
   end
 
   def password_reset_expired?
