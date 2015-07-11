@@ -19,6 +19,10 @@ class Topic < ActiveRecord::Base
     posts.count-1
   end
 
+  def increment_views
+    update_attributes(views: views+1)
+  end
+
   def remove!
     posts.each do |post|
       post.update_attributes(visible: false, flagged: false)

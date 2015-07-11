@@ -30,13 +30,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_url unless admin_user
     end
 
-    def displayable(args = {})
-      args.merge!(visible: true)
-      args.merge!(hellbanned: false) unless hellbanned?
-
-      args
-    end
-
     def captcha_verified(model)
       return true if logged_in? || Rails.env.test?
 

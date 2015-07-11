@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
+  include TopicsLibrary
   before_action :ensure_topic_exists
   before_action :ensure_logged_in,        only: :update
-  before_action :ensure_admin,            only: :destroy
   before_action :ensure_quote_associated, only: [:new, :create] 
   before_action :ensure_post_exists,      only: [:update, :destroy]
 
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?
       @post.update_attributes(hellbanned: true) if hellbanned?
+
       redirect_to topic_path_for(@post) 
     else
       render 'new'
@@ -27,12 +28,14 @@ class PostsController < ApplicationController
 
   def update 
     post.update_attributes(flagged: true) unless hellbanned?
+
     flash[:info] = "Post has been marked for moderation. Thanks!"
     redirect_to request.referrer || root_url
   end
 
   def destroy
     post.update_attributes(visible: false, flagged: false)
+
     flash[:danger] = "Post #{params[:id]} was successfully deleted."
     redirect_to request.referrer || root_url
   end
@@ -45,16 +48,12 @@ class PostsController < ApplicationController
 
     def topic
       id = params[:topic_id] || post_params[:topic_id]
-      Topic.find_by(displayable(id: id))
+      Topic.find_by(displayable where: { id: id })
     end
 
     def post
       id = params[:id]
-      topic.posts.find_by(displayable(id: id))
-    end
-
-    def ensure_topic_exists
-      redirect_to root_url unless topic
+      topic.posts.find_by(displayable where: { id: id })
     end
 
     def ensure_post_exists

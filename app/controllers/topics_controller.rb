@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
-  before_action :ensure_admin,    only: :destroy
-  before_action :ensure_exists,   only: [:show, :destroy]
-  before_action :increment_views, only: :show
+  include TopicsLibrary
+  before_action :ensure_topic_exists, only: [:show, :destroy]
+  before_action :increment_views,     only: :show
 
   def index
     @topics = Topic.where(displayable)
@@ -52,15 +52,11 @@ class TopicsController < ApplicationController
     end
 
     def topic
-      Topic.find_by(displayable(id: params[:id]))
-    end
-
-    def ensure_exists
-      redirect_to root_url unless topic
+      Topic.find_by(displayable where: { id: params[:id] })
     end
 
     def increment_views
-      topic.update_attributes(views: topic.views+1)
+      topic.increment_views
     end
 
     def order
