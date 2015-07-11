@@ -47,7 +47,7 @@ class PmTopicsController < ApplicationController
   end
 
   def update
-    pm_topic.update_attributes(patch_params) unless invalid_patch
+    pm_topic.update_attributes(patch_params) unless handshake_reneged? 
 
     redirect_to pm_topic
   end
@@ -99,17 +99,22 @@ class PmTopicsController < ApplicationController
       end
     end
 
-    def handshake_sent
-      pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
-    end
-
     def mark_as_read
       pm_topic.update_attributes(user_unread => false)
     end
 
-    def invalid_patch
-      handshake = patch_params[user_handshake] || pm_topic.send(user_handshake)
- 
-      patch_params[:handshake_declined] && handshake
+    def handshake_sent
+      pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
+    end
+
+    def user_sent_handshake?
+      patch_params[user_handshake] || pm_topic.send(user_handshake)
+    end
+
+    def handshake_reneged? 
+      # prevents a user from reneging on a handshake or sending
+      # conflicting patch params, e.g. by using curl 
+
+      patch_params[:handshake_declined] && user_sent_handshake? 
     end
 end
