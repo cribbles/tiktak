@@ -4,17 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :check_for_flagged_posts
-  helper_method :topic_path_for, :anchor_for
-
-  def topic_path_for(post)
-    topic = post.topic 
-
-    topic_path(topic, page: page_for(topic, post), anchor: anchor_for(post))
-  end
-
-  def anchor_for(post)
-    'p' + post.id.to_s
-  end
 
   protected
 
@@ -48,19 +37,6 @@ class ApplicationController < ActionController::Base
     end
 
   private
-
-    def page_for(topic, post)
-      page = 1
-      posts = topic.posts.inject([]) {|acc,p| acc << p.id}
-      post_index = posts.index(post.id.to_i)
-
-      until post_index < 20
-        post_index -= 20
-        page += 1
-      end
-
-      page
-    end
 
     def cache_ip
       unless session[:ip_cached]

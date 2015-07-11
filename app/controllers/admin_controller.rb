@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  include TopicsLibrary
   before_action :ensure_admin
 
   def index

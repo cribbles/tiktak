@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   include TopicsLibrary
+  before_action :ensure_admin, only: :destroy
   before_action :ensure_topic_exists, only: [:show, :destroy]
   before_action :increment_views,     only: :show
 

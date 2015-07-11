@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   include TopicsLibrary
   before_action :ensure_topic_exists
+  before_action :ensure_admin, only: :destroy
   before_action :ensure_logged_in,        only: :update
   before_action :ensure_quote_associated, only: [:new, :create] 
   before_action :ensure_post_exists,      only: [:update, :destroy]
