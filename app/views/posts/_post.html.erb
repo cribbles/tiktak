@@ -10,10 +10,8 @@
         <%= content_tag :span, contact_link_for(@topic, post: post),
               class: 'post-info' %>
       <% end %>
-      <% if logged_in? %>
-        <%= content_tag :span, report_link_for(@topic, post: post),
-              class: 'post-info' %>
-      <% end %>
+      <%= content_tag :span, report_link_for(@topic, post: post),
+            class: 'post-info' %>
       <%= content_tag :span, quote_link_for(post),
             class: "post-info" %>
       <% if admin_user %>
