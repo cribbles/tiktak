@@ -1,5 +1,5 @@
 class PmTopicsController < ApplicationController
-  before_action :ensure_logged_in
+  include PmLibrary
   before_action :ensure_post_exists,     only: [:new, :create]
   before_action :ensure_contactable,     only: [:new, :create]
   before_action :ensure_distinct_users,  only: [:new, :create]
@@ -31,14 +31,15 @@ class PmTopicsController < ApplicationController
   def create
     @pm_topic = PmTopic.new(pm_topic_params)
     if @pm_topic.save
-      @pm_post = @pm_topic.pm_posts.first
-      @pm_post.update_attributes(user_id:    current_user.id,
+      pm_post = @pm_topic.pm_posts.first
+      pm_post.update_attributes(user_id:    current_user.id,
                                  ip_address: request.remote_ip)
       @pm_topic.update_attributes(sender_id:     current_user.id,
                                   recipient_id:  post.user_id,
-                                  last_posted:   @pm_post.created_at,
+                                  last_posted:   pm_post.created_at,
                                   sender_unread: false)
       @pm_topic.update_attributes(sender_handshake: true) if handshake_sent
+
       redirect_to @pm_topic
     else
       render 'new'
@@ -47,6 +48,7 @@ class PmTopicsController < ApplicationController
 
   def update
     pm_topic.update_attributes(patch_params) unless invalid_patch
+
     redirect_to pm_topic
   end
 
@@ -78,51 +80,36 @@ class PmTopicsController < ApplicationController
       topic.posts.find_by(id: id)
     end
 
+    def contactable?(post)
+      post.contact && post.visible && (!post.hellbanned || hellbanned?)
+    end
+
     def ensure_post_exists
       redirect_to root_url if !topic || !post
     end
 
     def ensure_contactable
-      conditions = [!post.contact,
-                    !post.visible,
-                    post.hellbanned && !hellbanned?] 
-      redirect_to root_url if conditions.any?
+      redirect_to root_url unless contactable?(post) 
     end
 
     def ensure_distinct_users
-      if post.user_id == current_user.id
+      if post.user == current_user
         flash[:warning] = "You can't send yourself a private message!"
         redirect_to :back
       end
-    end
-
-    def ensure_pm_topic_exists
-      redirect_to root_url unless pm_topic
-    end
-
-    def ensure_valid_user
-      redirect_to root_url unless pm_topic.valid_users.include?(current_user.id)
     end
 
     def handshake_sent
       pm_topic_params[:pm_posts_attributes]["0"][:handshake_sent]
     end
 
-    def pm_user
-      pm_topic.sender_id == current_user.id ? 'sender' : 'recipient'
-    end
-
-    def user_handshake
-      "#{pm_user}_handshake".to_sym
-    end
-
     def mark_as_read
-      user_unread = "#{pm_user}_unread".to_sym
       pm_topic.update_attributes(user_unread => false)
     end
 
     def invalid_patch
       handshake = patch_params[user_handshake] || pm_topic.send(user_handshake)
+ 
       patch_params[:handshake_declined] && handshake
     end
 end

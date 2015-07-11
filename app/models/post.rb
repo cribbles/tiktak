@@ -14,4 +14,8 @@ class Post < ActiveRecord::Base
       Post.find_by(id: self.quote)
     end
   end
+
+  def user
+    User.find_by(id: self.user_id)
+  end
 end
