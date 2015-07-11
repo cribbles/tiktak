@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    topic.remove!
+    topic.remove
 
     flash[:danger] = "Topic #{params[:id]} was successfully removed."
     redirect_to request.referrer || root_url
@@ -47,8 +47,8 @@ class TopicsController < ApplicationController
   private
 
     def topic_params
-      params.require(:topic).permit(:title,
-                                    posts_attributes: [:content, :contact])
+      params.require(:topic).
+        permit(:title, posts_attributes: [:content, :contact])
     end
 
     def topic

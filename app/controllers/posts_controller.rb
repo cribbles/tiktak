@@ -27,14 +27,14 @@ class PostsController < ApplicationController
   end
 
   def update 
-    post.update_attributes(flagged: true) unless hellbanned?
+    post.flag unless hellbanned?
 
     flash[:info] = "Post has been marked for moderation. Thanks!"
     redirect_to request.referrer || root_url
   end
 
   def destroy
-    post.update_attributes(visible: false, flagged: false)
+    post.remove
 
     flash[:danger] = "Post #{params[:id]} was successfully deleted."
     redirect_to request.referrer || root_url
@@ -48,12 +48,12 @@ class PostsController < ApplicationController
 
     def topic
       id = params[:topic_id] || post_params[:topic_id]
+
       Topic.find_by(displayable where: { id: id })
     end
 
     def post
-      id = params[:id]
-      topic.posts.find_by(displayable where: { id: id })
+      topic.posts.find_by(displayable where: { id: params[:id] })
     end
 
     def ensure_post_exists

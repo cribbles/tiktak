@@ -23,10 +23,8 @@ class Topic < ActiveRecord::Base
     update_attributes(views: views+1)
   end
 
-  def remove!
-    posts.each do |post|
-      post.update_attributes(visible: false, flagged: false)
-    end
+  def remove
+    posts.each(&:remove)
 
     update_attributes(visible: false)
   end

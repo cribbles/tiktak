@@ -10,12 +10,18 @@ class Post < ActiveRecord::Base
   end
 
   def quoted
-    if self.quote && Post.find_by(id: self.quote).visible
-      Post.find_by(id: self.quote)
-    end
+    Post.find_by(id: self.quote)
   end
 
   def user
     User.find_by(id: self.user_id)
+  end
+
+  def flag
+    update_attributes(flagged: true)
+  end
+
+  def remove
+    update_attributes(visible: false, flagged: false)
   end
 end
