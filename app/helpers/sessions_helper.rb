@@ -54,12 +54,4 @@ module SessionsHelper
   def admin_user
     logged_in? && current_user.admin
   end
-
-  def cached_ip
-    IpCache.find_by(ip_address: request.remote_ip)
-  end
-
-  def hellbanned?
-    cached_ip.hellbanned
-  end
 end

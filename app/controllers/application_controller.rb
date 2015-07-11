@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
   before_action :check_for_flagged_posts
+  helper_method :cached_ip, :hellbanned?
 
   protected
 
@@ -36,19 +37,22 @@ class ApplicationController < ActionController::Base
       UserMailer.send(mail_type, options).deliver_now
     end
 
+    def cached_ip
+      IpCache.find_by(ip_address: request.remote_ip)
+    end
+
+    def hellbanned?
+      cached_ip.hellbanned
+    end
+
   private
 
     def cache_ip
-      unless session[:ip_cached]
-        if cached_ip.nil?
-          new_cache = IpCache.new(ip_address: request.remote_ip,
-                                  user_agent: request.user_agent,
-                                  referrer:   request.env['HTTP_REFERER'])
-          new_cache.save!
-        else
-          forbid_blacklisted
-        end
-        session[:ip_cached] = true
+      if !cached_ip
+        new_cache = IpCache.new(ip_address: request.remote_ip,
+                                user_agent: request.user_agent,
+                                referrer:   request.env['HTTP_REFERER'])
+        new_cache.save!
       end
     end
 
@@ -57,7 +61,7 @@ class ApplicationController < ActionController::Base
         cached_ip.blacklisted
       end
 
-      head :service_unavailable if cached_ip.blacklisted
+      head :service_unavaiable if cached_ip.blacklisted
     end
 
     def check_for_flagged_posts
