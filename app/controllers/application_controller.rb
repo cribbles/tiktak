@@ -3,11 +3,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :cache_ip
   before_action :forbid_blacklisted, only: [:create, :update, :destroy]
-  before_action :flash_queue
+  before_action :check_for_flagged_posts
   helper_method :topic_path_for, :topic_for, :page_for, :anchor_for
 
   def topic_path_for(post)
     topic = topic_for(post)
+
     topic_path(topic, page: page_for(topic, post), anchor: anchor_for(post))
   end
 
@@ -19,10 +20,12 @@ class ApplicationController < ActionController::Base
     page = 1
     posts = topic.posts.inject([]) {|acc,p| acc << p.id}
     post_index = posts.index(post.id.to_i)
+
     until post_index < 20
       post_index -= 20
       page += 1
     end
+
     page
   end
 
@@ -45,16 +48,19 @@ class ApplicationController < ActionController::Base
     end
 
     def displayable(args = {})
-      args.merge!( visible: true )
-      args.merge!( hellbanned: false ) unless hellbanned?
+      args.merge!(visible: true)
+      args.merge!(hellbanned: false) unless hellbanned?
+
       args
     end
 
     def captcha_verified(model)
-      bypass = logged_in? || Rails.env.test?
-      msg  = "There was a problem with your captcha verification - "
-      msg += "Please try again"
-      bypass || verify_recaptcha(model: model, message: msg, error: nil)
+      return true if logged_in? || Rails.env.test?
+
+      msg  = 'There was a problem with your captcha verification - '
+      msg += 'Please try again'
+
+      verify_recaptcha(model: model, message: msg, error: nil)
     end
 
     def update_each(*rows, &params)
@@ -65,9 +71,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def send_email(mail_type, options = nil)
-      options ||= { user: current_user, ip_address: request.remote_ip }
-
+    def send_email(mail_type, options = {})
       UserMailer.send(mail_type, options).deliver_now
     end
 
@@ -94,14 +98,19 @@ class ApplicationController < ActionController::Base
       head :service_unavailable if cached_ip.blacklisted
     end
 
+    def check_for_flagged_posts
+      @num_flagged = Post.where(flagged: true).count
+
+      flash_queue if admin_user && flash.empty? && @num_flagged > 0
+    end
+
     def flash_queue
-      num_flagged = Post.where(flagged: true).count
-      if admin_user && flash.empty? && num_flagged > 0
-        are = num_flagged == 1 ? 'is' : 'are'
-        flagged_posts = view_context.pluralize(num_flagged, 'flagged post')
-        msg  = "There #{are} #{flagged_posts} "
-        msg += "waiting in the queue for moderation."
-        flash.now[:danger] = view_context.link_to(msg, queue_path)
-      end
+      are = @num_flagged == 1 ? 'is' : 'are'
+      flagged_posts = view_context.pluralize(@num_flagged, 'flagged post')
+
+      msg  = "There #{are} #{flagged_posts} "
+      msg += "waiting in the queue for moderation."
+
+      flash.now[:danger] = view_context.link_to(msg, queue_path)
     end
 end
