@@ -372,7 +372,7 @@ p {
   &.info {
     @include info-p;
   }
-  &.message {
+  &.message, &.text-field {
     @include info-p;
     text-align: center;
   }

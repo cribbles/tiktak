@@ -1,6 +1,6 @@
 <% provide(:title, 'Log In')
    provide(:width, '460') %>
-<p class="info" align="center">
+<p class="message">
   New user? <b><%= link_to 'Sign up', signup_path %></b> here!
 </p>
 <%= form_for(:session, url: login_path) do |f| %>
