@@ -257,14 +257,23 @@ tr.form {
       @include info-p;
     }
     text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
-.info-td-no-border {
+div.widget {
   background-color: #F8F8F8;
   font-size: 13px;
   border-top: 1px solid #F8F8F8;
   border-bottom: 1px solid #F8F8F8;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.g-recaptcha div, #recaptcha_area {
+  margin: auto !important;
 }
 
 th.topic-info {
@@ -362,6 +371,10 @@ p {
   }
   &.info {
     @include info-p;
+  }
+  &.message {
+    @include info-p;
+    text-align: center;
   }
   &.selector {
     @include info-p;

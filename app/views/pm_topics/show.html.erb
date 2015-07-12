@@ -1,6 +1,6 @@
 <% provide(:title, @pm_topic.title) %>
   <div class="cell2">
-      Private Message
+    Private Message
   </div>
   <%= render @pm_posts %>
   <% if handshake_in_progress?(@pm_topic) %>
@@ -9,7 +9,7 @@
     <%= render 'pm_topics/handshake_declined' %>
   <% end %>
   <%= form_for @pm_post, url: create_pm_topic_post_path(params[:id]),
-                         method: :post do |f| %>
+        method: :post do |f| %>
     <%= f.hidden_field :pm_topic_id, value: @pm_topic.id %>
     <%= render 'shared/error_messages', object: f.object if request.post? %>
     <%= render 'shared/content_form',   f: f %>
