@@ -5,8 +5,8 @@ Check out a demo of the latest stable build on
 
 ## About
 
-TikTak provides a light-weight, Yik Yak-like anonymous forums system with
-BBS-style assets including private messaging, quoting, user registration,
+TikTak provides a light-weight, Yik Yak-like anonymous forum system with
+BBS-style assets including user sign-up, private messaging, quoting,
 hellbanning, IP whitelisting / blacklisting / caching, post reporting,
 and an easy-to-use moderation system.
 
@@ -17,3 +17,7 @@ stored in `config/settings.yml` and accessed with the Settings object.
 
 TikTak is deployed with Heroku using sendgrid for mailer integration
 by default.
+
+## License
+
+TikTak is released under the [MIT License](/LICENSE).
