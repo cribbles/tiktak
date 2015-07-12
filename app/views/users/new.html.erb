@@ -3,40 +3,28 @@
 <%= form_for(@user) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <table>
-  <tr class="info">
-    <td align="left">
-      <p class="info" align="center">
-        <b><%= f.label :email, "E-mail" %></b>
-      </p>
+  <tr class="form">
+    <td>
+      <p><b><%= f.label :email, "E-mail" %></b></p>
     </td>
-    <td align="right">
-      <p align="center">
-        <%= f.email_field :email %>
-      </p>
+    <td>
+      <%= f.email_field :email %>
     </td>
   </tr>
-  <tr class="cell4">
-    <td align="left">
-      <p class="info" align="center">
-        <b><%= f.label :password %></b>
-      </p>
+  <tr class="form">
+    <td>
+      <p><b><%= f.label :password %></b></p>
     </td>
-    <td align="right">
-      <p align="center">
-        <%= f.password_field :password %>
-      </p>
+    <td>
+      <%= f.password_field :password %>
     </td>
   </tr>
-  <tr class="info">
-    <td align="left">
-      <p class="info" align="center">
-        <b><%= f.label :password_confirmation, "Confirm Password" %></b>
-      </p>
+  <tr class="form">
+    <td>
+      <p><b><%= f.label :password_confirmation, "Confirm Password" %></b></p>
     </td>
-    <td align="right">
-      <p align="center">
-        <%= f.password_field :password_confirmation %>
-      </p>
+    <td>
+      <%= f.password_field :password_confirmation %>
     </td>
   </tr>
 </table>

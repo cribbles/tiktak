@@ -2,21 +2,17 @@
    provide(:width, '460') %>
 <%= form_for(:password_reset, url: password_resets_path) do |f| %>
 <table>
-  <tr class="info">
-    <td align="left">
-      <p class="info" align="center">
-        <b><%= f.label :email, 'E-mail' %></b>
-      </p>
+  <tr class="form">
+    <td>
+      <p><b><%= f.label :email, 'E-mail' %></b></p>
     </td>
-    <td align="right">
-      <p align="center">
-        <%= f.email_field :email %>
-      </p>
+    <td>
+      <%= f.email_field :email %>
     </td>
   </tr>
 </table>
 <div class="cell1">
-  <span align="center" class="footer">
+  <span class="footer">
     <%= f.submit 'Submit' %>
   </span>
 </div>

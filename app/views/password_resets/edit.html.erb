@@ -5,46 +5,36 @@
   <%= hidden_field_tag :email, @user.email %>
   <table>
   <% if logged_in? %>
-    <tr class="info">
-      <td align="left">
-        <p class="info" align="center">
-          <b><%= f.label :old_password, "Current Password" %></b>
-        </p>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :old_password, "Current Password" %></b></p>
       </td>
-      <td align="right">
-        <p align="center">
-          <%= f.password_field :old_password %>
-        </p>
+      <td>
+        <%= f.password_field :old_password %>
       </td>
     </tr>
   <% end %>
-    <tr class="cell4">
-      <td align="left">
-        <p class="info" align="center">
-          <b><%= f.label :password, "New Password" %></b>
-        </p>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :password, "New Password" %></b></p>
       </td>
-      <td align="right">
-        <p align="center">
-          <%= f.password_field :password %>
-        </p>
+      <td>
+        <%= f.password_field :password %>
       </td>
     </tr>
-    <tr class="info">
-      <td align="left">
-        <p class="info" align="center">
+    <tr class="form">
+      <td>
+        <p>
           <b><%= f.label :password_confirmation, "Confirm New Password" %></b>
         </p>
       </td>
-      <td align="right">
-        <p align="center">
-          <%= f.password_field :password_confirmation %>
-        </p>
+      <td>
+        <%= f.password_field :password_confirmation %>
       </td>
     </tr>
   </table>
   <div class="cell1">
-    <span align="center" class="footer">
+    <span class="footer">
       <%= f.submit "Update password" %>
     </span>
   </div>

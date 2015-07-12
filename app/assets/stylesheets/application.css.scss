@@ -1,3 +1,30 @@
+/* mixins */
+
+@mixin cell4 {
+  background-color: #FFFFFF;
+  font-size: 13px;
+}
+
+@mixin info {
+  background-color: #F8F8F8;
+  font-size: 13px;
+}
+
+@mixin info-borders {
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+@mixin info-p {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+@mixin post-p {
+  font-size: 13px;
+  text-align: left !important;
+}
+
 /* main */
 
 body {
@@ -193,11 +220,6 @@ div.cell3 {
   border-bottom: 1px solid #DDDDDD !important;
 }
 
-@mixin cell4 {
-  background-color: #FFFFFF;
-  font-size: 13px;
-}
-
 .topic-preview, .cell4 {
   @include cell4;
 }
@@ -208,16 +230,6 @@ div.cell3 {
   }
 }
 
-@mixin info {
-  background-color: #F8F8F8;
-  font-size: 13px;
-}
-
-@mixin info-borders {
-  border-top: 1px solid #E5E5E5;
-  border-bottom: 1px solid #E5E5E5;
-}
-
 tr.info, div.info {
   @include info;
 }
@@ -226,16 +238,25 @@ tr.info td, div.info {
   @include info-borders; 
 }
 
-tr.list, div.list {
-  &:nth-child(odd) {
+tr.list, tr.form, div.list {
+  &:nth-child(even) {
     @include cell4;
   }
-  &:nth-child(even) {
+  &:nth-child(odd) {
     @include info;
     @include info-borders;
     td {
       @include info-borders;
     }
+  }
+}
+
+tr.form {
+  td p {
+    &:first-child {
+      @include info-p;
+    }
+    text-align: center !important;
   }
 }
 
@@ -312,16 +333,6 @@ div.title {
 
 .dismiss {
   color: #008B00;
-}
-
-@mixin info-p {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
-@mixin post-p {
-  font-size: 13px;
-  text-align: left !important;
 }
 
 p {
