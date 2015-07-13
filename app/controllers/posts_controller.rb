@@ -19,7 +19,7 @@ class PostsController < ApplicationController
       topic.update_attributes(last_posted: @post.created_at) unless hellbanned?
       @post.update_attributes(ip_address: request.remote_ip)
       @post.update_attributes(user_id: current_user.id) if logged_in?
-      @post.update_attributes(hellbanned: true) if hellbanned?
+      @post.hellban if hellbanned?
 
       redirect_to topic_path_for(@post) 
     else

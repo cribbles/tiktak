@@ -22,17 +22,17 @@
   </tr>
   <tr class="cell4">
     <td class="poster">
-      <%= content_tag :div, poster_for(post, page: params[:page]),
-            class: 'poster' %>
+      <%= content_tag :div, post.poster, class: 'poster' %>
     </td>
     <td>
       <% if has_displayable_quote?(post) %>
         <%= render 'posts/quote', quote: post.quoted %>
       <% end %>
-      <%= content_tag :p, format_text(post.content),
-            class: 'tabular-post' %>
+      <p class="tabular-post">
+        <%= format_text(post.content) %>
+      </p>
     </td>
   </tr>
 <% else %>
-  <!-- <%= poster_for post, page: params[:page] %> -->
+  <!-- <%= post.poster %> -->
 <% end %>

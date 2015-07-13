@@ -17,12 +17,28 @@ class Post < ActiveRecord::Base
     User.find_by(id: self.user_id)
   end
 
+  def index
+    topic.posts.find_index(self)
+  end
+
+  def poster
+    index == 0 ? 'OP' : index
+  end
+
+  def page
+    index / 20 + 1
+  end
+
   def flag
     update_attributes(flagged: true)
   end
 
   def unflag
     update_attributes(flagged: false)
+  end
+
+  def hellban
+    update_attributes(hellbanned: true)
   end
 
   def remove

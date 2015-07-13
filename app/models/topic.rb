@@ -23,6 +23,10 @@ class Topic < ActiveRecord::Base
     update_attributes(views: views+1)
   end
 
+  def hellban
+    update_attributes(hellbanned: true)
+  end
+
   def remove
     posts.each(&:remove)
 

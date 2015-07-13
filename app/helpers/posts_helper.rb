@@ -12,21 +12,6 @@ module PostsHelper
     content_tag :a, nil, name: post.anchor 
   end
 
-  def poster_for(post, page: page)
-    page   ||= 1
-    @count ||= 0
-
-    if @count < 1 and page.to_i < 2
-      @count += 1
-      return 'OP'
-    else
-      post_number = (page.to_i - 1) * 20 + @count
-      @count += 1
-    end
-
-    post_number
-  end
-
   def quote_link_for(post)
     link_to 'Quote', quote_path(post.topic, post)
   end

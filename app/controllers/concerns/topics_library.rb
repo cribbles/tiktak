@@ -20,21 +20,6 @@ module TopicsLibrary
     end
 
     def topic_path_for(post)
-      topic = post.topic
-
-      topic_path(topic, page: page_for(topic, post), anchor: post.anchor)
-    end
-
-    def page_for(topic, post)
-      page = 1
-      posts = topic.posts.inject([]) {|acc,p| acc << p.id}
-      post_index = posts.index(post.id.to_i)
-
-      until post_index < 20
-        post_index -= 20
-        page += 1
-      end
-
-      page
+      topic_path(post.topic, page: post.page, anchor: post.anchor)
     end
 end
