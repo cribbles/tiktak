@@ -58,11 +58,12 @@ class User < ActiveRecord::Base
     PmTopic.where("sender_id = ? OR recipient_id = ?", id, id)
   end
 
-  def unread_pm_topics
-    truth_term = Rails.env.production? ? "true" : "'t'" # for sqlite
-    query  = "(sender_id = ? AND sender_unread = #{truth_term}) OR "
-    query += "(recipient_id = ? AND recipient_unread = #{truth_term})"
-    !PmTopic.where(query, id, id).first.nil?
+  def unread_pm_topics?
+    t = Settings.sql_true
+    query  = "(sender_id = ? AND sender_unread = #{t}) OR "
+    query += "(recipient_id = ? AND recipient_unread = #{t})"
+
+    PmTopic.where(query, id, id).any?
   end
 
   private
