@@ -29,8 +29,8 @@ class TopicsController < ApplicationController
 
       @topic.update_attributes(last_posted:    post.created_at,
                                last_posted_hb: post.created_at)
-      update_each(@topic, post) {{ user_id: current_user.id }} if logged_in?
-      update_each(@topic, post) {{ hellbanned: true }} if hellbanned?
+      @topic.update_with_nested(user_id: current_user.id) if logged_in?
+      @topic.update_with_nested(hellbanned: true) if hellbanned?
 
       redirect_to @topic
     else

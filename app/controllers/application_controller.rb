@@ -29,10 +29,6 @@ class ApplicationController < ActionController::Base
       verify_recaptcha(model: model, message: msg, error: nil)
     end
 
-    def update_each(*rows, &params)
-      rows.each { |row| row.update_attributes(params.call) }
-    end
-
     def send_email(mail_type, options = {})
       UserMailer.send(mail_type, options).deliver_now
     end

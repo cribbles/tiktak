@@ -19,6 +19,10 @@ class Topic < ActiveRecord::Base
     posts.count-1
   end
 
+  def update_with_nested(args)
+    [self, posts.first].each { |row| row.update_attributes(args) }
+  end
+
   def increment_views
     update_attributes(views: views+1)
   end
