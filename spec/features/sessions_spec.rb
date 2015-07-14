@@ -23,7 +23,7 @@ describe 'the login/logout process', type: :feature do
     expect(page).to have_selector '.alert'
   end
 
-  it 'doe snor log in an unactivated user' do
+  it 'does not log in an unactivated user' do
     visit '/login'
     fill_in 'E-mail', with: 'new_user@example.com'
     fill_in 'Password', with: 'password'
