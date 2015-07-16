@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'posting a topic', type: feature do
+describe 'posting a topic', type: :feature do
 
   before(:each) do
     FactoryGirl.create(:ip_cache, ip_address: '1.2.3.4')
@@ -14,14 +14,12 @@ describe 'posting a topic', type: feature do
     visit '/'
     click_link 'New Topic'
     expect(current_path).to eq '/topics/new'
-    fill_in 'Title', with: 'Inspiring topic title'
-    fill_in 'Message', with: 'Bold and motivational message body'
-    click_button 'Post'
+    make_new_topic(title: 'Inspiring topic title',
+                   post:  'Bold and motivational message body')
     expect(current_path).to eq '/topics/1'
     expect(page).to have_content 'Inspiring topic title'
     expect(page).to have_content 'Bold and motivational message body'
-    click_link 'Home'
-    expect(current_path).to eq '/'
+    visit '/'
     expect(page).to have_content 'Inspiring topic title'
     expect(page).to have_content 'Bold and motivational message body'
   end

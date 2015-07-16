@@ -3,7 +3,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
- 
+
 ActiveRecord::Migration.maintain_test_schema!
  
 RSpec.configure do |config|

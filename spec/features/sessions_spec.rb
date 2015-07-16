@@ -15,19 +15,19 @@ describe 'the login/logout process', type: :feature do
   end
 
   it 'does not log in user with invalid information' do
-    visit '/login'
-    fill_in 'E-mail', with: ''
-    fill_in 'Password', with: ''
-    click_button 'Log In'
+    login_as('', password: '')
     expect(current_path).to eq '/login'
     expect(page).to have_selector '.alert'
   end
 
   it 'does not log in an unactivated user' do
-    visit '/login'
-    fill_in 'E-mail', with: 'new_user@example.com'
-    fill_in 'Password', with: 'password'
-    click_button 'Log In'
+    login_as('new_user@example.com')
+    expect(current_path).to eq '/login'
+    expect(page).to have_selector '.alert'
+  end
+
+  it 'does not log in user with incorrect password' do
+    login_as('activated_user@example.com', password: 'wrong_password')
     expect(current_path).to eq '/login'
     expect(page).to have_selector '.alert'
   end
