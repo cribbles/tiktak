@@ -24,3 +24,27 @@ describe 'posting a topic', type: :feature do
     expect(page).to have_content 'Bold and motivational message body'
   end
 end
+
+describe 'viewing the topic list' do
+
+  let(:topic) do
+    FactoryGirl.create(:topic, title: 'Hellbanned topic', hellbanned: true)
+  end
+
+  let(:post) do
+    FactoryGirl.create(:post,
+      content: 'Hellbanned post', hellbanned: true, topic: topic)
+  end
+
+  it 'displays a hellbanned topic to a hellbanned ip address' do
+    FactoryGirl.create(:ip_cache, ip_address: '1.2.3.4', hellbanned: true)
+    visit '/'
+    expect(page).to have_content 'Hellbanned topic'
+  end
+
+  it 'does not display a hellbanned topic to a non hellbanned ip address' do
+    FactoryGirl.create(:ip_cache, ip_address: '1.2.3.4')
+    visit '/'
+    expect(page).to_not have_content 'Hellbanned topic'
+  end
+end
