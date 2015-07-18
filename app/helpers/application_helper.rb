@@ -5,16 +5,14 @@ module ApplicationHelper
     @benchmark ||= Time.now
   end
 
-  def width_override(width)
-    width = 695 if width.empty?
-
-    "width: #{width}px !important;"
-  end
-
-  def full_title(page_title = '')
+  def titleize(page_title)
     page_name = page_title.empty? ? '' : (' - ' + page_title)
 
     Settings.site_name + page_name 
+  end
+
+  def sizeify(page_size)
+    page_size.empty? ? 'large' : page_size
   end
 
   def format_date(datetime)

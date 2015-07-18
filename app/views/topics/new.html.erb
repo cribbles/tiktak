@@ -1,5 +1,5 @@
 <% provide(:title, 'New Topic')
-   provide(:width, '580') %>
+   provide(:page_size, 'medium') %>
 <%= form_for @topic do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= render 'shared/title_form', f: f %>

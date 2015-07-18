@@ -69,7 +69,18 @@ table {
 
 div.content {
   display: table;
+}
+
+div.content-large {
   width: 695px;
+}
+
+div.content-medium {
+  width: 580px;
+}
+
+div.content-small {
+  width: 460px;
 }
 
 form {

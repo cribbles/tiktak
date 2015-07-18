@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="noindex, nofollow" />
-  <title><%= full_title yield(:title) %></title>
+  <title><%= titleize(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all',
                                             'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -18,7 +18,7 @@
 <% end %>
 </div>
 <%= render 'layouts/title' %>
-<div class="content" style="<%= width_override yield(:width) %>">
+<div class="content content-<%= sizeify(yield(:page_size)) %>">
 <%= render 'layouts/header' %>
 <%= yield %>
 </div>
