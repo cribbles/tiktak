@@ -7,7 +7,7 @@ describe 'the moderation system', type: :feature do
   end
 
   let(:user) do
-    FactoryGirl.create(:user, email: 'user@example.com')
+    FactoryGirl.create(:activated_user, email: 'user@example.com')
   end
 
   let(:admin_user) do
@@ -26,5 +26,18 @@ describe 'the moderation system', type: :feature do
     visit '/topics/1'
     click_link 'Report'
     expect(current_path).to eq '/login'
+  end
+
+  it 'displays delete links for admin users only' do
+    login_as('admin@example.com')
+    visit '/'
+    expect(page).to have_link 'X'
+    visit '/topics/1'
+    expect(page).to have_link 'X'
+    log_out
+    login_as('user@example.com')
+    expect(page).to_not have_link 'X'
+    visit '/'
+    expect(page).to_not have_link 'X'
   end
 end
