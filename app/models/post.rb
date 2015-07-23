@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   end
 
   def index
-    topic.posts.reverse.find_index(self)
+    topic.posts.find_index(self)
   end
 
   def poster
