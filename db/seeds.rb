@@ -19,7 +19,7 @@ end
 # Topics
 
 25.times do |n|
-  Topic.create!(title: Faker::YikYak.words(19),
+  Topic.create!(title: Faker::YikYak.words(13),
                 last_posted: Time.zone.now,
                 last_posted_hb: Time.zone.now)
 end
