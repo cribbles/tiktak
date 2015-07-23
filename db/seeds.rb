@@ -25,7 +25,7 @@ end
 end
 
 Topic.all.each do |topic|
-  Random.new.rand(0..25).times do |n|
+  Random.new.rand(1..25).times do |n|
     @post = Post.new(content: Faker::YikYak.words(38), topic: topic)
     @post.save
     topic.update_attributes(last_posted: @post.created_at,
