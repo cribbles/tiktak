@@ -15,7 +15,6 @@ gem 'rack-attack'
 gem 'settingslogic'
 gem 'minitest'
 gem 'faker-yikyak', git: 'git://github.com/cribbles/faker-yikyak.git'
-gem 'faker-medical'
 
 group :development, :test do
   gem 'sqlite3'
