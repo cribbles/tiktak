@@ -19,14 +19,14 @@ end
 # Topics
 
 25.times do |n|
-  Topic.create!(title: Faker::Lorem.sentence(3, false, 10),
+  Topic.create!(title: Faker::YikYak.words(19),
                 last_posted: Time.zone.now,
                 last_posted_hb: Time.zone.now)
 end
 
 Topic.all.each do |topic|
-  25.times do |n|
-    @post = Post.new(content: Faker::Lorem.sentence(18), topic: topic)
+  Random.new.rand(0..25).times do |n|
+    @post = Post.new(content: Faker::YikYak.words(38), topic: topic)
     @post.save
     topic.update_attributes(last_posted: @post.created_at,
                             last_posted_hb: @post.created_at)
