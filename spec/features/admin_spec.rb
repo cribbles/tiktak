@@ -15,7 +15,7 @@ describe 'the moderation system', type: :feature do
   end
 
   let(:topic) do
-    FactoryGirl.create(:topic)
+    FactoryGirl.create(:topic, title: 'Inspiring topic title')
   end
 
   let(:post) do
@@ -23,11 +23,13 @@ describe 'the moderation system', type: :feature do
   end
 
   let(:flagged_post) do
-    FactoryGirl.create(:post, flagged: true)
+    FactoryGirl.create(:post, flagged: true,
+                              content: 'Bold and motivational message body')
   end
 
   it 'requires users to be logged in to report posts' do
     visit '/topics/1'
+    expect(page).to have_content 'Report'
     click_link 'Report'
     expect(current_path).to eq '/login'
   end
@@ -49,5 +51,11 @@ describe 'the moderation system', type: :feature do
     login_as 'admin@example.com'
     visit '/'
     expect(page).to have_css 'alert'
+  end
+
+  it 'displays flagged post in the queue' do
+    login_as 'admin@example.com'
+    visit '/queue'
+    expect(page).to have_content 'Bold and motivational message body'
   end
 end
