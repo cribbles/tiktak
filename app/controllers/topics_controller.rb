@@ -1,12 +1,15 @@
 class TopicsController < ApplicationController
   include TopicsLibrary
-  before_action :ensure_admin, only: :destroy
+
+  before_action :ensure_admin,        only: :destroy
   before_action :ensure_topic_exists, only: [:show, :destroy]
   before_action :increment_views,     only: :show
 
   def index
     @topics = Topic.where(displayable)
-                   .order(order)
+                   .joins(:posts)
+                   .order(display_order)
+                   .group("topics.id")
                    .paginate(page: params[:page], per_page: 20)
   end
 
@@ -24,13 +27,17 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+
     if captcha_verified(@topic) && @topic.save
       post = @topic.posts.first
 
       @topic.update_attributes(last_posted:    post.created_at,
                                last_posted_hb: post.created_at)
-      @topic.update_with_nested(user_id: current_user.id) if logged_in?
-      @topic.update_with_nested(hellbanned: true) if hellbanned?
+
+      [@topic, post].each do |table|
+        table.update_attributes(user_id: current_user.id) if logged_in?
+        table.update_attributes(hellbanned: true) if hellbanned?
+      end
 
       redirect_to @topic
     else
@@ -47,21 +54,26 @@ class TopicsController < ApplicationController
 
   private
 
-    def topic_params
-      params.require(:topic).
-        permit(:title, posts_attributes: [:content, :contact])
-    end
+  def topic_params
+    params
+      .require(:topic)
+      .permit(:title, posts_attributes: [:content, :contact])
+  end
 
-    def topic
-      Topic.find_by(displayable where: { id: params[:id] })
-    end
+  def topic
+    Topic
+      .joins(:posts)
+      .joins("LEFT OUTER JOIN users ON users.id = posts.user_id")
+      .find_by(displayable( where: { id: params[:id] }))
+  end
 
-    def increment_views
-      topic.increment_views
-    end
+  def increment_views
+    topic.increment_views
+  end
 
-    def order
-      last_posted = hellbanned? ? :last_posted_hb : :last_posted
-      { last_posted => :desc }
-    end
+  def display_order
+    last_posted = (hellbanned? ? :last_posted_hb : :last_posted)
+
+    { last_posted => :desc }
+  end
 end
