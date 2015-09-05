@@ -1,39 +1,41 @@
 <% provide(:title, 'Log In')
    provide(:page_size, 'small') %>
+
 <p class="message">
   New user? <b><%= link_to 'Sign up', signup_path %></b> here!
 </p>
+
 <%= form_for(:session, url: login_path) do |f| %>
-<table>
-  <tr class="form">
-    <td>
-      <p><b><%= f.label :email, "E-mail" %></b></p>
-    </td>
-    <td>
-      <p><%= f.email_field :email %></p>
-    </td>
-  </tr>
-  <tr class="form">
-    <td>
-      <p><b><%= f.label :password %></b></p>
-    </td>
-    <td>
-      <p><%= f.password_field :password %></p>
-    </td>
-  </tr>
-  <tr class="form">
-    <td>
-      <p><%= link_to "(forgot password?)", new_password_reset_path %></p>
-    </td>
-    <td>
-      <p>
-        <%= f.label :remember_me do %>
-          <%= f.check_box :remember_me %> Keep me logged in
-        <% end %>
-      </p>
-    </td>
-  </tr>
-</table>
+  <table>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :email, "E-mail" %></b></p>
+      </td>
+      <td>
+        <p><%= f.email_field :email %></p>
+      </td>
+    </tr>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :password %></b></p>
+      </td>
+      <td>
+        <p><%= f.password_field :password %></p>
+      </td>
+    </tr>
+    <tr class="form">
+      <td>
+        <p><%= link_to "(forgot password?)", new_password_reset_path %></p>
+      </td>
+      <td>
+        <p>
+          <%= f.label :remember_me do %>
+            <%= f.check_box :remember_me %> Keep me logged in
+          <% end %>
+        </p>
+      </td>
+    </tr>
+  </table>
   <div class="cell1">
     <span class="footer">
       <%= f.submit 'Log In' %>

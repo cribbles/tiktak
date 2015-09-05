@@ -1,5 +1,6 @@
 <% provide(:title, "Password Recovery")
    provide(:page_size, 'small') %>
+
 <%= form_for(:password_reset, url: password_resets_path) do |f| %>
 <table>
   <tr class="form">
@@ -11,6 +12,7 @@
     </td>
   </tr>
 </table>
+
 <div class="cell1">
   <span class="footer">
     <%= f.submit 'Submit' %>

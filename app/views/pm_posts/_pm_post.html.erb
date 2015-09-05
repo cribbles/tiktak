@@ -2,8 +2,9 @@
       <a name="<%= pm_post.anchor %>"></a>
       &nbsp;
       <%= format_date(pm_post.created_at) %> &nbsp;|&nbsp;
-      <b><%= who_posted(pm_post) %></b> said:
+      <b><%= who_posted?(pm_post) %></b> said:
   </div>
+
   <div class="cell4">
       <p class="post">
         <%= format_text(pm_post.content) %>

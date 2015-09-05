@@ -2,16 +2,23 @@
     <span class="post-info">
       <strong>Posted:</strong> <%= format_date(post.created_at) %>
     </span>
-    <%= content_tag :span, context_link_for(post),
-          class: 'post-info' %>
-    <%= content_tag :span, delete_link_for(topic, post: post),
-          class: 'post-info' %>
-    <%= content_tag :span, unflag_link_for(post),
-          class: 'post-info' %>
+    <span class="post-info">
+      <%= context_link_for(post) %>
+    </span>
+    <span class="post-info">
+      <%= delete_link_for(topic, post: post) %>
+    </span>
+    <span class="post-info">
+      <%= unflag_link_for(post) %>
+    </span>
   </div>
+
   <div class="cell4">
     <% if has_displayable_quote?(post) %>
       <%= render 'posts/quote', quote: post.quoted %>
     <% end %>
-    <%= content_tag :p, format_text(post.content), class: 'post' %>
+
+    <p class="post">
+      <%= format_text(post.content) %>
+    </p>
   </div>

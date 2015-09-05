@@ -1,0 +1,57 @@
+  <div class="cell1">
+    <span class="header">
+
+    <% if logged_in? %>
+      <span class="header-link">
+        <%= link_to(current_user.email, profile_path) %>
+
+        <% if current_user.unread_pm_topics? %>
+          (<%= link_to("New PMs!", pm_topics_path) %>)
+        <% end %>
+      </span>
+    <% end %>
+
+    <% if !topics_index? %>
+      <span class="header-link">
+        <%= link_to("Home", root_path) %>
+      </span>
+    <% end %>
+
+    <% if topics_show? %>
+      <span class="header-link">
+        <%= link_to("Reply", new_topic_post_path(@topic)) %>
+      </span>
+    <% end %>
+
+    <% if posts_new? %>
+      <span class="header-link">
+        <%= link_to("Topic", @topic) %>
+      </span>
+    <% end %>
+
+    <% if topics_index? %>
+      <span class="header-link">
+        <%= link_to("New Topic", new_topic_path) %>
+      </span>
+    <% end %>
+
+    <% if pm_topics_show? %>
+      <span class="header-link">
+        <%= link_to("PMs", pm_topics_path) %>
+      </span>
+    <% end %>
+
+    <% if !logged_in? || current_page?(login_path) %>
+      <span class="header-link">
+        <%= link_to("Log In", login_path) %>
+      </span>
+    <% end %>
+
+    <% if logged_in? %>
+      <span class="header-link">
+        <%= link_to("Log Out", logout_path, method: :delete) %>
+      </span>
+    <% end %>
+
+    </span>
+  </div>

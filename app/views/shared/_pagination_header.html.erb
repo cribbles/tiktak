@@ -1,6 +1,12 @@
 <div class="cell2">
-  <%= will_paginate collection, page_links: false, link_separator: ' | ',
-      previous_label: "Prev Page", next_label: "Next Page" %>
+  <%= will_paginate(
+        collection,
+        page_links: false,
+        link_separator: " | ",
+        previous_label: "Prev Page",
+        next_label: "Next Page"
+      ) %>
+
   <% if collection.total_pages == 1 %>
     <div class="pagination">
       <span class="previous_page disabled">

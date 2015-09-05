@@ -1,6 +1,7 @@
   <div class="cell2">
     Exchange E-mails
   </div>
+
   <div class="info">
     <% if @user_sent_handshake %>
       <p class="post">
@@ -9,19 +10,24 @@
       </p>
     <% else %>
       <%= form_for @pm_topic, url: update_pm_topic_path(params[:id]) do |f| %>
-      <p class="post">
-        <span class="handshake-sent">
-          <b>Your correspondent has offered to exchange e-mails.
-            Will you reciprocate?</b>
-        </span>
-        <br /><br />
-        If you choose to do so, you'll lose your anonymity -- but so will
-        the person you're talking to.
-      </p>
-      <p class="message">
-        <%= f.button "Exchange e-mails", name: "pm_topic[#{@user_handshake}]", value: "true" %>
-        <%= f.button "No thanks",        name: "pm_topic[handshake_declined]", value: "true" %>
-      </p>
+        <p class="post">
+          <span class="handshake-sent">
+            <b>Your correspondent has offered to exchange e-mails.
+              Will you reciprocate?</b>
+          </span>
+          <br /><br />
+          If you choose to do so, you'll lose your anonymity -- but so will
+          the person you're talking to.
+        </p>
+
+        <p class="message">
+          <%= f.button "Exchange e-mails",
+                       name: "pm_topic[#{@user_handshake}]",
+                       value: "true" %>
+          <%= f.button "No thanks",
+                       name: "pm_topic[handshake_declined]",
+                       value: "true" %>
+        </p>
       <% end %>
     <% end %>
   </div>

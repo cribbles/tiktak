@@ -1,12 +1,15 @@
-<% provide(:title, 'New Topic')
-   provide(:page_size, 'medium') %>
+<% provide(:title, "New Topic")
+   provide(:page_size, "medium") %>
+
 <%= form_for @topic do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= render 'shared/title_form', f: f %>
+  <%= render "shared/error_messages", object: f.object %>
+  <%= render "shared/title_form", f: f %>
+
   <%= f.fields_for :posts do |ff| %>
-    <%= render 'shared/content_form', f: ff %>
-    <%= render 'shared/recaptcha',    f: ff unless logged_in? %>
-    <%= render 'shared/form_options', f: ff if logged_in? %>
+    <%= render "shared/content_form", f: ff %>
+    <%= render "shared/recaptcha",    f: ff if !logged_in? %>
+    <%= render "shared/form_options", f: ff if logged_in? %>
   <% end %>
-  <%= render 'shared/submit_form', f: f %>
+
+  <%= render "shared/submit_form", f: f %>
 <% end %>

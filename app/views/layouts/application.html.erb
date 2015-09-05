@@ -1,34 +1,22 @@
-<% benchmark %>
+<% benchmark_start %>
 <!DOCTYPE html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title><%= titleize(yield(:title)) %></title>
-  <%= stylesheet_link_tag    'application', media: 'all',
-                                            'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class="container">
-<% flash.each do |msg_type, msg| %>
-  <% unless msg_type == 'recaptcha_error' %>
-    <div class="alert alert-<%= msg_type %>"><%= msg %></div>
-  <% end %>
-<% end %>
-</div>
-<%= render 'layouts/title' %>
-<div class="content content-<%= sizeify(yield(:page_size)) %>">
-<%= render 'layouts/header' %>
-<%= yield %>
-</div>
-<p class="footer-links">
-  <%= link_to "Terms of Use", terms_path %> |
-  <%= link_to "FAQ",          faq_path %> |
-  <%= link_to "Statistics",   stats_path %>
-  <br />
-  Page generated in <%= (Time.now-benchmark).round(3) %> seconds
-</p>
-<%= debug(params) if Rails.env.development? %>
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title><%= titleize(yield(:title)) %></title>
+
+    <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <%= render 'layouts/flash' %>
+    <%= render 'layouts/title' %>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
+  </body>
 </html>

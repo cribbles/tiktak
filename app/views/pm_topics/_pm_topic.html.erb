@@ -1,8 +1,9 @@
   <tr class="list">
     <td>
       <p class="info">
-        <%= link_to pm_topic.title, pm_topic_path(pm_topic),
-              class: unread_class?(pm_topic) %>
+        <%= link_to pm_topic.title,
+                    pm_topic_path(pm_topic),
+                    class: unread_class?(pm_topic) %>
       </p>
     </td>
     <td>

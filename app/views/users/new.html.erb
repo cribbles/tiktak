@@ -1,37 +1,41 @@
-<% provide(:title, 'Sign Up')
-   provide(:page_size, 'small') %>
+<% provide(:title, "Sign Up")
+   provide(:page_size, "small") %>
+
 <%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
-<table>
-  <tr class="form">
-    <td>
-      <p><b><%= f.label :email, "E-mail" %></b></p>
-    </td>
-    <td>
-      <%= f.email_field :email %>
-    </td>
-  </tr>
-  <tr class="form">
-    <td>
-      <p><b><%= f.label :password %></b></p>
-    </td>
-    <td>
-      <%= f.password_field :password %>
-    </td>
-  </tr>
-  <tr class="form">
-    <td>
-      <p><b><%= f.label :password_confirmation, "Confirm Password" %></b></p>
-    </td>
-    <td>
-      <%= f.password_field :password_confirmation %>
-    </td>
-  </tr>
-</table>
-<%= render 'shared/recaptcha', f: f %>
-<div class="cell1">
-  <span class="footer">
-    <%= f.submit "Sign up!" %>
-  </span>
-</div>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <table>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :email, "E-mail" %></b></p>
+      </td>
+      <td>
+        <%= f.email_field :email %>
+      </td>
+    </tr>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :password %></b></p>
+      </td>
+      <td>
+        <%= f.password_field :password %>
+      </td>
+    </tr>
+    <tr class="form">
+      <td>
+        <p><b><%= f.label :password_confirmation, "Confirm Password" %></b></p>
+      </td>
+      <td>
+        <%= f.password_field :password_confirmation %>
+      </td>
+    </tr>
+  </table>
+
+  <%= render "shared/recaptcha", f: f %>
+
+  <div class="cell1">
+    <span class="footer">
+      <%= f.submit "Sign up!" %>
+    </span>
+  </div>
 <% end %>

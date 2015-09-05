@@ -1,12 +1,17 @@
 <% provide(:title, "Private Messages") %>
 
 <table>
-<tr class="cell2">
-  <th>Title</th>
-  <th>Correspondent</th>
-  <th>Last Response</th>
-</tr>
-<%= render (@pm_topics.count > 0 ? @pm_topics : 'placeholder') %>
+  <tr class="cell2">
+    <th>Title</th>
+    <th>Correspondent</th>
+    <th>Last Response</th>
+  </tr>
+
+  <% if @pm_topics.empty? %>
+    <%= render 'placeholder' %>
+  <% else %>
+    <%= render @pm_topics %>
+  <% end %>
 </table>
 
 <%= render 'shared/pagination_footer', collection: @pm_topics %>

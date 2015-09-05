@@ -1,6 +1,7 @@
 <div class="cell1">
   <span class="footer">
-    <%= will_paginate collection %>
+    <%= will_paginate(collection) %>
+
     <% if collection.total_pages == 1 %>
       <div class="pagination">
         <span class="previous_page disabled">

@@ -1,21 +1,24 @@
-<% provide(:title, 'My Account')
-   provide(:page_size, 'small') %>
+<% provide(:title, "My Account")
+   provide(:page_size, "small") %>
+
 <div class="cell2">
     Settings
 </div>
+
 <div class="list">
   <p class="selector">
-    <%= link_to 'View my private messages', pm_topics_path %>
+    <%= link_to "View my private messages", pm_topics_path %>
   </p>
 </div>
+
 <div class="list">
   <p class="selector">
-    <%= link_to 'Reset my password', edit_password_reset_path(0) %>
+    <%= link_to "Reset my password", edit_password_reset_path(0) %>
   </p>
 </div>
+
 <div class="cell1">
   <span class="footer">
     &nbsp;
   </span>
 </div>
-

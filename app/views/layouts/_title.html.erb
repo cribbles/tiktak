@@ -1,8 +1,11 @@
 <p></p>
-  <div class="site-title">
-    <%= link_to "tik", root_path %><%= link_to "tak", root_path, class: "site-title" %>
-  </div>
+
+<div class="site-title">
+  <%= link_to "tik", root_path %><%= link_to "tak", root_path, class: "site-title" %>
+</div>
+
 <% unless yield(:title).empty? %>
   <div class="page-title"><%= yield(:title) %></div>
 <% end %>
+
 <p></p>

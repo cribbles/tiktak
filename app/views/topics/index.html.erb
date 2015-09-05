@@ -5,11 +5,13 @@
     <th class="topic-display">
       <b>Topic</b>
     </th>
+
     <th class="topic-info">
       <b>Replies</b>
     </th>
   </tr>
-<%= render @topics %>
+
+  <%= render @topics %>
 </table>
 
 <%= render 'shared/pagination_footer', collection: @topics %>

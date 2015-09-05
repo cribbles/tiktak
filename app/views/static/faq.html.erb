@@ -1,18 +1,19 @@
 <% provide(:title, 'FAQ')
    provide(:page_size, 'small') %>
+
 <% 3.times do %>
-<div class="info">
-  <p class="post">
-    <b>Q: <%= word_wrap(Faker::Lorem.sentence(3, false, 10)
-                                    .gsub('.', '?')) %></b>
-  </p>
-</div>
-<div class="cell4">
-  <p class="post">
-    <b>A:</b> <%= word_wrap(Faker::Lorem.sentence(18)) %>
-  </p>
-</div>
+  <div class="info">
+    <p class="post">
+      <b>Q: <%= word_wrap(fake_question) %></b>
+    </p>
+  </div>
+  <div class="cell4">
+    <p class="post">
+      <b>A:</b> <%= word_wrap(fake_answer) %>
+    </p>
+  </div>
 <% end %>
+
 <div class="cell1">
   <span class="footer">
     &nbsp;

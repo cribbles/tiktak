@@ -9,7 +9,7 @@ module PostsHelper
   end
 
   def anchor_tag(post)
-    content_tag :a, nil, name: post.anchor 
+    content_tag :a, nil, name: post.anchor
   end
 
   def quote_link_for(post)
@@ -21,14 +21,17 @@ module PostsHelper
     contact.capitalize! if post
     post ||= topic.posts.first
 
-    link_to contact, new_pm_topic_path(topic, post), class: 'contact'
+    link_to contact,
+      new_pm_topic_path(topic, post),
+      class: 'contact'
   end
 
   def report_link_for(topic, post: nil)
     row = post ? 'post' : 'topic'
     post ||= topic.posts.first
 
-    link_to 'Report', topic_post_path(topic, post),
+    link_to 'Report',
+      topic_post_path(topic, post),
       method: :patch,
       data: { confirm: "Flag this #{row} for moderation?" }
   end
@@ -42,7 +45,8 @@ module PostsHelper
       msg = 'This action will remove the entire topic. Are you sure?'
     end
 
-    link_to 'X', path,
+    link_to 'X',
+      path,
       method: :delete,
       data: { confirm: msg },
       class: 'delete'
@@ -53,6 +57,9 @@ module PostsHelper
   end
 
   def unflag_link_for(post)
-    link_to 'Unflag', dismiss_path(post), method: :patch, class: 'dismiss'
+    link_to 'Unflag',
+      dismiss_path(post),
+      method: :patch,
+      class: 'dismiss'
   end
 end

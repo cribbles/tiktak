@@ -1,33 +1,45 @@
 <% if displayable?(post)  %>
   <tr class="cell3">
     <%= content_tag :td, nil, class: 'poster' %>
+
     <td>
       <%= anchor_tag(post) %>
       <span class="post-info">
         <strong>Posted:</strong> <%= format_date(post.created_at) %>
       </span>
+
       <% if post.contact %>
-        <%= content_tag :span, contact_link_for(@topic, post: post),
-              class: 'post-info' %>
+        <span class="post-info">
+          <%= contact_link_for(@topic, post: post) %>
+        </span>
       <% end %>
-      <%= content_tag :span, report_link_for(@topic, post: post),
-            class: 'post-info' %>
-      <%= content_tag :span, quote_link_for(post),
-            class: "post-info" %>
-      <% if admin_user %>
-        <%= content_tag :span, delete_link_for(@topic, post: post),
-              class: 'post-info' %>
+
+      <span class="post-info">
+        <%= report_link_for(@topic, post: post) %>
+      </span>
+      <span class="post-info">
+        <%= quote_link_for(post) %>
+      </span>
+
+      <% if admin_user? %>
+        <span class="post-info">
+          <%= delete_link_for(@topic, post: post) %>
+        </span>
       <% end %>
     </td>
   </tr>
+
   <tr class="cell4">
     <td class="poster">
-      <%= content_tag :div, post.poster, class: 'poster' %>
+      <div class="poster">
+        <%= post.poster %>
+      </div>
     </td>
     <td>
       <% if has_displayable_quote?(post) %>
         <%= render 'posts/quote', quote: post.quoted %>
       <% end %>
+
       <p class="tabular-post">
         <%= format_text(post.content) %>
       </p>

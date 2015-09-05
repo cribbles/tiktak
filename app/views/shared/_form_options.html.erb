@@ -1,11 +1,13 @@
   <div class="widget">
-    <% unless @quote.nil? %>
+    <% if @quote %>
       <%= f.check_box :quote, { checked: true }, @quote.id, nil %>
       <b>Include quote?</b>
     <% end %>
+
     <% if @quote && logged_in? %>
       <br />
     <% end %>
+
     <% if logged_in? %>
       <%= f.check_box :contact, { checked: true }, true, false %>
       <b>Allow users to contact you?</b>
