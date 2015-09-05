@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
   include Anchorable
+
+  belongs_to :user
   belongs_to :topic, inverse_of: :posts, dependent: :destroy
   validates :topic,   presence: true
   validates :content, presence: true,
@@ -13,12 +15,8 @@ class Post < ActiveRecord::Base
     Post.find_by(id: self.quote)
   end
 
-  def user
-    User.find_by(id: self.user_id)
-  end
-
   def index
-    topic.posts.reverse.find_index(self)
+    topic.posts.find_index(self)
   end
 
   def poster
