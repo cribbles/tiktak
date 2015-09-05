@@ -4,16 +4,21 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      if !user.activated?
-        message = "Check your e-mail to activate your account."
-        flash.now[:warning] = message
-        render 'new'
-      else
+    email = params[:session][:email].downcase
+    password = params[:session][:password]
+    user = User.find_by(email: email)
+
+    if user && user.authenticate(password)
+      if user.activated?
         log_in user
-        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or root_url
+        remember_user? ? remember(user) : forget(user)
+
+        redirect_back_or(root_url)
+      else
+        msg = "Check your e-mail to activate your account."
+        flash.now[:warning] = msg
+
+        render 'new'
       end
     else
       flash.now[:danger] = 'Invalid e-mail or password.'
@@ -23,6 +28,13 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
+
     redirect_to root_url
+  end
+
+  private
+
+  def remember_user?
+    params[:session][:remember_me] == '1'
   end
 end

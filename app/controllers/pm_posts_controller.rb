@@ -1,12 +1,14 @@
 class PmPostsController < ApplicationController
   include PmLibrary
+
   before_action :ensure_pm_topic_exists
   before_action :ensure_valid_user
 
   def create
     @pm_post = pm_topic.pm_posts.build(pm_post_params)
+
     if @pm_post.save
-      pm_topic.update_attributes(user_handshake => true) if handshake_sent
+      pm_topic.update_attributes(user_handshake => true) if handshake_sent?
       pm_topic.update_attributes(last_posted: @pm_post.created_at,
                                  correspondent_unread => true)
       @pm_post.update_attributes(ip_address: request.remote_ip,
@@ -25,15 +27,15 @@ class PmPostsController < ApplicationController
 
   private
 
-    def pm_post_params
-      params.require(:pm_post).permit(:pm_topic_id, :content, :handshake_sent)
-    end
+  def pm_post_params
+    params.require(:pm_post).permit(:pm_topic_id, :content, :handshake_sent)
+  end
 
-    def pm_topic
-      PmTopic.find_by(id: pm_post_params[:pm_topic_id])
-    end
+  def pm_topic
+    PmTopic.find_by(id: pm_post_params[:pm_topic_id])
+  end
 
-    def handshake_sent
-      pm_post_params[:handshake_sent]
-    end
+  def handshake_sent?
+    pm_post_params[:handshake_sent]
+  end
 end

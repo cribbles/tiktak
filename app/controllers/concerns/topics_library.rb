@@ -7,19 +7,16 @@ module TopicsLibrary
 
   private
 
-    def ensure_topic_exists
-      redirect_to root_url unless topic
-    end
+  def ensure_topic_exists
+    redirect_to root_url if topic.nil?
+  end
 
-    def displayable(where: nil)
-      where ||= {}
-      where.merge!(visible: true)
-      where.merge!(hellbanned: false) unless hellbanned?
+  def displayable(where: {})
+    where.merge!(hellbanned: false) unless hellbanned?
+    where.merge!(visible: true)
+  end
 
-      where
-    end
-
-    def topic_path_for(post)
-      topic_path(post.topic, page: post.page, anchor: post.anchor)
-    end
+  def topic_path_for(post)
+    topic_path(post.topic, page: post.page, anchor: post.anchor)
+  end
 end
