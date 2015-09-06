@@ -1,6 +1,9 @@
 <%= render 'shared/pagination_header', collection: @topics %>
 
-<table>
+<table
+  class="topic-list"
+  data-topics-footer="#topics-footer"
+  data-topic-template="#topic-template">
   <tr class="cell3">
     <th class="topic-display">
       <b>Topic</b>
@@ -10,8 +13,54 @@
       <b>Replies</b>
     </th>
   </tr>
-
-  <%= render @topics %>
 </table>
 
-<%= render 'shared/pagination_footer', collection: @topics %>
+<div class="cell1 footer" id="topics-footer">
+  <a href="#" class="fetch-topics">Show More Topics</a>
+</div>
+
+<script type="text/template" id="topic-template">
+  <tr class="topic-preview">
+    <td>
+      <a
+        href="/topics/<%%= topic.id %>"
+        class="topic-title"
+        alt="<%%= topic.views %>"><%%= topic.title %></a>
+
+      <% if admin_user? %>
+        <a
+          rel="nofollow"
+          data-method="delete"
+          class="delete"
+          data-confirm="This action will remove the entire topic. Are you sure?"
+          href="/topics/<%%= topic.id %>">X</a>
+      <% end %>
+
+      <p class="post-preview">
+        <%%= topic["post"].content %>
+      </p>
+    </td>
+
+    <td>
+      <p class="topic-info">
+        <a href="/topics/<%%= topic.id %>"><%%= topic.num_replies %></a>
+
+        <%% if (topic.contactable) { %>
+          <strong>&middot;</strong>
+          <a
+            href="/topics/<%%= topic.id %>/posts/<%%= topic["post"].id %>/contact"
+            class="contact">contact</a>
+        <%% } %>
+
+        <br />
+        <%%= topic.last_posted %>
+      </p>
+    </td>
+  </tr>
+</script>
+
+<script>
+  $(function () {
+    $(".topic-list").renderTopics(<%= params[:page] || 1 %>);
+  });
+</script>

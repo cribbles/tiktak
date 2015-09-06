@@ -1,5 +1,5 @@
 json.array!(@topics) do |topic|
-  json.(topic, :id, :title)
+  json.(topic, :id, :title, :views)
   json.num_replies pluralize(topic.num_replies, 'reply')
   json.contactable topic.contactable?
   json.last_posted format_date(last_posted_for topic)
