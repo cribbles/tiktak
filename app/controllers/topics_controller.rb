@@ -23,6 +23,11 @@ class TopicsController < ApplicationController
     @posts = topic.posts
                   .order(created_at: :asc)
                   .paginate(page: params[:page], per_page: 20)
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render :show }
+    end
   end
 
   def new
