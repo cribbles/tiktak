@@ -11,6 +11,11 @@ class TopicsController < ApplicationController
                    .order(display_order)
                    .group("topics.id")
                    .paginate(page: params[:page], per_page: 20)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :index }
+    end
   end
 
   def show

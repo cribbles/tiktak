@@ -16,7 +16,7 @@ class Topic < ActiveRecord::Base
   end
 
   def num_replies
-    posts.count-1
+    posts.count - 1
   end
 
   def increment_views
