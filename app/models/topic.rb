@@ -1,4 +1,22 @@
 class Topic < ActiveRecord::Base
+  def self.indexed
+    all.select(<<-SQL)
+       topics.*,
+       post.id AS post_id,
+       post.content AS content,
+       post.contact AS contactable
+     SQL
+     .joins(<<-SQL)
+       INNER JOIN (
+         SELECT
+           posts.id, posts.content, posts.contact, posts.topic_id
+         FROM posts
+         ORDER BY posts.id DESC
+       ) AS post ON post.topic_id = topics.id
+     SQL
+     .group("topics.id")
+  end
+
   has_many :posts, inverse_of: :topic, dependent: :destroy
   accepts_nested_attributes_for :posts
   validates :title, presence: true, length: { maximum: 140 }

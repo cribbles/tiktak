@@ -6,23 +6,9 @@ class TopicsController < ApplicationController
   before_action :increment_views,     only: :show
 
   def index
-    @topics = Topic.select(<<-SQL)
-                     topics.*,
-                     post.id AS post_id,
-                     post.content AS content,
-                     post.contact AS contactable
-                   SQL
+    @topics = Topic.indexed
                    .where(displayable)
-                   .joins(<<-SQL)
-                     INNER JOIN (
-                       SELECT
-                         posts.id, posts.content, posts.contact, posts.topic_id
-                       FROM posts
-                       ORDER BY posts.id ASC
-                     ) AS post ON post.topic_id = topics.id
-                   SQL
                    .order(display_order)
-                   .group("topics.id")
                    .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
