@@ -7,7 +7,13 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.where(displayable)
-                   .joins(:posts)
+                   .joins(<<-SQL)
+                     INNER JOIN (
+                       SELECT posts.*
+                       FROM posts
+                       ORDER BY posts.id ASC
+                     ) AS posts ON posts.topic_id = topics.id
+                   SQL
                    .includes(:posts)
                    .order(display_order)
                    .group("topics.id")
