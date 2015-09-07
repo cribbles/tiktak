@@ -8,6 +8,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.where(displayable)
                    .joins(:posts)
+                   .includes(:posts)
                    .order(display_order)
                    .group("topics.id")
                    .paginate(page: params[:page], per_page: 20)
