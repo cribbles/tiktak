@@ -15,7 +15,7 @@ class Topic < ActiveRecord::Base
          ORDER BY posts.id DESC
        ) AS posts ON posts.topic_id = topics.id
      SQL
-     .group("topics.id")
+     .group("topics.id, posts.id, posts.content, posts.contact")
   end
 
   has_many :posts, inverse_of: :topic, dependent: :destroy
