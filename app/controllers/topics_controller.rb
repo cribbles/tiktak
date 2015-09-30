@@ -6,9 +6,10 @@ class TopicsController < ApplicationController
   before_action :increment_views,     only: :show
 
   def index
-    @topics = Topic.indexed
+    @topics = Topic.joins(:posts)
                    .where(displayable)
                    .order(display_order)
+                   .group("topics.id")
                    .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
