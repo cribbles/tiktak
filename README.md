@@ -48,7 +48,8 @@ BBS-style assets.
 ## Deploying
 
 Site-wide globals, e.g. the name of your campus or institution, are stored in
-[`config/settings.yml`](./config/settings.yml) and accessed through the Settings
+[`config/settings.yml`](./config/settings.yml) and accessed through the
+Settings
 model.
 
 TikTak uses user mailers (for sign-in / sign-up / lost password) and reCAPTCHA
@@ -75,7 +76,8 @@ In production, you'll definitely want to provide an e-mail regex specific to
 your campus / institution / organization in
 [`config/settings.yml`](./config/settings.yml). This helps to ensure integrity
 among contactees. The principle behind exchanging e-mails is that only
-individuals who have authenticated through a 'my-cool-school.edu' account should
+individuals who have authenticated through a 'my-cool-school.edu' account
+should
 be available for contact. (Of course, this says nothing about who _in
 particular_ a user might be getting in contact with.)
 
@@ -95,8 +97,21 @@ posts.
 Hellbanning is tightly coupled to the topic index and show views, to the point
 of paginating these views separately for hellbanned and non-hellbanned users.
 This way, hellbanned users can appear to be bumping their own and others'
-threads, but replying to a thread from a hellbanned IP address won't bump it for
+threads, but replying to a thread from a hellbanned IP address won't bump it
+for
 the rest of the site.
+
+### Seed Data
+
+I wrote a small gem to produce seed data:
+[Faker::YikYak](https://github.com/cribbles/faker-yikyak). This makes Danny
+Glunz's [YikYakov](https://github.com/dglunz/yikyakov) available in a slightly
+more modular form under the [Faker](https://github.com/stympy/faker) namespace
+(a la Faker::Hacker).
+
+Calling `Faker::YikYak.words(n)` will produce a Markov chain of length _n_
+words, generated from YikYak sample data. See the [Heroku live
+site](http://acb-api.herokuapp.com) for an example of what this looks like.
 
 ## License
 
