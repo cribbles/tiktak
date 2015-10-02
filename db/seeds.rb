@@ -1,7 +1,7 @@
 # Users
 
-User.create!(email: 'foobar@example.org',
-             password:              "password",
+User.create!(email: 'user@example.org',
+             password: "password",
              password_confirmation: "password",
              activated: true,
              activated_at: Time.zone.now,
@@ -10,7 +10,7 @@ User.create!(email: 'foobar@example.org',
 test_users = ['yaphet@gmail.com', 'giallo@network.com']
 test_users.each do |email|
   User.create!(email: email,
-               password:              "password",
+               password: "password",
                password_confirmation: "password",
                activated: true,
                activated_at: Time.zone.now)
@@ -26,7 +26,8 @@ end
 
 Topic.all.each do |topic|
   Random.new.rand(1..25).times do |n|
-    @post = Post.new(content: Faker::YikYak.words(38), topic: topic)
+    num_words = Random.new.rand(38..52)
+    @post = Post.new(content: Faker::YikYak.words(num_words), topic: topic)
     @post.save
     topic.update_attributes(last_posted: @post.created_at,
                             last_posted_hb: @post.created_at)

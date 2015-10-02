@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/cribbles/faker-yikyak.git
-  revision: ed1a6f56d570c71ee7d5278404d322eeefe3a07b
+  revision: 0da234be3393f7bc45360c0024acd86b921c3844
   specs:
-    faker-yikyak (0.1.2)
+    faker-yikyak (0.1.3)
       faker
       marky_markov
 
@@ -99,7 +99,7 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     i18n (0.7.0)
-    jbuilder (2.3.1)
+    jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
@@ -118,13 +118,13 @@ GEM
     marky_markov (0.3.5)
       msgpack
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mini_backtrace (0.1.3)
       minitest (> 1.2.0)
       rails (>= 2.3.3)
     mini_portile (0.6.2)
-    minitest (5.8.0)
-    minitest-reporters (1.0.20)
+    minitest (5.8.1)
+    minitest-reporters (1.1.2)
       ansi
       builder
       minitest (>= 5.0)
@@ -134,15 +134,15 @@ GEM
     nenv (0.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.7)
+    notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.18.3)
-    pry (0.10.1)
+    pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.13.4)
+    puma (2.14.0)
     rack (1.6.4)
     rack-attack (4.3.0)
       rack
@@ -220,10 +220,10 @@ GEM
     settingslogic (2.0.9)
     shellany (0.0.1)
     slop (3.6.0)
-    spring (1.3.6)
-    sprockets (3.3.4)
-      rack (~> 1.0)
-    sprockets-rails (2.3.2)
+    spring (1.4.0)
+    sprockets (3.3.5)
+      rack (> 1, < 3)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
